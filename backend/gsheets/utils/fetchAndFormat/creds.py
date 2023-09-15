@@ -8,6 +8,7 @@ CLIENT_EMAIL = config("SERVICE_CLIENT_EMAIL")
 CLIENT_ID = config("SERVICE_CLIENT_ID")
 CLIENT_X509_CERT_URL = config("GOOGLE_CLIENT_X509_CERT_URL")
 
+print(PROJECT_ID)
 
 credentials = {
     "type": "service_account",

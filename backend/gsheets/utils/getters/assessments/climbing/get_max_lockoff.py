@@ -1,4 +1,4 @@
-from backend.gspread.utils.gsheet_fetcher import fetcher
+from gsheets.utils.fetchAndFormat.gsheet_fetcher import fetcher
 
 
 def get_max_lockoff():
