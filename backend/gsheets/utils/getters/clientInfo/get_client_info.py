@@ -4,5 +4,5 @@ from gsheets.utils.fetchAndFormat.gsheet_fetcher import fetcher
 
 
 def get_client_info():
-    data = fetcher.fetch_data(sheet_index=0, start_cell="A2", end_cell="J9")
+    data = fetcher.fetch_client_data(sheet_index=0, start_cell="A2", end_cell="J9")
     return data
