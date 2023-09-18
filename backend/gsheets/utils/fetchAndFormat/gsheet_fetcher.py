@@ -4,6 +4,7 @@ from .creds import credentials
 from .format_client_data import format_client_data
 from .format_client_availability import format_availability
 from .format_program_data import format_program_data
+from .remove_whitespace_training import remove_otw_empty_elements
 
 
 class GoogleSheetsFetcher:
@@ -57,6 +58,16 @@ class GoogleSheetsFetcher:
             worksheet = self.sh.get_worksheet(sheet_index)
             data = worksheet.get(f"{start_cell}:{end_cell}")
             filtered_data = format_program_data(data)
+            return filtered_data
+        except Exception as e:
+            print(f"Error fetching data: {e}")
+            return []
+
+    def fetch_training_data(self, sheet_index, start_cell, end_cell):
+        try:
+            worksheet = self.sh.get_worksheet(sheet_index)
+            data = worksheet.get(f"{start_cell}:{end_cell}")
+            filtered_data = remove_otw_empty_elements(data)
             return filtered_data
         except Exception as e:
             print(f"Error fetching data: {e}")
