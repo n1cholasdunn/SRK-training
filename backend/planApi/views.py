@@ -1,9 +1,13 @@
 from django.shortcuts import render
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework import status
 from .models import OTWTrainingPlan
 from .serializers import OTWTrainingPlanSerializer
 from django.http import response
+from planApi.models import TrainingExercise, OTWTrainingPlan
+from planApi.gsheets.getters.get_training import get_otw_training
 from .utils import (
     get_otw_plans_list,
     create_otw_plan,
@@ -113,3 +117,25 @@ def get_otw_plan(request, pk):
 
     if request.method == "DELETE":
         return delete_otw_plan(request, pk)
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def input_otw_plan_view(request):
+    if request.method == "POST":
+        new_plan = OTWTrainingPlan.objects.create(trainee=request.user)
+        data = get_otw_training()
+        for entry in data:
+            exercise = TrainingExercise(
+                training_plan=new_plan,
+                name=entry[0],
+                equipment_used=entry[1],
+                rest=entry[2],
+                sets=entry[3],
+                notes=entry[4],
+            )
+            exercise.save()
+
+        return Response(
+            {"message": "Data inputted successfully!"}, status=status.HTTP_201_CREATED
+        )

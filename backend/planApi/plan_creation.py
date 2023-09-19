@@ -1,5 +1,8 @@
-from .models import TrainingExercise, OTWTrainingPlan
-from gsheets.utils.getters.training.get_otw_training import get_otw_training
+from gsheets.getters.get_training import get_otw_training
+from planApi.models import TrainingExercise, OTWTrainingPlan
+
+
+# print(get_otw_training())
 
 
 def input_otw_plan():

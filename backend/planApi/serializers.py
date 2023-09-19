@@ -14,7 +14,8 @@ from .models import OTWTrainingPlan, TrainingExercise
 class TrainingExerciseSerializer(ModelSerializer):
     class Meta:
         model = TrainingExercise
-        fields = "__all__"
+        fields = ["name", "equipment_used", "rest", "sets", "notes"]
+        # fields = "__all__"
 
 
 class OTWTrainingPlanSerializer(ModelSerializer):

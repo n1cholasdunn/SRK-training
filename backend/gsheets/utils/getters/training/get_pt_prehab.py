@@ -1,6 +1,0 @@
-from gsheets.utils.fetchAndFormat.gsheet_fetcher import fetcher
-
-
-def get_pt_prehab():
-    data = fetcher.fetch_data(sheet_index=1, start_cell="B40", end_cell="L42")
-    return data
