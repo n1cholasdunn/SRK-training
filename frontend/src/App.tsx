@@ -5,46 +5,13 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import HomePage from './pages/Home/HomePage';
 import PlanList from './components/PlanList';
-import OtwPlan from './components/otwPlan';
+import OtwPlan from './components/OtwPlan';
+import GymPlan from './components/GymPlan';
+import PrehabPlan from './components/PrehabPlan';
+import PlanListGym from './components/PlanListGym';
+import PlanListPrehab from './components/PlanListPrehab';
 
 function App() {
-  // const { data: profile, refetch: fetchProfile } = useProfile();
-  // const { data: googleAuth, refetch: fetchGoogleAuth } = useGoogleAuthLink();
-  // const { mutate, isSuccess } = useGoogleAuthToken();
-
-  // useEffect(() => {
-  //   if (googleAuth) {
-  //     window.location.replace(googleAuth.authorizationUrl);
-  //   }
-  // }, [googleAuth]);
-
-  // useEffect(() => {
-  //   const searchParams = new URLSearchParams(document.location.search);
-
-  //   const code = searchParams.get('code');
-  //   const state = searchParams.get('state');
-
-  //   if (code && state) {
-  //     mutate({ code, state });
-  //   }
-  // }, [mutate]);
-
-  // useEffect(() => {
-  //   if (isSuccess) {
-  //     fetchProfile();
-  //   }
-  // }, [isSuccess, fetchProfile]);
-
-  // useEffect(() => {
-  //   if (googleAuth) {
-  //     window.location.replace(googleAuth.authorizationUrl);
-  //   }
-  // }, [googleAuth]);
-
-  // const handleGoogleLogin = () => {
-  //   fetchGoogleAuth();
-  // };
-
   return (
     <Router>
       <div className='App'>
@@ -54,12 +21,28 @@ function App() {
             element={<HomePage />}
           />
           <Route
-            path='/training/input-otw-plan/'
+            path='/training/plans/otw/create/'
             element={<OtwPlan />}
           />
           <Route
-            path='/training/plans/1/exercises/'
+            path='/training/plans/otw/1/'
             element={<PlanList />}
+          />
+          <Route
+            path='/training/plans/gym/create/'
+            element={<GymPlan />}
+          />
+          <Route
+            path='/training/plans/gym/1/'
+            element={<PlanListGym />}
+          />
+          <Route
+            path='/training/plans/prehab/create/'
+            element={<PrehabPlan />}
+          />
+          <Route
+            path='/training/plans/prehab/1/'
+            element={<PlanListPrehab />}
           />
           {/* <div>
             {profile ? (

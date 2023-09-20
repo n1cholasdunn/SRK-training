@@ -1,4 +1,4 @@
-from gsheets.getters.get_training import get_otw_training
+from planApi.gsheets.getters.get_training import get_otw_training
 from planApi.models import TrainingExercise, OTWTrainingPlan
 
 
@@ -19,4 +19,4 @@ def input_otw_plan():
         )
 
 
-input_otw_plan()
+# input_otw_plan()

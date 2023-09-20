@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 // import { fetchOTWPlan } from '../gsheets/fetch';
 import { TOKEN_KEY } from '../api';
 
-const PlanList = () => {
+const PlanListGym = () => {
   const token = localStorage.getItem(TOKEN_KEY);
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/training/plans/otw/1/', {
+    fetch('http://127.0.0.1:8000/training/plans/gym/1/', {
       headers: {
         Authorization: `Token ${token}`,
       },
@@ -22,4 +22,4 @@ const PlanList = () => {
   return <div>This is plan exercise data</div>;
 };
 
-export default PlanList;
+export default PlanListGym;

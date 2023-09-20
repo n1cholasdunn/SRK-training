@@ -1,25 +1,25 @@
 import { useEffect } from 'react';
-// import { fetchOTWPlan } from '../gsheets/fetch';
+// import { fetchGymPlan } from '../gsheets/fetch';
 import { TOKEN_KEY } from '../api';
 
-const PlanList = () => {
+const GymPlan = () => {
   const token = localStorage.getItem(TOKEN_KEY);
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/training/plans/otw/1/', {
+    fetch('http://127.0.0.1:8000/training/plans/gym/create/', {
       headers: {
         Authorization: `Token ${token}`,
       },
-      method: 'GET',
+      method: 'POST',
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data); // "Data inputted successfully!"
+        console.log(data.message); // "Data inputted successfully!"
       })
       .catch(error => {
         console.error('There was an error!', error);
       });
   }, [token]);
-  return <div>This is plan exercise data</div>;
+  return <div>GymPlan</div>;
 };
 
-export default PlanList;
+export default GymPlan;

@@ -48,13 +48,30 @@ const HomePage = () => {
       ) : (
         <button onClick={handleGoogleLogin}>Login with Google</button>
       )}
-      <Link to={'/training/input-otw-plan/'}>
+      <Link to={'/training/plans/otw/create/'}>
         <div>CLICK FOR OTW PLAN CREATION</div>
       </Link>
-      <Link to={'/training/plans/1/exercises/'}>
-        <div>CLICK TO GET PLAN CREATION</div>
+      <div>...</div>
+      <Link to={'/training/plans/otw/1/'}>
+        <div>CLICK TO GET OTW PLAN </div>
       </Link>
-      )
+      <div>...</div>
+      <Link to={'/training/plans/gym/create/'}>
+        <div>CLICK FOR gym PLAN CREATION</div>
+      </Link>
+      <div>...</div>
+      <Link to={'/training/plans/gym/1/'}>
+        <div>CLICK TO GET gym PLAN </div>
+      </Link>
+      <div>...</div>
+      <Link to={'/training/plans/prehab/create/'}>
+        <div>CLICK FOR prehab PLAN CREATION</div>
+      </Link>
+      <div>...</div>
+      <Link to={'/training/plans/prehab/1/'}>
+        <div>CLICK TO GET prehab PLAN </div>
+      </Link>
+      <div>...</div>)
     </div>
   );
 };

@@ -2,18 +2,26 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
-from rest_framework import status
-from .models import OTWTrainingPlan
-from .serializers import OTWTrainingPlanSerializer, TrainingExerciseSerializer
-from django.http import response
-from planApi.models import TrainingExercise, OTWTrainingPlan
-from planApi.gsheets.getters.get_training import get_otw_training
+
+# from rest_framework import status
+# from .models import OTWTrainingPlan
+# from .serializers import OTWTrainingPlanSerializer, TrainingExerciseSerializer
+# from django.http import response
+# from planApi.models import TrainingExercise, OTWTrainingPlan
+# from planApi.gsheets.getters.get_training import get_otw_training
 from .utils import (
-    get_otw_plans_list,
-    create_otw_plan,
-    get_otw_plan_detail,
+    get_otw_exercises,
+    input_otw_plan,
     update_otw_plan,
     delete_otw_plan,
+    get_gym_exercises,
+    input_gym_plan,
+    delete_gym_plan,
+    update_gym_plan,
+    get_prehab_exercises,
+    input_prehab_plan,
+    update_prehab_plan,
+    delete_prehab_plan,
 )
 
 
@@ -98,53 +106,105 @@ def getRoutes(request):
     return Response(routes)
 
 
-@api_view(["GET", "POST"])
-def get_otw_plans(request):
-    if request.method == "GET":
-        return get_otw_plans_list(request)
-
-    if request.method == "POST":
-        return create_otw_plan(request)
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def handle_otw_input(request):
+    return input_otw_plan(request)
 
 
 @api_view(["GET", "PUT", "DELETE"])
-def get_otw_plan(request, pk):
+@permission_classes([IsAuthenticated])
+def handle_otw_plan(request, pk):
     if request.method == "GET":
-        return get_otw_plan_detail(request, pk)
-
+        return get_otw_exercises(request, pk)
     if request.method == "PUT":
         return update_otw_plan(request, pk)
-
     if request.method == "DELETE":
         return delete_otw_plan(request, pk)
 
 
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
-def input_otw_plan_view(request):
-    if request.method == "POST":
-        new_plan = OTWTrainingPlan.objects.create(trainee=request.user)
-        data = get_otw_training()
-        for entry in data:
-            exercise = TrainingExercise(
-                training_plan=new_plan,
-                name=entry[0],
-                equipment_used=entry[1],
-                rest=entry[2],
-                sets=entry[3],
-                notes=entry[4],
-            )
-            exercise.save()
-
-        return Response(
-            {"message": "Data inputted successfully!"}, status=status.HTTP_201_CREATED
-        )
+def handle_gym_input(request):
+    return input_gym_plan(request)
 
 
-@api_view(["GET"])
+@api_view(["GET", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
-def get_otw_exercises(request, otw_plan_id):
+def handle_gym_plan(request, pk):
     if request.method == "GET":
-        exercises = TrainingExercise.objects.filter(training_plan_id=otw_plan_id)
-        serializer = TrainingExerciseSerializer(exercises, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return get_gym_exercises(request, pk)
+    if request.method == "PUT":
+        return update_gym_plan(request, pk)
+    if request.method == "DELETE":
+        return delete_gym_plan(request, pk)
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def handle_prehab_input(request):
+    return input_prehab_plan(request)
+
+
+@api_view(["GET", "PUT", "DELETE"])
+@permission_classes([IsAuthenticated])
+def handle_prehab_plan(request, pk):
+    if request.method == "GET":
+        return get_prehab_exercises(request, pk)
+    if request.method == "PUT":
+        return update_prehab_plan(request, pk)
+    if request.method == "DELETE":
+        return delete_prehab_plan(request, pk)
+
+
+# def input_otw_plan(request):
+#     if request.method == "POST":
+#         new_plan = OTWTrainingPlan.objects.create(trainee=request.user)
+#         data = get_otw_training()
+#         for entry in data:
+#             exercise = TrainingExercise(
+#                 training_plan=new_plan,
+#                 name=entry[0],
+#                 equipment_used=entry[1],
+#                 rest=entry[2],
+#                 sets=entry[3],
+#                 notes=entry[4],
+#             )
+#             exercise.save()
+
+#         return Response(
+#             {"message": "Data inputted successfully!"}, status=status.HTTP_201_CREATED
+#         )
+
+
+# @api_view(["POST"])
+# @permission_classes([IsAuthenticated])
+# # def input_otw_plan_view(request):
+# #     if request.method == "POST":
+# #         new_plan = OTWTrainingPlan.objects.create(trainee=request.user)
+# #         data = get_otw_training()
+# #         for entry in data:
+# #             exercise = TrainingExercise(
+# #                 training_plan=new_plan,
+# #                 name=entry[0],
+# #                 equipment_used=entry[1],
+# #                 rest=entry[2],
+# #                 sets=entry[3],
+# #                 notes=entry[4],
+# #             )
+# #             exercise.save()
+
+# #         return Response(
+# #             {"message": "Data inputted successfully!"}, status=status.HTTP_201_CREATED
+# #         )
+
+
+# @api_view(["GET"])
+# @permission_classes([IsAuthenticated])
+# def get_otw_exercises(request, pk):
+#     if request.method == "GET":
+#         exercises = TrainingExercise.objects.filter(training_pk=pk)
+#         serializer = TrainingExerciseSerializer(exercises, many=True)
+#         return Response(serializer.data, status=status.HTTP_200_OK)
+#     if request.method == "POST":
+#         return input_otw_plan(request)
