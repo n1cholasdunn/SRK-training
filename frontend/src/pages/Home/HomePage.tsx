@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import useGoogleAuthToken from '../hooks/useGoogleAuthToken';
-import useGoogleAuthLink from '../hooks/useGoogleAuthLink';
-import useProfile from '../hooks/useProfile';
+import useGoogleAuthToken from '../../hooks/useGoogleAuthToken';
+import useGoogleAuthLink from '../../hooks/useGoogleAuthLink';
+import useProfile from '../../hooks/useProfile';
 import { Link } from 'react-router-dom';
 
 const HomePage = () => {
@@ -50,6 +50,9 @@ const HomePage = () => {
       )}
       <Link to={'/training/input-otw-plan/'}>
         <div>CLICK FOR OTW PLAN CREATION</div>
+      </Link>
+      <Link to={'/training/plans/1/exercises/'}>
+        <div>CLICK TO GET PLAN CREATION</div>
       </Link>
       )
     </div>

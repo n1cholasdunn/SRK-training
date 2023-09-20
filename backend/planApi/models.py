@@ -13,6 +13,9 @@ class TrainingExercise(models.Model):
     sets = models.CharField(max_length=50)
     notes = models.TextField(null=True, blank=True)
 
+    def __str__(self):
+        return f"{self.name} - {self.equipment_used} - {self.rest} - {self.sets} - {self.notes}"
+
 
 class BaseTrainingPlan(models.Model):
     updated = models.DateTimeField(auto_now=True)
@@ -22,15 +25,9 @@ class BaseTrainingPlan(models.Model):
     class Meta:
         abstract = True
 
-    def __str__(self):
-        return str(self.training_plan)
-
 
 class OTWTrainingPlan(BaseTrainingPlan):
     warmup = models.TextField(null=True, blank=True)
-
-    def __str__(self):
-        return self.training_plan
 
 
 # class ClimbingAssessment(models.Model):

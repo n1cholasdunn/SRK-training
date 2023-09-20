@@ -3,7 +3,8 @@
 // import useGoogleAuthLink from './hooks/useGoogleAuthLink';
 // import useProfile from './hooks/useProfile';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import HomePage from './components/HomePage';
+import HomePage from './pages/Home/HomePage';
+import PlanList from './components/PlanList';
 import OtwPlan from './components/otwPlan';
 
 function App() {
@@ -55,6 +56,10 @@ function App() {
           <Route
             path='/training/input-otw-plan/'
             element={<OtwPlan />}
+          />
+          <Route
+            path='/training/plans/1/exercises/'
+            element={<PlanList />}
           />
           {/* <div>
             {profile ? (

@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from .models import OTWTrainingPlan
-from .serializers import OTWTrainingPlanSerializer
+from .serializers import OTWTrainingPlanSerializer, TrainingExerciseSerializer
 from django.http import response
 from planApi.models import TrainingExercise, OTWTrainingPlan
 from planApi.gsheets.getters.get_training import get_otw_training
@@ -139,3 +139,12 @@ def input_otw_plan_view(request):
         return Response(
             {"message": "Data inputted successfully!"}, status=status.HTTP_201_CREATED
         )
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_otw_exercises(request, otw_plan_id):
+    if request.method == "GET":
+        exercises = TrainingExercise.objects.filter(training_plan_id=otw_plan_id)
+        serializer = TrainingExerciseSerializer(exercises, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
