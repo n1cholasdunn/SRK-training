@@ -1,4 +1,4 @@
-from gsheets.utils.gsheet_fetcher import fetcher
+from planApi.gsheets.utils.gsheet_fetcher import fetcher
 
 
 def get_ymca_step_test():
