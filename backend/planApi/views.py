@@ -22,7 +22,7 @@ from .utils.training_utils import (
 def getRoutes(request):
     routes = [
         {
-            # TODO add in userId after Oauth is added
+            # TODO update list of rotues once all models and data fetching/writing is complete
             "Endpoint": "/plans/otw/",
             "method": "GET",
             "body": None,
@@ -147,56 +147,3 @@ def handle_prehab_plan(request, pk):
         return update_prehab_plan(request, pk)
     if request.method == "DELETE":
         return delete_prehab_plan(request, pk)
-
-
-# def input_otw_plan(request):
-#     if request.method == "POST":
-#         new_plan = OTWTrainingPlan.objects.create(trainee=request.user)
-#         data = get_otw_training()
-#         for entry in data:
-#             exercise = TrainingExercise(
-#                 training_plan=new_plan,
-#                 name=entry[0],
-#                 equipment_used=entry[1],
-#                 rest=entry[2],
-#                 sets=entry[3],
-#                 notes=entry[4],
-#             )
-#             exercise.save()
-
-#         return Response(
-#             {"message": "Data inputted successfully!"}, status=status.HTTP_201_CREATED
-#         )
-
-
-# @api_view(["POST"])
-# @permission_classes([IsAuthenticated])
-# # def input_otw_plan_view(request):
-# #     if request.method == "POST":
-# #         new_plan = OTWTrainingPlan.objects.create(trainee=request.user)
-# #         data = get_otw_training()
-# #         for entry in data:
-# #             exercise = TrainingExercise(
-# #                 training_plan=new_plan,
-# #                 name=entry[0],
-# #                 equipment_used=entry[1],
-# #                 rest=entry[2],
-# #                 sets=entry[3],
-# #                 notes=entry[4],
-# #             )
-# #             exercise.save()
-
-# #         return Response(
-# #             {"message": "Data inputted successfully!"}, status=status.HTTP_201_CREATED
-# #         )
-
-
-# @api_view(["GET"])
-# @permission_classes([IsAuthenticated])
-# def get_otw_exercises(request, pk):
-#     if request.method == "GET":
-#         exercises = TrainingExercise.objects.filter(training_pk=pk)
-#         serializer = TrainingExerciseSerializer(exercises, many=True)
-#         return Response(serializer.data, status=status.HTTP_200_OK)
-#     if request.method == "POST":
-#         return input_otw_plan(request)

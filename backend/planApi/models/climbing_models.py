@@ -11,101 +11,85 @@ class BaseAssessment(models.Model):
         abstract = True
 
 
-class PowerEnduranceAssessment(BaseAssessment):
-    pre_training_test = models.CharField(max_length=5, null=True, blank=True)
-    test1 = models.CharField(max_length=5, null=True, blank=True)
-    test2 = models.CharField(max_length=5, null=True, blank=True)
-    test3 = models.CharField(max_length=5, null=True, blank=True)
-    test4 = models.CharField(max_length=5, null=True, blank=True)
-    test5 = models.CharField(max_length=5, null=True, blank=True)
-    test6 = models.CharField(max_length=5, null=True, blank=True)
-    test7 = models.CharField(max_length=5, null=True, blank=True)
-    test8 = models.CharField(max_length=5, null=True, blank=True)
-    test9 = models.CharField(max_length=5, null=True, blank=True)
-    test10 = models.CharField(max_length=5, null=True, blank=True)
-    test11 = models.CharField(max_length=5, null=True, blank=True)
+class PowerEnduranceAssessments(BaseAssessment):
+    pass
 
 
-class MaxPullupsAssessment(BaseAssessment):
-    pre_training_test = models.CharField(max_length=5, null=True, blank=True)
-    test1 = models.CharField(max_length=5, null=True, blank=True)
-    test2 = models.CharField(max_length=5, null=True, blank=True)
-    test3 = models.CharField(max_length=5, null=True, blank=True)
-    test4 = models.CharField(max_length=5, null=True, blank=True)
-    test5 = models.CharField(max_length=5, null=True, blank=True)
-    test6 = models.CharField(max_length=5, null=True, blank=True)
-    test7 = models.CharField(max_length=5, null=True, blank=True)
-    test8 = models.CharField(max_length=5, null=True, blank=True)
-    test9 = models.CharField(max_length=5, null=True, blank=True)
-    test10 = models.CharField(max_length=5, null=True, blank=True)
-    test11 = models.CharField(max_length=5, null=True, blank=True)
+class PowerEnduranceTest(models.Model):
+    assessment = models.ForeignKey(
+        "PowerEnduranceAssessment", related_name="tests", on_delete=models.CASCADE
+    )
+    test = models.CharField(max_length=8, null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.test}"
 
 
-class MaxLockoffAssessment(BaseAssessment):
-    pre_training_test = models.CharField(max_length=5, null=True, blank=True)
-    test1 = models.CharField(max_length=5, null=True, blank=True)
-    test2 = models.CharField(max_length=5, null=True, blank=True)
-    test3 = models.CharField(max_length=5, null=True, blank=True)
-    test4 = models.CharField(max_length=5, null=True, blank=True)
-    test5 = models.CharField(max_length=5, null=True, blank=True)
-    test6 = models.CharField(max_length=5, null=True, blank=True)
-    test7 = models.CharField(max_length=5, null=True, blank=True)
-    test8 = models.CharField(max_length=5, null=True, blank=True)
-    test9 = models.CharField(max_length=5, null=True, blank=True)
-    test10 = models.CharField(max_length=5, null=True, blank=True)
-    test11 = models.CharField(max_length=5, null=True, blank=True)
+class MaxPullupsAssessments(BaseAssessment):
+    pass
 
 
-class FingerStrengthAssessment(BaseAssessment):
-    pre_training_test = models.CharField(max_length=5, null=True, blank=True)
-    test1 = models.CharField(max_length=5, null=True, blank=True)
-    test2 = models.CharField(max_length=5, null=True, blank=True)
-    test3 = models.CharField(max_length=5, null=True, blank=True)
-    test4 = models.CharField(max_length=5, null=True, blank=True)
-    test5 = models.CharField(max_length=5, null=True, blank=True)
-    test6 = models.CharField(max_length=5, null=True, blank=True)
-    test7 = models.CharField(max_length=5, null=True, blank=True)
-    test8 = models.CharField(max_length=5, null=True, blank=True)
-    test9 = models.CharField(max_length=5, null=True, blank=True)
-    test10 = models.CharField(max_length=5, null=True, blank=True)
+class MaxPullupsTest(models.Model):
+    assessment = models.ForeignKey(
+        "MaxPullupsAssessment", related_name="tests", on_delete=models.CASCADE
+    )
+    test = models.CharField(max_length=8, null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.test}"
 
 
-class OAFingerStrengthAssessment(BaseAssessment):
-    pre_training_test = models.CharField(max_length=5, null=True, blank=True)
-    test1 = models.CharField(max_length=5, null=True, blank=True)
-    test2 = models.CharField(max_length=5, null=True, blank=True)
-    test3 = models.CharField(max_length=5, null=True, blank=True)
-    test4 = models.CharField(max_length=5, null=True, blank=True)
-    test5 = models.CharField(max_length=5, null=True, blank=True)
-    test6 = models.CharField(max_length=5, null=True, blank=True)
-    test7 = models.CharField(max_length=5, null=True, blank=True)
-    test8 = models.CharField(max_length=5, null=True, blank=True)
-    test9 = models.CharField(max_length=5, null=True, blank=True)
-    test10 = models.CharField(max_length=5, null=True, blank=True)
+class MaxLockoffAssessments(BaseAssessment):
+    pass
 
 
-class OAPinchAssessment(BaseAssessment):
-    # TODO find best method for if inputting 1 test at a time over time. all tests prenamed like below or seperate model that is connected but presents problem of limiting it
-    pre_training_test = models.CharField(max_length=5, null=True, blank=True)
-    test1 = models.CharField(max_length=5, null=True, blank=True)
-    test2 = models.CharField(max_length=5, null=True, blank=True)
-    test3 = models.CharField(max_length=5, null=True, blank=True)
-    test4 = models.CharField(max_length=5, null=True, blank=True)
-    test5 = models.CharField(max_length=5, null=True, blank=True)
-    test6 = models.CharField(max_length=5, null=True, blank=True)
-    test7 = models.CharField(max_length=5, null=True, blank=True)
-    test8 = models.CharField(max_length=5, null=True, blank=True)
-    test9 = models.CharField(max_length=5, null=True, blank=True)
-    test10 = models.CharField(max_length=5, null=True, blank=True)
+class MaxLockoffTest(models.Model):
+    assessment = models.ForeignKey(
+        "MaxLockoffAssessment", related_name="tests", on_delete=models.CASCADE
+    )
+    test = models.CharField(max_length=8, null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.test}"
 
 
-# class OAPinchTests(models.Model):
-#     assessment = models.ForeignKey(
-#         "OAPinchAssessment", related_name="tests", on_delete=models.CASCADE
-#     )
-#     weight = models.CharField(max_length=10, null=True, blank=True)
-#     bmi = models.CharField(max_length=6, null=True, blank=True)
-#     waist_hip_ratio = models.CharField(max_length=6, null=True, blank=True)
-#     resting_hr = models.CharField(max_length=6, null=True, blank=True)
-#     blood_pressure = models.CharField(max_length=6, null=True, blank=True)
-#     vo2_max = models.CharField(max_length=6, null=True, blank=True)
+class FingerStrengthAssessments(BaseAssessment):
+    pass
+
+
+class FingerStrengthTest(models.Model):
+    assessment = models.ForeignKey(
+        "FingerStrengthAssessment", related_name="tests", on_delete=models.CASCADE
+    )
+    test = models.CharField(max_length=8, null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.test}"
+
+
+class OAFingerStrengthAssessments(BaseAssessment):
+    pass
+
+
+class OAFingerStrengthTest(models.Model):
+    assessment = models.ForeignKey(
+        "OAFingerStrengthAssessment", related_name="tests", on_delete=models.CASCADE
+    )
+    test = models.CharField(max_length=8, null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.test}"
+
+
+class OAPinchAssessments(BaseAssessment):
+    pass
+
+
+class OAPinchTest(models.Model):
+    assessment = models.ForeignKey(
+        "OAPinchAssessment", related_name="tests", on_delete=models.CASCADE
+    )
+    test = models.CharField(max_length=8, null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.test}"
