@@ -5,6 +5,7 @@ from planApi.gsheets.getters.get_training import (
     get_gym_training,
     get_prehab_training,
 )
+from planApi.gsheets.utils.fetch_by_url import fetch_url_data
 from .models import (
     OTWTrainingPlan,
     TrainingExercise,
@@ -18,6 +19,7 @@ from .serializers import (
     GymTrainingExerciseSerializer,
     PrehabTrainingExerciseSerializer,
 )
+import requests
 
 
 #!OTW
@@ -28,22 +30,46 @@ def get_otw_exercises(request, plan_id):
 
 
 def input_otw_plan(request):
-    new_plan = OTWTrainingPlan.objects.create(trainee=request.user)
-    data = get_otw_training()
-    for entry in data:
-        notes_value = entry[4] if len(entry) > 4 else ""
-        exercise = TrainingExercise(
-            training_plan=new_plan,
-            name=entry[0],
-            equipment_used=entry[1],
-            rest=entry[2],
-            sets=entry[3],
-            notes=notes_value,
+    if request.method == "POST":
+        url = request.data.get("url")
+        print(url)
+        if not url:
+            return Response(
+                {"error": "URL is required"}, status=status.HTTP_400_BAD_REQUEST
+            )
+
+        try:
+            # response = requests.get(url)
+            # response.raise_for_status()  # Check if the request was successful
+            # sheet_url = response.json()  # Assume the response is in JSON format
+            data = fetch_url_data(url, get_otw_training)
+
+        except requests.RequestException as e:
+            return Response(
+                {"error": f"Failed to fetch data from {url}: {str(e)}"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        new_plan = OTWTrainingPlan.objects.create(trainee=request.user)
+
+        for entry in data:  # Adjust as per the actual data format received
+            notes_value = entry[4] if len(entry) > 4 else ""
+            exercise = TrainingExercise(
+                training_plan=new_plan,
+                name=entry[0],
+                equipment_used=entry[1],
+                rest=entry[2],
+                sets=entry[3],
+                notes=notes_value,
+            )
+            exercise.save()
+
+        return Response(
+            {"message": "Data inputted successfully!"}, status=status.HTTP_201_CREATED
         )
-        exercise.save()
 
     return Response(
-        {"message": "Data inputted successfully!"}, status=status.HTTP_201_CREATED
+        {"error": "Invalid request method"}, status=status.HTTP_400_BAD_REQUEST
     )
 
 
@@ -100,22 +126,42 @@ def get_gym_exercises(request, plan_id):
 
 
 def input_gym_plan(request):
-    new_plan = GymTrainingPlan.objects.create(trainee=request.user)
-    data = get_gym_training()
-    for entry in data:
-        notes_value = entry[4] if len(entry) > 4 else ""
-        exercise = GymTrainingExercise(
-            training_plan=new_plan,
-            name=entry[0],
-            equipment_used=entry[1],
-            rest=entry[2],
-            sets=entry[3],
-            notes=notes_value,
+    if request.method == "POST":
+        url = request.data.get("url")
+        if not url:
+            return Response(
+                {"error": "URL is required"}, status=status.HTTP_400_BAD_REQUEST
+            )
+
+        try:
+            data = fetch_url_data(url, get_gym_training)
+
+        except requests.RequestException as e:
+            return Response(
+                {"error": f"Failed to fetch data from {url}: {str(e)}"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        new_plan = OTWTrainingPlan.objects.create(trainee=request.user)
+
+        for entry in data:  # Adjust as per the actual data format received
+            notes_value = entry[4] if len(entry) > 4 else ""
+            exercise = GymTrainingExercise(
+                training_plan=new_plan,
+                name=entry[0],
+                equipment_used=entry[1],
+                rest=entry[2],
+                sets=entry[3],
+                notes=notes_value,
+            )
+            exercise.save()
+
+        return Response(
+            {"message": "Data inputted successfully!"}, status=status.HTTP_201_CREATED
         )
-        exercise.save()
 
     return Response(
-        {"message": "Data inputted successfully!"}, status=status.HTTP_201_CREATED
+        {"error": "Invalid request method"}, status=status.HTTP_400_BAD_REQUEST
     )
 
 
@@ -172,22 +218,42 @@ def get_prehab_exercises(request, plan_id):
 
 
 def input_prehab_plan(request):
-    new_plan = PrehabTrainingPlan.objects.create(trainee=request.user)
-    data = get_prehab_training()
-    for entry in data:
-        notes_value = entry[4] if len(entry) > 4 else ""
-        exercise = PrehabTrainingExercise(
-            training_plan=new_plan,
-            name=entry[0],
-            equipment_used=entry[1],
-            rest=entry[2],
-            sets=entry[3],
-            notes=notes_value,
+    if request.method == "POST":
+        url = request.data.get("url")
+        if not url:
+            return Response(
+                {"error": "URL is required"}, status=status.HTTP_400_BAD_REQUEST
+            )
+
+        try:
+            data = fetch_url_data(url, get_otw_training)
+
+        except requests.RequestException as e:
+            return Response(
+                {"error": f"Failed to fetch data from {url}: {str(e)}"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        new_plan = PrehabTrainingPlan.objects.create(trainee=request.user)
+
+        for entry in data:  # Adjust as per the actual data format received
+            notes_value = entry[4] if len(entry) > 4 else ""
+            exercise = PrehabTrainingExercise(
+                training_plan=new_plan,
+                name=entry[0],
+                equipment_used=entry[1],
+                rest=entry[2],
+                sets=entry[3],
+                notes=notes_value,
+            )
+            exercise.save()
+
+        return Response(
+            {"message": "Data inputted successfully!"}, status=status.HTTP_201_CREATED
         )
-        exercise.save()
 
     return Response(
-        {"message": "Data inputted successfully!"}, status=status.HTTP_201_CREATED
+        {"error": "Invalid request method"}, status=status.HTTP_400_BAD_REQUEST
     )
 
 

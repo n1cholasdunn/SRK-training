@@ -20,7 +20,15 @@ class TrainingExerciseAdmin(admin.ModelAdmin):
 
 @admin.register(OTWTrainingPlan)
 class OTWTrainingPlanAdmin(admin.ModelAdmin):
-    list_display = ["id", "exercise_count", "trainee", "warmup", "exercise_list"]
+    list_display = [
+        "id",
+        "exercise_count",
+        "trainee",
+        "warmup",
+        "exercise_list",
+        "created",
+        "updated",
+    ]
 
     def exercise_count(self, obj):
         return obj.exercises.count()
@@ -66,7 +74,14 @@ class TrainingExerciseAdmin(admin.ModelAdmin):
 
 @admin.register(GymTrainingPlan)
 class OTWTrainingPlanAdmin(admin.ModelAdmin):
-    list_display = ["id", "exercise_count", "trainee", "exercise_list"]
+    list_display = [
+        "id",
+        "exercise_count",
+        "trainee",
+        "exercise_list",
+        "created",
+        "updated",
+    ]
 
     def exercise_count(self, obj):
         return obj.exercises.count()
@@ -112,7 +127,14 @@ class TrainingExerciseAdmin(admin.ModelAdmin):
 
 @admin.register(PrehabTrainingPlan)
 class OTWTrainingPlanAdmin(admin.ModelAdmin):
-    list_display = ["id", "exercise_count", "trainee", "exercise_list"]
+    list_display = [
+        "id",
+        "exercise_count",
+        "trainee",
+        "exercise_list",
+        "created",
+        "updated",
+    ]
 
     def exercise_count(self, obj):
         return obj.exercises.count()
