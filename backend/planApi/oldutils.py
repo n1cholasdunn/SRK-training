@@ -39,9 +39,6 @@ def input_otw_plan(request):
             )
 
         try:
-            # response = requests.get(url)
-            # response.raise_for_status()  # Check if the request was successful
-            # sheet_url = response.json()  # Assume the response is in JSON format
             data = fetch_url_data(url, get_otw_training)
 
         except requests.RequestException as e:

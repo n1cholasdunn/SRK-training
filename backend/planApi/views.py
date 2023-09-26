@@ -2,14 +2,7 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
-
-# from rest_framework import status
-# from .models import OTWTrainingPlan
-# from .serializers import OTWTrainingPlanSerializer, TrainingExerciseSerializer
-# from django.http import response
-# from planApi.models import TrainingExercise, OTWTrainingPlan
-# from planApi.gsheets.getters.get_training import get_otw_training
-from .utils import (
+from .utils.training_utils import (
     get_otw_exercises,
     input_otw_plan,
     update_otw_plan,
@@ -25,7 +18,6 @@ from .utils import (
 )
 
 
-# Create your views here.
 @api_view(["GET"])
 def getRoutes(request):
     routes = [

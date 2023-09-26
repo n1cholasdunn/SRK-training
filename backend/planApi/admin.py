@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html_join
 
-from .models import (
+from planApi.models.training_models import (
     OTWTrainingPlan,
     TrainingExercise,
     GymTrainingExercise,
