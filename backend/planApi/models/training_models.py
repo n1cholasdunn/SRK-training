@@ -2,6 +2,7 @@ from django.db import models
 from core.models import User
 
 
+# TODO Update plans to use Integer or Decimal Fields and alter formatting function to switch it up
 class BaseTrainingPlan(models.Model):
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)

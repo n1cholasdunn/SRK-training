@@ -98,6 +98,7 @@ def getRoutes(request):
     return Response(routes)
 
 
+# TODO create a route for input plan from sheet to be unique and different from regular routes
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def handle_otw_input(request):

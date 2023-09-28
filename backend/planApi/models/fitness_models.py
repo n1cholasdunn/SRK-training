@@ -1,21 +1,28 @@
 from django.db import models
-from .climbing_models import BaseAssessment
+from .common import BaseAssessment
 
 
+# TODO format data to be integers and floats to be stored in DB properly and have forms be reusable for react forms
 class HealthMarkersAssessments(BaseAssessment):
     pass
 
 
 class HealthMarkerTest(models.Model):
     assessment = models.ForeignKey(
-        "HealthMarkersAssessment", related_name="tests", on_delete=models.CASCADE
+        "HealthMarkersAssessments", related_name="tests", on_delete=models.CASCADE
     )
-    weight = models.CharField(max_length=10, null=True, blank=True)
-    bmi = models.CharField(max_length=6, null=True, blank=True)
-    waist_hip_ratio = models.CharField(max_length=6, null=True, blank=True)
-    resting_hr = models.CharField(max_length=6, null=True, blank=True)
-    blood_pressure = models.CharField(max_length=6, null=True, blank=True)
-    vo2_max = models.CharField(max_length=6, null=True, blank=True)
+    weight = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
+    bmi = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
+    waist_hip_ratio = models.DecimalField(
+        decimal_places=2, max_digits=5, null=True, blank=True
+    )
+    resting_hr = models.DecimalField(
+        decimal_places=2, max_digits=5, null=True, blank=True
+    )
+    blood_pressure = models.DecimalField(
+        decimal_places=2, max_digits=5, null=True, blank=True
+    )
+    vo2_max = models.DecimalField(decimal_places=2, max_digits=2, null=True, blank=True)
 
     def __str__(self):
         return f"{self.weight} - {self.bmi} - {self.waist_hip_ratio} - {self.resting_hr} - {self.blood_pressure} - {self.vo2_max}"
@@ -27,16 +34,24 @@ class MeasurementsAssessments(BaseAssessment):
 
 class MeasurementsTest(models.Model):
     assessment = models.ForeignKey(
-        "MeasurementsAssessment", related_name="tests", on_delete=models.CASCADE
+        "MeasurementsAssessments", related_name="tests", on_delete=models.CASCADE
     )
-    chest = models.CharField(max_length=6, null=True, blank=True)
-    biceps = models.CharField(max_length=6, null=True, blank=True)
-    forearms = models.CharField(max_length=6, null=True, blank=True)
-    lower_abdomen = models.CharField(max_length=6, null=True, blank=True)
-    hips = models.CharField(max_length=6, null=True, blank=True)
-    upper_thigh = models.CharField(max_length=6, null=True, blank=True)
-    mid_thigh = models.CharField(max_length=6, null=True, blank=True)
-    calves = models.CharField(max_length=6, null=True, blank=True)
+    chest = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
+    biceps = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
+    forearms = models.DecimalField(
+        decimal_places=2, max_digits=5, null=True, blank=True
+    )
+    lower_abdomen = models.DecimalField(
+        decimal_places=2, max_digits=5, null=True, blank=True
+    )
+    hips = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
+    upper_thigh = models.DecimalField(
+        decimal_places=2, max_digits=5, null=True, blank=True
+    )
+    mid_thigh = models.DecimalField(
+        decimal_places=2, max_digits=5, null=True, blank=True
+    )
+    calves = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
 
     def __str__(self):
         return f"{self.chest} - {self.biceps} - {self.forearms} - {self.lower_abdomen} - {self.hips} - {self.upper_thigh} - {self.mid_thigh} - {self.calves}"
@@ -48,7 +63,7 @@ class OverheadSquatAssessments(BaseAssessment):
 
 class OverheadSquatTest(models.Model):
     assessment = models.ForeignKey(
-        "OverheadSquatAssessment", related_name="tests", on_delete=models.CASCADE
+        "OverheadSquatAssessments", related_name="tests", on_delete=models.CASCADE
     )
     foot_ankle = models.CharField(max_length=250, null=True, blank=True)
     knee = models.CharField(max_length=250, null=True, blank=True)
@@ -66,9 +81,11 @@ class YMCAStepAssessments(BaseAssessment):
 
 class YMCAStepTest(models.Model):
     assessment = models.ForeignKey(
-        "YMCAStepAssessment", related_name="tests", on_delete=models.CASCADE
+        "YMCAStepAssessments", related_name="tests", on_delete=models.CASCADE
     )
-    recovery_hr = models.CharField(max_length=6, null=True, blank=True)
+    recovery_hr = models.DecimalField(
+        decimal_places=2, max_digits=5, null=True, blank=True
+    )
     rating = models.CharField(max_length=25, null=True, blank=True)
 
     def __str__(self):
@@ -81,9 +98,11 @@ class SitReachAssessments(BaseAssessment):
 
 class SitReachTest(models.Model):
     assessment = models.ForeignKey(
-        "SitReachAssessment", related_name="tests", on_delete=models.CASCADE
+        "SitReachAssessments", related_name="tests", on_delete=models.CASCADE
     )
-    measurement = models.CharField(max_length=6, null=True, blank=True)
+    measurement = models.DecimalField(
+        decimal_places=2, max_digits=5, null=True, blank=True
+    )
 
     def __str__(self):
         return f"{self.measurement}"
@@ -95,9 +114,9 @@ class PushUpAssessments(BaseAssessment):
 
 class PushUpTest(models.Model):
     assessment = models.ForeignKey(
-        "PushUpAssessment", related_name="tests", on_delete=models.CASCADE
+        "PushUpAssessments", related_name="tests", on_delete=models.CASCADE
     )
-    num_pushups = models.CharField(max_length=15, null=True, blank=True)
+    num_pushups = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.num_pushups}"
@@ -109,11 +128,11 @@ class DaviesAssessments(BaseAssessment):
 
 class DaviesTest(models.Model):
     assessment = models.ForeignKey(
-        "DaviesAssessment", related_name="tests", on_delete=models.CASCADE
+        "DaviesAssessments", related_name="tests", on_delete=models.CASCADE
     )
-    first_trial = models.CharField(max_length=6, null=True, blank=True)
-    second_trial = models.CharField(max_length=6, null=True, blank=True)
-    third_trial = models.CharField(max_length=6, null=True, blank=True)
+    first_trial = models.IntegerField(null=True, blank=True)
+    second_trial = models.IntegerField(null=True, blank=True)
+    third_trial = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.first_trial} - {self.second_trial} - {self.third_trial}"
@@ -123,20 +142,68 @@ class SharkSkillsAssessments(BaseAssessment):
     pass
 
 
-# TODO complex model nesting when I get home
+class SharkSkillsSide(models.Model):
+    time = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
+    deduction_tally = models.DecimalField(
+        decimal_places=2, max_digits=5, null=True, blank=True
+    )
+    total_deducted = models.DecimalField(
+        decimal_places=2, max_digits=5, null=True, blank=True
+    )
+    final_total = models.DecimalField(
+        decimal_places=2, max_digits=5, null=True, blank=True
+    )
+
+
 class SharkSkillsTest(models.Model):
     assessment = models.ForeignKey(
-        "SharkSkillsAssessment", related_name="tests", on_delete=models.CASCADE
+        "SharkSkillsAssessments", related_name="tests", on_delete=models.CASCADE
     )
-    practice_left = models.CharField(max_length=6, null=True, blank=True)
-    practice_right = models.CharField(max_length=6, null=True, blank=True)
-    first_left = models.CharField(max_length=6, null=True, blank=True)
-    first_right = models.CharField(max_length=6, null=True, blank=True)
-    second_left = models.CharField(max_length=6, null=True, blank=True)
-    second_right = models.CharField(max_length=6, null=True, blank=True)
+    practice_left = models.ForeignKey(
+        SharkSkillsSide,
+        related_name="practice_lefts",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
+    practice_right = models.ForeignKey(
+        SharkSkillsSide,
+        related_name="practice_rights",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
+    first_left = models.ForeignKey(
+        SharkSkillsSide,
+        related_name="first_lefts",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
+    first_right = models.ForeignKey(
+        SharkSkillsSide,
+        related_name="first_rights",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
+    second_left = models.ForeignKey(
+        SharkSkillsSide,
+        related_name="second_lefts",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
+    second_right = models.ForeignKey(
+        SharkSkillsSide,
+        related_name="second_rights",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
 
     def __str__(self):
-        return f"{self.first_trial} - {self.second_trial} - {self.third_trial}"
+        return f"{self.practice_left} - {self.practice_right} - {self.first_left} - {self.first_right} - {self.second_left} - {self.second_right}"
 
 
 class CoreAssessments(BaseAssessment):
@@ -145,7 +212,7 @@ class CoreAssessments(BaseAssessment):
 
 class CoreTest(models.Model):
     assessment = models.ForeignKey(
-        "CoreAssessment", related_name="tests", on_delete=models.CASCADE
+        "CoreAssessments", related_name="tests", on_delete=models.CASCADE
     )
     first_trial = models.CharField(max_length=6, null=True, blank=True)
     second_trial = models.CharField(max_length=6, null=True, blank=True)
