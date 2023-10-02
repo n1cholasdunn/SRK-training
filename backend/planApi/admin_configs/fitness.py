@@ -1,6 +1,6 @@
 from django.contrib import admin
 from planApi.models.fitness_models import (
-    HealthMarkerTest,
+    HealthMarkersTest,
     HealthMarkersAssessments,
     MeasurementsAssessments,
     MeasurementsTest,
@@ -22,8 +22,8 @@ from planApi.models.fitness_models import (
 )
 
 
-@admin.register(HealthMarkerTest)
-class HealthMarkerTestAdmin(admin.ModelAdmin):
+@admin.register(HealthMarkersTest)
+class HealthMarkersTestAdmin(admin.ModelAdmin):
     list_display = [
         "weight",
         "bmi",

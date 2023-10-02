@@ -1,0 +1,63 @@
+<!-- Custom Admin Template -->
+{% extends "admin/index.html" %} 
+{% load model_name_tags %}
+{% block content %}
+    {% get_model_lists as model_lists %}
+    {% for app in app_list %}
+        
+        {% if app.name == "planApi" %}
+            <div class="app-{{ app.name }} module">
+            <h2>{{ app.name|capfirst }}</h2>
+            <h4>Climbing Assessments</h4>
+            {% for model in app.models %} 
+                {% if model.name in model_lists.climbing_assessment_names %}
+                    <p><a href="{{ model.admin_url }}">{{ model.name|capfirst }}</a></p>
+                {% endif %} 
+            {% endfor %}
+            <h3>Climbing Tests</h3>
+            {% for model in app.models %} 
+                {% if model.name in model_lists.climbing_test_names %}
+                    <p><a href="{{ model.admin_url }}">{{ model.name|capfirst }}</a></p>
+                {% endif %} 
+            {% endfor %}
+            <h4>Fitness Assessments</h4>
+            {% for model in app.models %} 
+                {% if model.name in model_lists.fitness_assessment_names %}
+                    <p><a href="{{ model.admin_url }}">{{ model.name|capfirst }}</a></p>
+                {% endif %} 
+            {% endfor %}
+            <h3>Fitness Tests</h3>
+            {% for model in app.models %} 
+                {% if model.name in model_lists.climbing_test_names %}
+            <p><a href="{{ model.admin_url }}">{{ model.name|capfirst }}</a></p>
+                {% endif %} 
+            {% endfor %}
+            <h4>Client Info</h4>
+            {% for model in app.models %} 
+                {% if model.name in model_lists.client_info_models %}
+            <p><a href="{{ model.admin_url }}">{{ model.name|capfirst }}</a></p>
+                {% endif %} 
+            {% endfor %}
+            <h4>Training</h4>
+            <h3>Climbing Training</h3>
+            {% for model in app.models %} 
+                {% if model.name in model_lists.climbing_training_models %}
+            <p><a href="{{ model.admin_url }}">{{ model.name|capfirst }}</a></p>
+                {% endif %} 
+            {% endfor %}
+            <h3>Gym Training</h3>
+            {% for model in app.models %} 
+                {% if model.name in model_lists.gym_training_models %}
+            <p><a href="{{ model.admin_url }}">{{ model.name|capfirst }}</a></p>
+                {% endif %} 
+            {% endfor %}
+            <h3>Prehab Training</h3>
+            {% for model in app.models %} 
+                {% if model.name in model_lists.prehab_training_models %}
+            <p><a href="{{ model.admin_url }}">{{ model.name|capfirst }}</a></p>
+                {% endif %} 
+            {% endfor %}
+            </div>
+        {% endif %} 
+    {% endfor %}
+{% endblock %}

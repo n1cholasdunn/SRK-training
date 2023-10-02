@@ -7,7 +7,7 @@ class HealthMarkersAssessments(BaseAssessment):
     pass
 
 
-class HealthMarkerTest(models.Model):
+class HealthMarkersTest(models.Model):
     assessment = models.ForeignKey(
         "HealthMarkersAssessments", related_name="tests", on_delete=models.CASCADE
     )
@@ -19,10 +19,8 @@ class HealthMarkerTest(models.Model):
     resting_hr = models.DecimalField(
         decimal_places=2, max_digits=5, null=True, blank=True
     )
-    blood_pressure = models.DecimalField(
-        decimal_places=2, max_digits=5, null=True, blank=True
-    )
-    vo2_max = models.DecimalField(decimal_places=2, max_digits=2, null=True, blank=True)
+    blood_pressure = models.CharField(max_length=30, null=True, blank=True)
+    vo2_max = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
 
     def __str__(self):
         return f"{self.weight} - {self.bmi} - {self.waist_hip_ratio} - {self.resting_hr} - {self.blood_pressure} - {self.vo2_max}"

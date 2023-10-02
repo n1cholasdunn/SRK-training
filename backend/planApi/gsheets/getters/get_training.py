@@ -1,6 +1,3 @@
-from planApi.gsheets.utils.gsheet_fetcher import fetcher
-
-
 def get_gym_training(sheet_fetcher):
     data = sheet_fetcher.fetch_data(sheet_index=1, start_cell="B27", end_cell="L37")
     return data

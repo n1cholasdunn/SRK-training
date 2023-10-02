@@ -10,6 +10,7 @@ import GymPlan from './components/GymPlan';
 import PrehabPlan from './components/PrehabPlan';
 import PlanListGym from './components/PlanListGym';
 import PlanListPrehab from './components/PlanListPrehab';
+import TestForm from './components/form/TestForm';
 
 function App() {
   return (
@@ -43,6 +44,10 @@ function App() {
           <Route
             path='/training/plans/prehab/1/'
             element={<PlanListPrehab />}
+          />
+          <Route
+            path='/training/assessments/health-markers/create/'
+            element={<TestForm />}
           />
           {/* <div>
             {profile ? (

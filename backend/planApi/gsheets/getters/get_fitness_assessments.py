@@ -1,36 +1,46 @@
 from planApi.gsheets.utils.gsheet_fetcher import fetcher
 
 
-def get_ymca_step_test():
-    data = fetcher.fetch_data(sheet_index=3, start_cell="A43", end_cell="N44")
+def get_health_markers(sheet_fetcher):
+    data = sheet_fetcher.fetch_data(sheet_index=3, start_cell="B4", end_cell="N9")
     return data
 
 
-def get_sit_reach():
-    data = fetcher.fetch_data(sheet_index=3, start_cell="D22", end_cell="O26")
+def get_measurements(sheet_fetcher):
+    data = sheet_fetcher.fetch_data(sheet_index=3, start_cell="B12", end_cell="N19")
     return data
 
 
-def get_sharks_skills():
-    data = fetcher.fetch_data(sheet_index=3, start_cell="A60", end_cell="L73")
+def get_ymca_step_test(sheet_fetcher):
+    data = sheet_fetcher.fetch_data(sheet_index=3, start_cell="B33", end_cell="O35")
     return data
 
 
-def get_pushups():
-    data = fetcher.fetch_data(sheet_index=3, start_cell="B48", end_cell="O51")
+def get_sit_reach(sheet_fetcher):
+    data = sheet_fetcher.fetch_data(sheet_index=3, start_cell="A44", end_cell="N46")
     return data
 
 
-def get_overhead_squat():
-    data = fetcher.fetch_data(sheet_index=3, start_cell="D22", end_cell="O26")
+def get_sharks_skills(sheet_fetcher):
+    data = sheet_fetcher.fetch_data(sheet_index=3, start_cell="A60", end_cell="L73")
     return data
 
 
-def get_davies():
-    data = fetcher.fetch_data(sheet_index=3, start_cell="B54", end_cell="O57")
+def get_pushups(sheet_fetcher):
+    data = sheet_fetcher.fetch_data(sheet_index=3, start_cell="B48", end_cell="O51")
     return data
 
 
-def get_core_strength():
-    data = fetcher.fetch_data(sheet_index=3, start_cell="B76", end_cell="O78")
+def get_overhead_squat(sheet_fetcher):
+    data = sheet_fetcher.fetch_data(sheet_index=3, start_cell="D23", end_cell="O29")
+    return data
+
+
+def get_davies(sheet_fetcher):
+    data = sheet_fetcher.fetch_data(sheet_index=3, start_cell="B55", end_cell="O57")
+    return data
+
+
+def get_core_strength(sheet_fetcher):
+    data = sheet_fetcher.fetch_data(sheet_index=3, start_cell="B77", end_cell="O78")
     return data

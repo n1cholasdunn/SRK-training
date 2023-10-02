@@ -16,6 +16,10 @@ from .utils.training_utils import (
     update_prehab_plan,
     delete_prehab_plan,
 )
+from .utils.fitness_utils import (
+    input_health_markers_test,
+    get_health_markers_assessments,
+)
 
 
 @api_view(["GET"])
@@ -99,6 +103,7 @@ def getRoutes(request):
 
 
 # TODO create a route for input plan from sheet to be unique and different from regular routes
+# TODO Create route to input everything from a sheet like click which are filled out in a form and then have a route for different combinations of fitness/climbing assessments + plans
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def handle_otw_input(request):
@@ -148,3 +153,20 @@ def handle_prehab_plan(request, pk):
         return update_prehab_plan(request, pk)
     if request.method == "DELETE":
         return delete_prehab_plan(request, pk)
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def handle_health_markers_input(request):
+    return input_health_markers_test(request)
+
+
+@api_view(["GET", "PUT", "DELETE"])
+@permission_classes([IsAuthenticated])
+def handle_health_markers(request, pk):
+    if request.method == "GET":
+        return get_health_markers_assessments(request, pk)
+    # if request.method == "PUT":
+    #     return update_prehab_plan(request, pk)
+    # if request.method == "DELETE":
+    #     return delete_prehab_plan(request, pk)

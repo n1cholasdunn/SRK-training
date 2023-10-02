@@ -22,7 +22,7 @@ from .climbing_models import (
 )
 from .fitness_models import (
     HealthMarkersAssessments,
-    HealthMarkerTest,
+    HealthMarkersTest,
     MeasurementsAssessments,
     MeasurementsTest,
     OverheadSquatAssessments,
