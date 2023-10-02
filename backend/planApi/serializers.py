@@ -77,7 +77,6 @@ class HealthMarkersTestSerializer(ModelSerializer):
     class Meta:
         model = HealthMarkersTest
         fields = [
-            "marker",
             "weight",
             "bmi",
             "waist_hip_ratio",
@@ -92,7 +91,7 @@ class HealthMarkersAssessmentsSerializer(ModelSerializer):
 
     class Meta:
         model = HealthMarkersAssessments
-        fields = ["id", "assessments"]
+        fields = ["id", "tests"]
 
 
 class MeasurementsTestSerializer(ModelSerializer):

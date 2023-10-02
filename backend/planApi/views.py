@@ -17,8 +17,18 @@ from .utils.training_utils import (
     delete_prehab_plan,
 )
 from .utils.fitness_utils import (
+    delete_health_markers_test,
+    delete_measurements_assessments,
+    delete_measurements_test,
+    get_health_markers_test,
+    get_measurements_assessments,
+    get_measurements_test,
     input_health_markers_test,
     get_health_markers_assessments,
+    delete_health_markers_assessments,
+    input_measurements_test,
+    update_health_markers_test,
+    update_measurements_test,
 )
 
 
@@ -161,12 +171,47 @@ def handle_health_markers_input(request):
     return input_health_markers_test(request)
 
 
-@api_view(["GET", "PUT", "DELETE"])
+@api_view(["GET", "DELETE"])
 @permission_classes([IsAuthenticated])
-def handle_health_markers(request, pk):
+def handle_health_markers_assessments(request, pk):
     if request.method == "GET":
         return get_health_markers_assessments(request, pk)
-    # if request.method == "PUT":
-    #     return update_prehab_plan(request, pk)
-    # if request.method == "DELETE":
-    #     return delete_prehab_plan(request, pk)
+    if request.method == "DELETE":
+        return delete_health_markers_assessments(request, pk)
+
+
+@api_view(["GET", "PUT", "DELETE"])
+@permission_classes([IsAuthenticated])
+def handle_health_markers_tests(request, pk):
+    if request.method == "GET":
+        return get_health_markers_test(request, pk)
+    if request.method == "PUT":
+        return update_health_markers_test(request, pk)
+    if request.method == "DELETE":
+        return delete_health_markers_test(request, pk)
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def handle_measurements_input(request):
+    return input_measurements_test(request)
+
+
+@api_view(["GET", "DELETE"])
+@permission_classes([IsAuthenticated])
+def handle_measurements_assessments(request, pk):
+    if request.method == "GET":
+        return get_measurements_assessments(request, pk)
+    if request.method == "DELETE":
+        return delete_measurements_assessments(request, pk)
+
+
+@api_view(["GET", "PUT", "DELETE"])
+@permission_classes([IsAuthenticated])
+def handle_measurements_tests(request, pk):
+    if request.method == "GET":
+        return get_measurements_test(request, pk)
+    if request.method == "PUT":
+        return update_measurements_test(request, pk)
+    if request.method == "DELETE":
+        return delete_measurements_test(request, pk)

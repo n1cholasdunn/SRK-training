@@ -25,6 +25,7 @@ from planApi.models.fitness_models import (
 @admin.register(HealthMarkersTest)
 class HealthMarkersTestAdmin(admin.ModelAdmin):
     list_display = [
+        "id",
         "weight",
         "bmi",
         "waist_hip_ratio",

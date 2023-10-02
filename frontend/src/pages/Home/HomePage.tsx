@@ -72,6 +72,14 @@ const HomePage = () => {
         <div>CLICK TO GET prehab PLAN </div>
       </Link>
       <div>...</div>
+      <Link to={'/training/tests/health-markers/33/'}>
+        <div>CLICK TO GET test with id 33 </div>
+      </Link>
+      <div>...</div>
+      <Link to={'/training/assessments/health-markers/3/'}>
+        <div>CLICK TO GET assessments for user 3 </div>
+      </Link>
+      <div>...</div>
       <Link to={'/training/assessments/health-markers/create/'}>
         <div>CLICK TO create health markers plan</div>
       </Link>

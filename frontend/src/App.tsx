@@ -11,6 +11,8 @@ import PrehabPlan from './components/PrehabPlan';
 import PlanListGym from './components/PlanListGym';
 import PlanListPrehab from './components/PlanListPrehab';
 import TestForm from './components/form/TestForm';
+import AssessmentList from './components/AssessmentList';
+import SingleTest from './components/HealthMarkersTest';
 
 function App() {
   return (
@@ -48,6 +50,14 @@ function App() {
           <Route
             path='/training/assessments/health-markers/create/'
             element={<TestForm />}
+          />
+          <Route
+            path='/training/assessments/health-markers/3/'
+            element={<AssessmentList />}
+          />
+          <Route
+            path='/training/tests/health-markers/33/'
+            element={<SingleTest />}
           />
           {/* <div>
             {profile ? (
