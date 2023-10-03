@@ -20,15 +20,21 @@ from .utils.fitness_utils import (
     delete_health_markers_test,
     delete_measurements_assessments,
     delete_measurements_test,
+    delete_overhead_squat_assessments,
+    delete_overhead_squat_test,
     get_health_markers_test,
     get_measurements_assessments,
     get_measurements_test,
+    get_overhead_squat_assessments,
+    get_overhead_squat_test,
     input_health_markers_test,
     get_health_markers_assessments,
     delete_health_markers_assessments,
     input_measurements_test,
+    input_overhead_squat_test,
     update_health_markers_test,
     update_measurements_test,
+    update_overhead_squat_test,
 )
 
 
@@ -165,6 +171,7 @@ def handle_prehab_plan(request, pk):
         return delete_prehab_plan(request, pk)
 
 
+# Health Markers
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def handle_health_markers_input(request):
@@ -191,6 +198,7 @@ def handle_health_markers_tests(request, pk):
         return delete_health_markers_test(request, pk)
 
 
+# Measurements
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def handle_measurements_input(request):
@@ -215,3 +223,30 @@ def handle_measurements_tests(request, pk):
         return update_measurements_test(request, pk)
     if request.method == "DELETE":
         return delete_measurements_test(request, pk)
+
+
+# overhead squats
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def handle_overhead_squat_input(request):
+    return input_overhead_squat_test(request)
+
+
+@api_view(["GET", "DELETE"])
+@permission_classes([IsAuthenticated])
+def handle_overhead_squat_assessments(request, pk):
+    if request.method == "GET":
+        return get_overhead_squat_assessments(request, pk)
+    if request.method == "DELETE":
+        return delete_overhead_squat_assessments(request, pk)
+
+
+@api_view(["GET", "PUT", "DELETE"])
+@permission_classes([IsAuthenticated])
+def handle_overhead_squat_tests(request, pk):
+    if request.method == "GET":
+        return get_overhead_squat_test(request, pk)
+    if request.method == "PUT":
+        return update_overhead_squat_test(request, pk)
+    if request.method == "DELETE":
+        return delete_overhead_squat_test(request, pk)
