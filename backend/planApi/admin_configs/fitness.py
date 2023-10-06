@@ -83,7 +83,7 @@ class OverheadSquatAssessmentsAdmin(admin.ModelAdmin):
 
 @admin.register(SitReachTest)
 class SitReachTestAdmin(admin.ModelAdmin):
-    list_display = ["measurement"]
+    list_display = ["first_measurement", "second_measurement", "third_measurement"]
 
 
 @admin.register(SitReachAssessments)
@@ -111,7 +111,7 @@ class YMCAStepAssessmentsAdmin(admin.ModelAdmin):
 
 @admin.register(PushUpTest)
 class PushUpTestAdmin(admin.ModelAdmin):
-    list_display = ["num_pushups"]
+    list_display = ["num_pushups", "completed"]
 
 
 @admin.register(PushUpAssessments)

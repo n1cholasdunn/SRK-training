@@ -1,14 +1,3 @@
-# from planApi.gsheets.utils.gsheet_fetcher import fetcher
-
-
-# def testfetch():
-#     data = fetcher.fetch_data(sheet_index=3, start_cell="D23", end_cell="O29")
-#     return data
-
-
-# print(testfetch())
-
-
 def get_health_markers(sheet_fetcher):
     data = sheet_fetcher.fetch_data(sheet_index=3, start_cell="B4", end_cell="N9")
     return data
@@ -30,7 +19,9 @@ def get_sit_reach(sheet_fetcher):
 
 
 def get_sharks_skills(sheet_fetcher):
-    data = sheet_fetcher.fetch_data(sheet_index=3, start_cell="A60", end_cell="L73")
+    data = sheet_fetcher.fetch_shark_skills_data(
+        sheet_index=3, start_cell="A60", end_cell="L73"
+    )
     return data
 
 
@@ -49,6 +40,6 @@ def get_davies(sheet_fetcher):
     return data
 
 
-def get_core_strength(sheet_fetcher):
+def get_core(sheet_fetcher):
     data = sheet_fetcher.fetch_data(sheet_index=3, start_cell="B77", end_cell="O78")
     return data

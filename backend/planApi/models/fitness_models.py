@@ -98,12 +98,18 @@ class SitReachTest(models.Model):
     assessment = models.ForeignKey(
         "SitReachAssessments", related_name="tests", on_delete=models.CASCADE
     )
-    measurement = models.DecimalField(
+    first_measurement = models.DecimalField(
+        decimal_places=2, max_digits=5, null=True, blank=True
+    )
+    second_measurement = models.DecimalField(
+        decimal_places=2, max_digits=5, null=True, blank=True
+    )
+    third_measurement = models.DecimalField(
         decimal_places=2, max_digits=5, null=True, blank=True
     )
 
     def __str__(self):
-        return f"{self.measurement}"
+        return f"{self.first_measurement - {self.second_measurement} - {self.third_measurement}}"
 
 
 class PushUpAssessments(BaseAssessment):
@@ -115,6 +121,7 @@ class PushUpTest(models.Model):
         "PushUpAssessments", related_name="tests", on_delete=models.CASCADE
     )
     num_pushups = models.IntegerField(null=True, blank=True)
+    completed = models.BooleanField(null=True, blank=True, default=False)
 
     def __str__(self):
         return f"{self.num_pushups}"

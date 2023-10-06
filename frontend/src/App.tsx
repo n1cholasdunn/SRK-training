@@ -24,7 +24,7 @@ function App() {
             element={<HomePage />}
           />
           <Route
-            path='/training/plans/otw/create/'
+            path='/training/assessments/shark-skills/create/'
             element={<OtwPlan />}
           />
           <Route

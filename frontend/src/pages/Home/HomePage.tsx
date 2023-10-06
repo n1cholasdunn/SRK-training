@@ -48,8 +48,8 @@ const HomePage = () => {
       ) : (
         <button onClick={handleGoogleLogin}>Login with Google</button>
       )}
-      <Link to={'/training/plans/otw/create/'}>
-        <div>CLICK FOR OTW PLAN CREATION</div>
+      <Link to={'/training/assessments/shark-skills/create/'}>
+        <div>CLICK FOR Shark skills CREATION</div>
       </Link>
       <div>...</div>
       <Link to={'/training/plans/otw/1/'}>
@@ -80,6 +80,10 @@ const HomePage = () => {
         <div>CLICK TO GET assessments for user 3 </div>
       </Link>
       <div>...</div>
+      {/* <Link to={'/training/tests/shark-skills/create/'}>
+        <div>CLICK TO Create shark skills test </div>
+      </Link>
+      <div>...</div> */}
       <Link to={'/training/assessments/health-markers/create/'}>
         <div>CLICK TO create health markers plan</div>
       </Link>

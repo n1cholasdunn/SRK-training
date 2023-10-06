@@ -11,7 +11,7 @@ const GSheetForm = () => {
 
     try {
       const response = await fetch(
-        'http://127.0.0.1:8000/training/plans/otw/create/',
+        'http://127.0.0.1:8000/training/assessments/shark-skills/create/',
         {
           method: 'POST',
           headers: {
