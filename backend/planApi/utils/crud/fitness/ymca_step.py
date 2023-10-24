@@ -1,12 +1,16 @@
 from core.models import User
 from django.forms import ValidationError
 from planApi.models.fitness_models import YMCAStepAssessments, YMCAStepTest
-from planApi.serializers import YMCAStepAssessmentsSerializer, YMCAStepTestSerializer
+from planApi.utils.serializers.fitness import (
+    YMCAStepAssessmentsSerializer,
+    YMCAStepTestSerializer,
+)
 import requests
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 from planApi.gsheets.utils.fetch_by_url import fetch_url_data
 from rest_framework.response import Response
+
 
 def get_ymca_step_assessments(request, user_id):
     user = get_object_or_404(User, id=user_id)

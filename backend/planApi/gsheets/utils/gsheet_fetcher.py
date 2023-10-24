@@ -1,4 +1,10 @@
-import gspread
+import gspread  # type:ignore
+from planApi.gsheets.utils.format_climbing import (
+    format_finger_strength,
+    format_oa_finger_strength,
+    format_pinch_strength,
+    format_test_with_seconds,
+)
 from .remove_whitespace import remove_empty_elements
 from .creds import credentials
 from .format_client_data import format_client_data
@@ -84,10 +90,46 @@ class GoogleSheetsFetcher:
             print(f"Error fetching data: {e}")
             return []
 
+    def fetch_oa_finger_strength(self, sheet_index, start_cell, end_cell):
+        try:
+            worksheet = self.sh.get_worksheet(sheet_index)
+            data = worksheet.get(f"{start_cell}:{end_cell}")
+            filtered_data = remove_empty_elements(data)
+            return format_oa_finger_strength(filtered_data)
+        except Exception as e:
+            print(f"Error fetching data: {e}")
+            return []
 
-# Example usage
+    def fetch_finger_strength(self, sheet_index, start_cell, end_cell):
+        try:
+            worksheet = self.sh.get_worksheet(sheet_index)
+            data = worksheet.get(f"{start_cell}:{end_cell}")
+            filtered_data = remove_empty_elements(data)
+            return format_finger_strength(filtered_data)
+        except Exception as e:
+            print(f"Error fetching data: {e}")
+            return []
+
+    def fetch_pinch_strength(self, sheet_index, start_cell, end_cell):
+        try:
+            worksheet = self.sh.get_worksheet(sheet_index)
+            data = worksheet.get(f"{start_cell}:{end_cell}")
+            filtered_data = remove_empty_elements(data)
+            return format_pinch_strength(filtered_data)
+        except Exception as e:
+            print(f"Error fetching data: {e}")
+            return []
+
+    def fetch_test_with_seconds(self, sheet_index, start_cell, end_cell):
+        try:
+            worksheet = self.sh.get_worksheet(sheet_index)
+            data = worksheet.get(f"{start_cell}:{end_cell}")
+            filtered_data = remove_empty_elements(data)
+            return format_test_with_seconds(filtered_data)
+        except Exception as e:
+            print(f"Error fetching data: {e}")
+            return []
+
+
 sheet = "https://docs.google.com/spreadsheets/d/16eR5pzMGubEou4c5-JBm86zoqbrco71ZlGrX-HZG6ig/edit?usp=sharing"
 fetcher = GoogleSheetsFetcher(sheet)
-
-# # Fetch data from sheet index 1, cells B11 to L25
-# data = fetcher.fetch_data(sheet_index=1, start_cell="B11", end_cell="L25")

@@ -1,6 +1,6 @@
 from planApi.gsheets.getters.get_training import get_gym_training
 from planApi.models.training_models import GymTrainingExercise, GymTrainingPlan, OTWTrainingPlan
-from planApi.serializers import GymTrainingExerciseSerializer
+from planApi.utils.serializers.training import GymTrainingExerciseSerializer
 from rest_framework.response import Response
 from rest_framework import status
 import requests

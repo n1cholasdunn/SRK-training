@@ -3,7 +3,7 @@ from core.models import User
 from django.forms import ValidationError
 from planApi.gsheets.getters.get_fitness_assessments import get_davies
 from planApi.models.fitness_models import DaviesAssessments, DaviesTest
-from planApi.serializers import DaviesAssessmentsSerializer, DaviesTestSerializer
+from planApi.utils.serializers.fitness import DaviesAssessmentsSerializer, DaviesTestSerializer
 import requests
 from rest_framework import status
 from django.shortcuts import get_object_or_404

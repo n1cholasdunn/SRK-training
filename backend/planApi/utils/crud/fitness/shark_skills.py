@@ -6,7 +6,7 @@ from planApi.gsheets.utils.fetch_by_url import fetch_url_data
 from rest_framework.response import Response
 from planApi.gsheets.getters.get_fitness_assessments import get_sharks_skills
 from planApi.models.fitness_models import SharkSkillsAssessments, SharkSkillsSide, SharkSkillsTest
-from planApi.serializers import SharkSkillsAssessmentsSerializer, SharkSkillsTestSerializer
+from planApi.utils.serializers.fitness import SharkSkillsAssessmentsSerializer, SharkSkillsTestSerializer
 
 def get_shark_skills_assessments(request, user_id):
     user = get_object_or_404(User, id=user_id)

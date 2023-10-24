@@ -8,7 +8,7 @@ class HealthMarkersAssessments(BaseAssessment):
 
 
 class HealthMarkersTest(models.Model):
-    assessment = models.ForeignKey(
+    assessment: models.ForeignKey[HealthMarkersAssessments] = models.ForeignKey(
         "HealthMarkersAssessments", related_name="tests", on_delete=models.CASCADE
     )
     weight = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
@@ -31,7 +31,7 @@ class MeasurementsAssessments(BaseAssessment):
 
 
 class MeasurementsTest(models.Model):
-    assessment = models.ForeignKey(
+    assessment: models.ForeignKey[MeasurementsAssessments] = models.ForeignKey(
         "MeasurementsAssessments", related_name="tests", on_delete=models.CASCADE
     )
     chest = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
@@ -60,7 +60,7 @@ class OverheadSquatAssessments(BaseAssessment):
 
 
 class OverheadSquatTest(models.Model):
-    assessment = models.ForeignKey(
+    assessment: models.ForeignKey[OverheadSquatAssessments] = models.ForeignKey(
         "OverheadSquatAssessments", related_name="tests", on_delete=models.CASCADE
     )
     foot_ankle = models.CharField(max_length=250, null=True, blank=True)
@@ -78,7 +78,7 @@ class YMCAStepAssessments(BaseAssessment):
 
 
 class YMCAStepTest(models.Model):
-    assessment = models.ForeignKey(
+    assessment: models.ForeignKey[YMCAStepAssessments] = models.ForeignKey(
         "YMCAStepAssessments", related_name="tests", on_delete=models.CASCADE
     )
     recovery_hr = models.DecimalField(
@@ -95,7 +95,7 @@ class SitReachAssessments(BaseAssessment):
 
 
 class SitReachTest(models.Model):
-    assessment = models.ForeignKey(
+    assessment: models.ForeignKey[SitReachAssessments] = models.ForeignKey(
         "SitReachAssessments", related_name="tests", on_delete=models.CASCADE
     )
     first_measurement = models.DecimalField(
@@ -117,7 +117,7 @@ class PushUpAssessments(BaseAssessment):
 
 
 class PushUpTest(models.Model):
-    assessment = models.ForeignKey(
+    assessment: models.ForeignKey[PushUpAssessments] = models.ForeignKey(
         "PushUpAssessments", related_name="tests", on_delete=models.CASCADE
     )
     num_pushups = models.IntegerField(null=True, blank=True)
@@ -132,7 +132,7 @@ class DaviesAssessments(BaseAssessment):
 
 
 class DaviesTest(models.Model):
-    assessment = models.ForeignKey(
+    assessment: models.ForeignKey[DaviesAssessments] = models.ForeignKey(
         "DaviesAssessments", related_name="tests", on_delete=models.CASCADE
     )
     first_trial = models.IntegerField(null=True, blank=True)
@@ -161,7 +161,7 @@ class SharkSkillsSide(models.Model):
 
 
 class SharkSkillsTest(models.Model):
-    assessment = models.ForeignKey(
+    assessment: models.ForeignKey[SharkSkillsAssessments] = models.ForeignKey(
         "SharkSkillsAssessments", related_name="tests", on_delete=models.CASCADE
     )
     practice_left = models.ForeignKey(
@@ -216,7 +216,7 @@ class CoreAssessments(BaseAssessment):
 
 
 class CoreTest(models.Model):
-    assessment = models.ForeignKey(
+    assessment: models.ForeignKey[CoreAssessments] = models.ForeignKey(
         "CoreAssessments", related_name="tests", on_delete=models.CASCADE
     )
     first_trial = models.CharField(max_length=6, null=True, blank=True)

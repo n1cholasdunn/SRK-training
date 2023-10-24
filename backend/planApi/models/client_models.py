@@ -1,6 +1,7 @@
 from django.db import models
 from .common import BaseClientInfo
-from phonenumber_field.modelfields import PhoneNumberField
+
+from phonenumber_field.modelfields import PhoneNumberField  # type:ignore
 
 
 class GeneralClientInfo(BaseClientInfo):

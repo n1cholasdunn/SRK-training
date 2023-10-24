@@ -7,7 +7,11 @@ from planApi.gsheets.utils.fetch_by_url import fetch_url_data
 from rest_framework.response import Response
 from planApi.gsheets.getters.get_fitness_assessments import get_core
 from planApi.models.fitness_models import CoreAssessments, CoreTest
-from planApi.serializers import CoreAssessmentsSerializer, CoreTestSerializer
+from planApi.utils.serializers.fitness import (
+    CoreAssessmentsSerializer,
+    CoreTestSerializer,
+)
+
 
 def get_core_assessments(request, user_id):
     user = get_object_or_404(User, id=user_id)
@@ -33,7 +37,6 @@ def delete_core_assessments(request, user_id):
 
 
 def get_core_test(request, test_id):
-    # TODO make consistent with .object or getobjector404 lean swap to .object and filter
     test = get_object_or_404(CoreTest, id=test_id)
     serializer = CoreTestSerializer(test)
     return Response(serializer.data, status=status.HTTP_200_OK)

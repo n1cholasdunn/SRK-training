@@ -2,7 +2,7 @@ from core.models import User
 from django.forms import ValidationError
 from planApi.gsheets.getters.get_fitness_assessments import get_overhead_squat
 from planApi.models.fitness_models import OverheadSquatAssessments, OverheadSquatTest
-from planApi.serializers import OverheadSquatAssessmentsSerializer, OverheadSquatTestSerializer
+from planApi.utils.serializers.fitness import OverheadSquatAssessmentsSerializer, OverheadSquatTestSerializer
 import requests
 from rest_framework import status
 from django.shortcuts import get_object_or_404
