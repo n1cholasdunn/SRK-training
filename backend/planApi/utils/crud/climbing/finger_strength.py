@@ -1,3 +1,4 @@
+from backend.planApi.gsheets.getters.get_climbing_assessments import get_finger_strength
 from core.models import User
 from django.forms import ValidationError
 import requests
@@ -49,21 +50,33 @@ def input_finger_strength_test(request):
             )
 
         try:
-            data = fetch_url_data(url, get_finger_strength_test)
+            data = fetch_url_data(url, get_finger_strength)
         except requests.RequestException as e:
             return Response(
                 {"error": f"Failed to fetch data from {url}: {str(e)}"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
+        labels = data[0]
+        total_load = data[1]
+        percentage_bodyweight = data[2]
+
         new_assessment = FingerStrengthAssessments.objects.create(trainee=request.user)
-        for i in range(len(data[0])):
-            test = FingerStrengthTest(
-                assessment=new_assessment,
-                test=float(data[0][i]),
-                # TODO structure data
-            )
-            test.save()
+
+        for i in range(len(labels)):
+            try:
+                test = FingerStrengthTest(
+                    assessment=new_assessment,
+                    test=labels[i],
+                    total_load=total_load[i],
+                    percentage_bodyweight=percentage_bodyweight[i],
+                )
+                test.save()
+            except ValidationError as e:
+                return Response(
+                    {"error": f"Invalid data: {str(e)}"},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
         return Response(
             {"message": "Data inputted successfully!"}, status=status.HTTP_201_CREATED
         )
@@ -74,18 +87,44 @@ def input_finger_strength_test(request):
 
 
 def update_finger_strength_test(request, test_id):
+    url = request.data.get("url")
+    if not url:
+        return Response(
+            {"error": "URL is required"}, status=status.HTTP_400_BAD_REQUEST
+        )
+    try:
+        data = fetch_url_data(url, get_finger_strength)
+    except requests.RequestException as e:
+        return Response(
+            {"error": f"Failed to fetch data from {url}: {str(e)}"},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
     try:
         test_instance = FingerStrengthTest.objects.get(id=test_id)
     except FingerStrengthTest.DoesNotExist:
         return Response({"error": "Test not found"}, status=status.HTTP_404_NOT_FOUND)
 
-    serializer = FingerStrengthTestSerializer(instance=test_instance, data=request.data)
+    labels = data[0]
+    total_load = data[1]
+    percentage_bodyweight = data[2]
 
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_200_OK)
-    else:
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    for i in range(len(labels)):
+        try:
+            test_instance.test = labels[i]
+            test_instance.total_load = total_load[i]
+            test_instance.percentage_bodyweight = percentage_bodyweight[i]
+
+        except ValidationError as e:
+            return Response(
+                {"error": f"Invalid data: {str(e)}"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+    test_instance.save()
+
+    return Response(
+        {"message": "Data updated successfully!"}, status=status.HTTP_200_OK
+    )
 
 
 def delete_finger_strength_test(request, test_id):

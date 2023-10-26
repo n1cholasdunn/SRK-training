@@ -76,7 +76,7 @@ def update_client_equipment(request, equipment_id):
         equipment_instance = equipment_queryset.first()
 
         try:
-            # Update with the fetched data
+            # TODO test to see if this works
             equipment_instance.equipment_id = data.get(
                 "equipment", equipment_instance.equipment_id
             )

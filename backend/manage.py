@@ -1,5 +1,7 @@
-#!/usr/bin/env python
+#!/Users/nicholasdunn/Documents/Projects/SRK-Website/backend/myenv/bin/python
 """Django's command-line utility for administrative tasks."""
+#! need to change the shebang line for deployment potentially the default is below
+# original -> !/usr/bin/env python
 import os
 import sys
 

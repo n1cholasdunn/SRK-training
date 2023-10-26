@@ -1,3 +1,4 @@
+from backend.planApi.gsheets.getters.get_climbing_assessments import get_power_endurance
 from core.models import User
 from django.forms import ValidationError
 import requests
@@ -49,7 +50,7 @@ def input_power_endurance_test(request):
             )
 
         try:
-            data = fetch_url_data(url, get_power_endurance_test)
+            data = fetch_url_data(url, get_power_endurance)
         except requests.RequestException as e:
             return Response(
                 {"error": f"Failed to fetch data from {url}: {str(e)}"},
@@ -57,13 +58,18 @@ def input_power_endurance_test(request):
             )
 
         new_assessment = PowerEnduranceAssessments.objects.create(trainee=request.user)
-        for i in range(len(data[0])):
+
+        test_names = data[0]
+        values = data[1]
+
+        for i in range(len(test_names)):
             test = PowerEnduranceTest(
                 assessment=new_assessment,
-                test=float(data[0][i]),
-                # TODO check structure of data - power endurance
+                test=test_names[i],
+                seconds=values[i],
             )
             test.save()
+
         return Response(
             {"message": "Data inputted successfully!"}, status=status.HTTP_201_CREATED
         )
@@ -73,19 +79,49 @@ def input_power_endurance_test(request):
     )
 
 
-def update_power_endurance_test(request, test_id):
+def update_power_endurance_test(request):
+    test_id = request.data.get("id")
+    url = request.data.get("url")
+    if not test_id:
+        return Response(
+            {"error": "Test ID is required"}, status=status.HTTP_400_BAD_REQUEST
+        )
+    if not url:
+        return Response(
+            {"error": "URL is required"}, status=status.HTTP_400_BAD_REQUEST
+        )
+
+    try:
+        data = fetch_url_data(url, get_power_endurance)
+    except requests.RequestException as e:
+        return Response(
+            {"error": f"Failed to fetch data from {url}: {str(e)}"},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
     try:
         test_instance = PowerEnduranceTest.objects.get(id=test_id)
     except PowerEnduranceTest.DoesNotExist:
         return Response({"error": "Test not found"}, status=status.HTTP_404_NOT_FOUND)
 
-    serializer = PowerEnduranceTestSerializer(instance=test_instance, data=request.data)
+    test_names = data[0]
+    values = data[1]
 
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_200_OK)
-    else:
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    for i in range(len(test_names)):
+        try:
+            test_instance.test = test_names[i]
+            test_instance.seconds = values[i]
+        except ValidationError as e:
+            return Response(
+                {"error": f"Invalid data: {str(e)}"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+    test_instance.save()
+
+    return Response(
+        {"error": "No matching data found for the test in the fetched data"},
+        status=status.HTTP_400_BAD_REQUEST,
+    )
 
 
 def delete_power_endurance_test(request, test_id):

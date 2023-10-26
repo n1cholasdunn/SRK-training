@@ -61,6 +61,53 @@ def create_client_availability(request):
     )
 
 
+def update_client_availability(request, availability_id):
+    if request.method == "POST":
+        url = request.data.get("url")
+        if not url:
+            return Response(
+                {"error": "URL is required"}, status=status.HTTP_400_BAD_REQUEST
+            )
+
+        try:
+            data = fetch_url_data(url, get_availability)
+        except requests.RequestException as e:
+            return Response(
+                {"error": f"Failed to fetch data from {url}: {str(e)}"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        try:
+            availability = ClientAvailability.objects.get(id=availability_id)
+        except ClientAvailability.DoesNotExist:
+            return Response(
+                {
+                    "error": f"ClientAvailability with ID {availability_id} does not exist"
+                },
+                status=status.HTTP_404_NOT_FOUND,
+            )
+
+        availability.monday_id = data.get("monday")
+        availability.tuesday_id = data.get("tuesday")
+        availability.wednesday_id = data.get("wednesday")
+        availability.thursday_id = data.get("thursday")
+        availability.friday_id = data.get("friday")
+        availability.saturday_id = data.get("saturday")
+        availability.sunday_id = data.get("sunday")
+        availability.save()
+
+        return Response(
+            {
+                "message": f"Client availability with ID {availability_id} updated successfully!"
+            },
+            status=status.HTTP_200_OK,
+        )
+
+    return Response(
+        {"error": "Invalid request method"}, status=status.HTTP_400_BAD_REQUEST
+    )
+
+
 def delete_client_availability(request, user_id):
     if request.method == "DELETE":
         availability = get_object_or_404(ClientAvailability, id=user_id)

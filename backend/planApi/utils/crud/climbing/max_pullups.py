@@ -59,10 +59,15 @@ def input_max_pullups_test(request):
 
         new_assessment = MaxPullupsAssessments.objects.create(trainee=request.user)
 
-        for item in data:
-            test_name = list(item.keys())[0]
-            value = list(item.values())[0]
-            test = MaxPullupsTest(assessment=new_assessment, test=test_name, reps=value)
+        test_names = data[0]
+        values = data[1]
+
+        for i in range(len(test_names)):
+            test = MaxPullupsTest(
+                assessment=new_assessment,
+                test=test_names[i],
+                reps=values[i],
+            )
             test.save()
 
         return Response(
@@ -87,7 +92,7 @@ def update_max_pullups_test(request):
         )
 
     try:
-        data = fetch_url_data(url)
+        data = fetch_url_data(url, get_max_pullups)
     except requests.RequestException as e:
         return Response(
             {"error": f"Failed to fetch data from {url}: {str(e)}"},
@@ -95,18 +100,23 @@ def update_max_pullups_test(request):
         )
 
     try:
-        existing_test = MaxPullupsTest.objects.get(id=test_id)
+        test_instance = MaxPullupsTest.objects.get(id=test_id)
     except MaxPullupsTest.DoesNotExist:
         return Response({"error": "Test not found"}, status=status.HTTP_404_NOT_FOUND)
 
-    for item in data:
-        existing_test.test = list(item.keys())[0]
-        existing_test.reps = list(item.values())[0]
-        existing_test.save()
-        return Response(
-            {"message": f"Test with ID {test_id} updated successfully!"},
-            status=status.HTTP_200_OK,
-        )
+    test_names = data[0]
+    values = data[1]
+
+    for i in range(len(test_names)):
+        try:
+            test_instance.test = test_names[i]
+            test_instance.reps = values[i]
+        except ValidationError as e:
+            return Response(
+                {"error": f"Invalid data: {str(e)}"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+    test_instance.save()
 
     return Response(
         {"error": "No matching data found for the test in the fetched data"},

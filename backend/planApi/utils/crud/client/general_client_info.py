@@ -1,3 +1,4 @@
+from backend.planApi.gsheets.getters.get_client import get_client_info
 from core.models import User
 from django.shortcuts import get_object_or_404
 from planApi.gsheets.utils.fetch_by_url import fetch_url_data
@@ -19,7 +20,19 @@ def get_general_client_info(request, user_id):
 
 def create_general_client_info(request):
     if request.method == "POST":
-        serializer = GeneralClientInfoSerializer(data=request.data)
+        url = request.data.get("url")
+        if not url:
+            return Response(
+                {"error": "URL is required"}, status=status.HTTP_400_BAD_REQUEST
+            )
+        try:
+            data = fetch_url_data(url, get_client_info)
+        except requests.RequestException as e:
+            return Response(
+                {"error": f"Failed to fetch data from {url}: {str(e)}"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        serializer = GeneralClientInfoSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -30,8 +43,20 @@ def create_general_client_info(request):
 
 
 def update_general_client_info(request, user_id):
+    url = request.data.get("url")
+    if not url:
+        return Response(
+            {"error": "URL is required"}, status=status.HTTP_400_BAD_REQUEST
+        )
+    try:
+        data = fetch_url_data(url, get_client_info)
+    except requests.RequestException as e:
+        return Response(
+            {"error": f"Failed to fetch data from {url}: {str(e)}"},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
     client_info = get_object_or_404(GeneralClientInfo, user_id=user_id)
-    serializer = GeneralClientInfoSerializer(instance=client_info, data=request.data)
+    serializer = GeneralClientInfoSerializer(instance=client_info, data=data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)

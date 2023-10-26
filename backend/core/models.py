@@ -3,9 +3,6 @@ from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 
 
-# Create your models here.
-
-
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **kwargs):
         if not email:
@@ -29,13 +26,13 @@ class UserManager(BaseUserManager):
         return self.create_user(email, password, **kwargs)
 
 
-class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(max_length=255, unique=True)
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
+class User(AbstractBaseUser, PermissionsMixin):  # type:ignore
+    email = models.EmailField(max_length=255, unique=True)  # type:ignore
+    first_name = models.CharField(max_length=255)  # type:ignore
+    last_name = models.CharField(max_length=255)  # type:ignore
     is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-    date_joined = models.DateTimeField(auto_now_add=True)
+    is_staff = models.BooleanField(default=False)  # type:ignore
+    date_joined = models.DateTimeField(auto_now_add=True)  # type:ignore
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["first_name", "last_name"]

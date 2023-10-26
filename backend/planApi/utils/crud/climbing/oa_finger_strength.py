@@ -1,6 +1,9 @@
 from core.models import User
 from django.forms import ValidationError
-from planApi.gsheets.getters.get_climbing_assessments import get_oa_finger_strength
+from planApi.gsheets.getters.get_climbing_assessments import (
+    get_oa_finger_strength,
+    get_oa_pinch_finger_strength,
+)
 import requests
 from django.shortcuts import get_object_or_404
 from rest_framework import status
@@ -84,7 +87,7 @@ def input_oa_finger_strength_test(request):
     )
 
 
-def update_oa_finger_strength_test_from_url(request):
+def update_oa_finger_strength_test(request):
     test_id = request.data.get("id")
     url = request.data.get("url")
 
@@ -107,16 +110,16 @@ def update_oa_finger_strength_test_from_url(request):
         )
 
     try:
-        existing_test = OAFingerStrengthTest.objects.get(id=test_id)
+        test_instance = OAFingerStrengthTest.objects.get(id=test_id)
     except OAFingerStrengthTest.DoesNotExist:
         return Response({"error": "Test not found"}, status=status.HTTP_404_NOT_FOUND)
 
     for item in data:
-        existing_test.left = item["Left"]
-        existing_test.right = item["Right"]
-        existing_test.left_percentage = item["LeftPercentage"]
-        existing_test.right_percentage = item["RightPercentage"]
-        existing_test.save()
+        test_instance.left = item["Left"]
+        test_instance.right = item["Right"]
+        test_instance.left_percentage = item["LeftPercentage"]
+        test_instance.right_percentage = item["RightPercentage"]
+        test_instance.save()
 
         return Response(
             {"message": f"Test with ID {test_id} updated successfully!"},
@@ -135,3 +138,20 @@ def delete_oa_finger_strength_test(request, test_id):
     return Response(
         {"message": "Test has been deleted successfully"}, status=status.HTTP_200_OK
     )
+
+
+# data = fetch_url_data(
+#     "https://docs.google.com/spreadsheets/d/16eR5pzMGubEou4c5-JBm86zoqbrco71ZlGrX-HZG6ig/edit?usp=sharing",
+#     get_oa_finger_strength,
+# )
+
+
+# def test_func():
+#     data = fetch_url_data(
+#         "https://docs.google.com/spreadsheets/d/16eR5pzMGubEou4c5-JBm86zoqbrco71ZlGrX-HZG6ig/edit?usp=sharing",
+#         get_oa_pinch_finger_strength,
+#     )
+#     return data
+
+
+# print(test_func())

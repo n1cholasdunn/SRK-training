@@ -1,3 +1,6 @@
+from backend.planApi.gsheets.getters.get_climbing_assessments import (
+    get_oa_pinch_finger_strength,
+)
 from core.models import User
 from django.forms import ValidationError
 import requests
@@ -49,7 +52,7 @@ def input_oa_pinch_test(request):
             )
 
         try:
-            data = fetch_url_data(url, get_oa_pinch_test)
+            data = fetch_url_data(url, get_oa_pinch_finger_strength)
         except requests.RequestException as e:
             return Response(
                 {"error": f"Failed to fetch data from {url}: {str(e)}"},
@@ -57,13 +60,16 @@ def input_oa_pinch_test(request):
             )
 
         new_assessment = OAPinchAssessments.objects.create(trainee=request.user)
-        for i in range(len(data[0])):
+
+        for test_data in data:
             test = OAPinchTest(
                 assessment=new_assessment,
-                test=float(data[0][i])
-                # TODO check structure of data - oa pinch
+                test=test_data["Test"],
+                left=test_data["Left"],
+                right=test_data["Right"],
             )
             test.save()
+
         return Response(
             {"message": "Data inputted successfully!"}, status=status.HTTP_201_CREATED
         )
@@ -73,19 +79,48 @@ def input_oa_pinch_test(request):
     )
 
 
-def update_oa_pinch_test(request, test_id):
+def update_oa_pinch_test(request):
+    test_id = request.data.get("id")
+    url = request.data.get("url")
+
+    if not test_id:
+        return Response(
+            {"error": "Test ID is required"}, status=status.HTTP_400_BAD_REQUEST
+        )
+
+    if not url:
+        return Response(
+            {"error": "URL is required"}, status=status.HTTP_400_BAD_REQUEST
+        )
+
+    try:
+        data = fetch_url_data(url, get_oa_pinch_finger_strength)
+    except requests.RequestException as e:
+        return Response(
+            {"error": f"Failed to fetch data from {url}: {str(e)}"},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
     try:
         test_instance = OAPinchTest.objects.get(id=test_id)
     except OAPinchTest.DoesNotExist:
         return Response({"error": "Test not found"}, status=status.HTTP_404_NOT_FOUND)
 
-    serializer = OAPinchTestSerializer(instance=test_instance, data=request.data)
+    for item in data:
+        # TODO change all accessing to be dot notation isntead of bracket as well
+        test_instance.left = item.Left
+        test_instance.right = item.Right
+        test_instance.save()
 
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_200_OK)
-    else:
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(
+            {"message": f"Test with ID {test_id} updated successfully!"},
+            status=status.HTTP_200_OK,
+        )
+
+    return Response(
+        {"error": "No matching data found for the test in the fetched data"},
+        status=status.HTTP_400_BAD_REQUEST,
+    )
 
 
 def delete_oa_pinch_test(request, test_id):
