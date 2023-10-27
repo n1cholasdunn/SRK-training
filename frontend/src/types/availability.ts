@@ -24,17 +24,6 @@ export type FormValues = {
   availability: Day[];
 };
 
-// const {
-//   control,
-//   handleSubmit,
-//   trigger,
-//   register,
-//   formState: { errors },
-// } = useForm<FormValues>({
-//   resolver: zodResolver(FormSchema),
-// });
-// export type Availability = { [key: string]: Day };
-
 export type AvailabilityField = `availability.${number}.slots.${number}.${
   | 'from'
   | 'to'}`;

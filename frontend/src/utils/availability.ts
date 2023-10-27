@@ -38,9 +38,9 @@ export const initialAvailability: Day[] = [
   },
 ];
 
-export function checkForOverlap(
+export const checkForOverlap = (
   availability: (typeof initialAvailability)[number]
-): { message: string; slotIndices: [number, number] } | null {
+): { message: string; slotIndices: [number, number] } | null => {
   const slots = availability.slots;
 
   for (let i = 0; i < slots.length; i++) {
@@ -70,46 +70,7 @@ export function checkForOverlap(
   }
 
   return null;
-}
-
-// export function checkForOverlap(
-//   availability: (typeof initialAvailability)[number]
-// ): string | null {
-//   const slots = availability.slots;
-
-//   for (let i = 0; i < slots.length; i++) {
-//     const slot = slots[i];
-
-//     const startTime = parseTime(slot.from);
-//     const endTime = parseTime(slot.to);
-
-//     // Check if the start time is greater than or equal to the end time
-//     if (startTime >= endTime) {
-//       const invalidTimeMessage = `Invalid time slot: ${slot.from} - ${slot.to}. The start time must be earlier than the end time.`;
-//       return invalidTimeMessage;
-//     }
-
-//     for (let j = i + 1; j < slots.length; j++) {
-//       const compareSlot = slots[j];
-
-//       const compareStartTime = parseTime(compareSlot.from);
-//       const compareEndTime = parseTime(compareSlot.to);
-
-//       if (
-//         (startTime >= compareStartTime && startTime < compareEndTime) ||
-//         (endTime > compareStartTime && endTime <= compareEndTime) ||
-//         (compareStartTime >= startTime && compareStartTime < endTime) ||
-//         (compareEndTime > startTime && compareEndTime <= endTime)
-//       ) {
-//         const overlapMessage = `Overlapping time slots: ${slot.from} - ${slot.to} and ${compareSlot.from} - ${compareSlot.to}`;
-//         return overlapMessage;
-//       }
-//     }
-//   }
-
-//   console.log('No overlap detected');
-//   return null;
-// }
+};
 
 const parseTime = (timeString: string): Date => {
   const [hour, minute, period] = timeString.split(/[ :]/);
