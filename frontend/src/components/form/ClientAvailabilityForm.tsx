@@ -1,156 +1,156 @@
-import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { checkForOverlap, initialAvailability } from '../../utils/availability';
 import { createTimeOptions } from '../../utils/timeOptions';
+import {
+  FormData,
+  FormValues,
+  FormValuesSchema,
+} from '../../types/availability';
+import { useEffect, useState } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-const ClientAvailabilityForm = () => {
-  const [availability, setAvailability] = useState(initialAvailability);
-  const [errorMessages, setErrorMessages] = useState<string[]>([]);
+const ZodClientAvailabilityForm = () => {
+  const [forceUpdate, setForceUpdate] = useState(0);
 
   const timeOptions = createTimeOptions();
+  const {
+    handleSubmit,
+    watch,
+    setValue,
+    setError,
+    clearErrors,
+    formState: { errors },
+    register,
+  } = useForm<FormValues>({
+    resolver: zodResolver(FormValuesSchema),
+    defaultValues: { availability: initialAvailability },
+  });
 
-  const handleTimeChange = (
-    dayIndex: number,
-    slotIndex: number,
-    field: 'from' | 'to',
-    value: string
-  ) => {
-    console.log('handle change start');
+  const availability = watch('availability', initialAvailability);
+  console.log(availability, 'avail');
+  console.log(initialAvailability, 'initial');
 
-    const updatedAvailability = [...availability];
-    updatedAvailability[dayIndex].slots[slotIndex][field] = value;
-    setAvailability(updatedAvailability);
-
-    const dayAvailability = updatedAvailability[dayIndex];
-    const overlapMessage = checkForOverlap(dayAvailability);
-    setErrorMessages(prevErrors => {
-      const updatedErrors = [...prevErrors];
-
-      updatedErrors[dayIndex] = overlapMessage || '';
-      console.log('handle change end');
-      return updatedErrors;
-    });
-    console.log(overlapMessage, 'this is overlap message');
+  const getSlotErrorMessage = (dayIndex: number, slotIndex: number) => {
+    return errors.availability?.[dayIndex]?.slots?.[slotIndex]?.message;
   };
+
   useEffect(() => {
-    console.log(errorMessages);
-  }, [errorMessages]);
+    availability?.forEach((day, dayIndex) => {
+      day.slots.forEach((_, slotIndex) => {
+        const overlapError = checkForOverlap(day);
+
+        if (overlapError) {
+          const { message, slotIndices } = overlapError;
+
+          slotIndices.forEach(index => {
+            const errorPath =
+              `availability.${dayIndex}.slots.${index}` as const;
+            setError(errorPath, { message });
+          });
+
+          setForceUpdate(prev => prev + 1);
+        } else {
+          const errorPath =
+            `availability.${dayIndex}.slots.${slotIndex}` as const;
+          clearErrors(errorPath);
+          setForceUpdate(prev => prev + 1);
+        }
+      });
+    });
+  }, [availability, setError, clearErrors, forceUpdate]);
 
   const addSlot = (dayIndex: number) => {
-    const updatedAvailability = [...availability];
-    updatedAvailability[dayIndex].slots.push({ from: '', to: '' });
-    setAvailability(updatedAvailability);
+    setValue(`availability.${dayIndex}.slots`, [
+      ...(availability[dayIndex].slots || []),
+      { from: '', to: '' },
+    ]);
+  };
 
-    setErrorMessages(prevErrors => {
-      const updatedErrors = [...prevErrors];
-      updatedErrors[dayIndex] = '';
-      return updatedErrors;
-    });
+  const onSubmit = (data: FormData) => {
+    try {
+      FormValuesSchema.parse(data);
+      console.log(data);
+
+      // TODO add submit logic
+    } catch (error) {
+      // TODO add error handling
+    }
   };
 
   return (
     <div>
       <h2>Set Availability for Each Day</h2>
-      <form>
-        {availability.map((day, dayIndex) => (
-          <div key={day.day}>
-            <label>
-              {day.day}:
-              <br />
-              {day.slots.map((slot, slotIndex) => (
-                <div key={slotIndex}>
-                  From:
-                  <select
-                    value={slot.from}
-                    onChange={e =>
-                      handleTimeChange(
-                        dayIndex,
-                        slotIndex,
-                        'from',
-                        e.target.value
-                      )
-                    }
-                  >
-                    <option value=''>Select Time</option>
-                    {timeOptions.map((timeOption, index) => (
-                      <option
-                        key={index}
-                        value={timeOption}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {availability && availability.length > 0 ? (
+          availability.map((day, dayIndex) => (
+            <div key={day.day}>
+              <label>
+                {day.day}:
+                <br />
+                {day.slots && day.slots.length > 0 ? (
+                  day.slots.map((_, slotIndex) => (
+                    <div key={slotIndex}>
+                      From:
+                      <select
+                        {...register(
+                          `availability.${dayIndex}.slots.${slotIndex}.from`
+                        )}
                       >
-                        {timeOption}
-                      </option>
-                    ))}
-                  </select>
-                  To:
-                  <select
-                    value={slot.to}
-                    onChange={e =>
-                      handleTimeChange(
-                        dayIndex,
-                        slotIndex,
-                        'to',
-                        e.target.value
-                      )
-                    }
-                  >
-                    <option value=''>Select Time</option>
-                    {timeOptions.map((timeOption, index) => (
-                      <option
-                        key={index}
-                        value={timeOption}
+                        <option value=''>Select Time</option>
+                        {timeOptions.map((timeOption, index) => (
+                          <option
+                            key={index}
+                            value={timeOption}
+                          >
+                            {timeOption}
+                          </option>
+                        ))}
+                      </select>
+                      To:
+                      <select
+                        {...register(
+                          `availability.${dayIndex}.slots.${slotIndex}.to`
+                        )}
                       >
-                        {timeOption}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              ))}
-              <button
-                type='button'
-                onClick={() => addSlot(dayIndex)}
-              >
-                Add Slot
-              </button>
-              Comment:
-              <input
-                type='text'
-                value={day.comment}
-                onChange={e =>
-                  setAvailability(prevAvailability => {
-                    const updatedAvailability = [...prevAvailability];
-                    updatedAvailability[dayIndex].comment = e.target.value;
-                    return updatedAvailability;
-                  })
-                }
-              />
-              {errorMessages[dayIndex] && (
-                <div className='error'>{errorMessages[dayIndex]}</div>
-              )}
-            </label>
-          </div>
-        ))}
+                        <option value=''>Select Time</option>
+                        {timeOptions.map((timeOption, index) => (
+                          <option
+                            key={index}
+                            value={timeOption}
+                          >
+                            {timeOption}
+                          </option>
+                        ))}
+                      </select>
+                      {getSlotErrorMessage(dayIndex, slotIndex) && (
+                        <div className='error'>
+                          <p className='text-red-600'>
+                            {getSlotErrorMessage(dayIndex, slotIndex)}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  ))
+                ) : (
+                  <p>No slots added</p>
+                )}
+                <button
+                  type='button'
+                  onClick={() => addSlot(dayIndex)}
+                >
+                  Add Slot
+                </button>
+              </label>
+            </div>
+          ))
+        ) : (
+          <p>No availability data</p>
+        )}
+
+        <button type='submit'>Submit</button>
       </form>
-      <div>
-        <h2>Availability:</h2>
-        <ul>
-          {availability.map(day => (
-            <li key={day.day}>
-              {day.day}:
-              {day.slots.map((slot, slotIndex) => (
-                <ul key={slotIndex}>
-                  {slot.from && slot.to && (
-                    <li>
-                      From: {slot.from}, To: {slot.to}
-                    </li>
-                  )}
-                </ul>
-              ))}
-              {day.comment && <div>Comment: {day.comment}</div>}
-            </li>
-          ))}
-        </ul>
-      </div>
     </div>
   );
 };
 
-export default ClientAvailabilityForm;
+export default ZodClientAvailabilityForm;

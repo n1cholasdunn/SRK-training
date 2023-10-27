@@ -1,7 +1,4 @@
-// import { useEffect } from 'react';
-// import useGoogleAuthToken from './hooks/useGoogleAuthToken';
-// import useGoogleAuthLink from './hooks/useGoogleAuthLink';
-// import useProfile from './hooks/useProfile';
+import './App.css';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import HomePage from './pages/Home/HomePage';
 import PlanList from './components/PlanList';
@@ -18,7 +15,7 @@ import ClientAvailabilityForm from './components/form/ClientAvailabilityForm';
 function App() {
   return (
     <Router>
-      <div className='App'>
+      <div className='App h-full w-full'>
         <Routes>
           <Route
             path='/'

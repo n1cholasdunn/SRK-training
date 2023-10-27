@@ -2,79 +2,116 @@ import { Day } from '../types/availability';
 
 export const initialAvailability: Day[] = [
   {
-    day: 'mon',
-    slots: [{ from: '', to: '' }],
+    day: 'Monday',
+    slots: [],
     comment: '',
   },
   {
-    day: 'tue',
-    slots: [{ from: '', to: '' }],
+    day: 'Tuesday',
+    slots: [],
     comment: '',
   },
   {
-    day: 'wed',
-    slots: [{ from: '', to: '' }],
+    day: 'Wednesday',
+    slots: [],
     comment: '',
   },
   {
-    day: 'thu',
-    slots: [{ from: '', to: '' }],
+    day: 'Thursday',
+    slots: [],
     comment: '',
   },
   {
-    day: 'fri',
-    slots: [{ from: '', to: '' }],
+    day: 'Friday',
+    slots: [],
     comment: '',
   },
   {
-    day: 'sat',
-    slots: [{ from: '', to: '' }],
+    day: 'Saturday',
+    slots: [],
     comment: '',
   },
   {
-    day: 'sun',
-    slots: [{ from: '', to: '' }],
+    day: 'Sunday',
+    slots: [],
     comment: '',
   },
 ];
 
-// console.log(startTimeA, 'startA');
-// console.log(endTimeA, 'endA');
-// console.log(startTimeB, 'startB');
-// console.log(endTimeB, 'endB');
-
 export function checkForOverlap(
   availability: (typeof initialAvailability)[number]
-): string | null {
+): { message: string; slotIndices: [number, number] } | null {
   const slots = availability.slots;
 
   for (let i = 0; i < slots.length; i++) {
-    for (let j = i + 1; j < slots.length; j++) {
-      const slotA = slots[i];
-      const slotB = slots[j];
+    const slotA = slots[i];
+    const startTimeA = parseTime(slotA.from);
+    const endTimeA = parseTime(slotA.to);
 
-      const startTimeA = parseTime(slotA.from);
-      console.log(startTimeA, 'startA');
-      const endTimeA = parseTime(slotA.to);
-      console.log(endTimeA, 'endA');
+    if (startTimeA >= endTimeA) {
+      return {
+        message: `Start time must be earlier than end time in slot ${slotA.from} - ${slotA.to}`,
+        slotIndices: [i, i],
+      };
+    }
+
+    for (let j = i + 1; j < slots.length; j++) {
+      const slotB = slots[j];
       const startTimeB = parseTime(slotB.from);
-      console.log(startTimeB, 'startB');
       const endTimeB = parseTime(slotB.to);
-      console.log(endTimeB, 'endB');
 
       if (startTimeA < endTimeB && endTimeA > startTimeB) {
-        const overlapMessage = `Overlapping time slots: ${slotA.from} - ${slotA.to} and ${slotB.from} - ${slotB.to}`;
-        console.log(overlapMessage);
-        return overlapMessage;
+        return {
+          message: `Overlapping slots detected: ${slotA.from} - ${slotA.to} and ${slotB.from} - ${slotB.to}`,
+          slotIndices: [i, j],
+        };
       }
     }
   }
 
-  console.log('No overlap detected');
   return null;
 }
 
-function parseTime(timeString: string): Date {
+// export function checkForOverlap(
+//   availability: (typeof initialAvailability)[number]
+// ): string | null {
+//   const slots = availability.slots;
+
+//   for (let i = 0; i < slots.length; i++) {
+//     const slot = slots[i];
+
+//     const startTime = parseTime(slot.from);
+//     const endTime = parseTime(slot.to);
+
+//     // Check if the start time is greater than or equal to the end time
+//     if (startTime >= endTime) {
+//       const invalidTimeMessage = `Invalid time slot: ${slot.from} - ${slot.to}. The start time must be earlier than the end time.`;
+//       return invalidTimeMessage;
+//     }
+
+//     for (let j = i + 1; j < slots.length; j++) {
+//       const compareSlot = slots[j];
+
+//       const compareStartTime = parseTime(compareSlot.from);
+//       const compareEndTime = parseTime(compareSlot.to);
+
+//       if (
+//         (startTime >= compareStartTime && startTime < compareEndTime) ||
+//         (endTime > compareStartTime && endTime <= compareEndTime) ||
+//         (compareStartTime >= startTime && compareStartTime < endTime) ||
+//         (compareEndTime > startTime && compareEndTime <= endTime)
+//       ) {
+//         const overlapMessage = `Overlapping time slots: ${slot.from} - ${slot.to} and ${compareSlot.from} - ${compareSlot.to}`;
+//         return overlapMessage;
+//       }
+//     }
+//   }
+
+//   console.log('No overlap detected');
+//   return null;
+// }
+
+const parseTime = (timeString: string): Date => {
   const [hour, minute, period] = timeString.split(/[ :]/);
 
   // Convert to 24-hour format
@@ -86,4 +123,4 @@ function parseTime(timeString: string): Date {
   }
 
   return new Date(1970, 0, 1, hourValue, parseInt(minute, 10));
-}
+};
