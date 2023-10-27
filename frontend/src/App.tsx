@@ -13,6 +13,7 @@ import PlanListPrehab from './components/PlanListPrehab';
 import TestForm from './components/form/TestForm';
 import AssessmentList from './components/AssessmentList';
 import SingleTest from './components/HealthMarkersTest';
+import ClientAvailabilityForm from './components/form/ClientAvailabilityForm';
 
 function App() {
   return (
@@ -58,6 +59,10 @@ function App() {
           <Route
             path='/training/tests/health-markers/33/'
             element={<SingleTest />}
+          />
+          <Route
+            path='/username/update/availability/'
+            element={<ClientAvailabilityForm />}
           />
           {/* <div>
             {profile ? (

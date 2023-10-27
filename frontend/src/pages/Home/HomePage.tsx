@@ -87,6 +87,9 @@ const HomePage = () => {
       <Link to={'/training/assessments/health-markers/create/'}>
         <div>CLICK TO create health markers plan</div>
       </Link>
+      <Link to={'/username/update/availability/'}>
+        <div>UPDATE AVAILABILITY</div>
+      </Link>
       <div>...</div>)
     </div>
   );
