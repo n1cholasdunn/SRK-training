@@ -1,13 +1,13 @@
-import { useEffect } from 'react';
+import {useEffect} from 'react';
 import useGoogleAuthToken from '../../hooks/useGoogleAuthToken';
 import useGoogleAuthLink from '../../hooks/useGoogleAuthLink';
 import useProfile from '../../hooks/useProfile';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 const HomePage = () => {
-  const { data: profile, refetch: fetchProfile } = useProfile();
-  const { data: googleAuth, refetch: fetchGoogleAuth } = useGoogleAuthLink();
-  const { mutate, isSuccess } = useGoogleAuthToken();
+  const {data: profile, refetch: fetchProfile} = useProfile();
+  const {data: googleAuth, refetch: fetchGoogleAuth} = useGoogleAuthLink();
+  const {mutate, isSuccess} = useGoogleAuthToken();
 
   useEffect(() => {
     if (googleAuth) {
@@ -22,7 +22,7 @@ const HomePage = () => {
     const state = searchParams.get('state');
 
     if (code && state) {
-      mutate({ code, state });
+      mutate({code, state});
     }
   }, [mutate]);
 
@@ -90,7 +90,11 @@ const HomePage = () => {
       <Link to={'/username/update/availability/'}>
         <div>UPDATE AVAILABILITY</div>
       </Link>
-      <div>...</div>)
+      <div>...</div>
+      <Link to={'/username/update/info/'}>
+        <div>UPDATE Client INFO</div>
+      </Link>
+      <div>...</div>
     </div>
   );
 };

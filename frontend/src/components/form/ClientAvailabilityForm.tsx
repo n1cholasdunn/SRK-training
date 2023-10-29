@@ -137,6 +137,7 @@ const ZodClientAvailabilityForm = () => {
                 <button
                   type='button'
                   onClick={() => addSlot(dayIndex)}
+                  className='bg-red-200 rounded py-1 px-2 m-1'
                 >
                   Add Slot
                 </button>
