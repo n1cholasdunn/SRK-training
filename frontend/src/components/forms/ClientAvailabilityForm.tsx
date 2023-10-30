@@ -1,13 +1,9 @@
-import { useForm } from 'react-hook-form';
-import { checkForOverlap, initialAvailability } from '../../utils/availability';
-import { createTimeOptions } from '../../utils/timeOptions';
-import {
-  FormData,
-  FormValues,
-  FormValuesSchema,
-} from '../../types/availability';
-import { useEffect, useState } from 'react';
-import { zodResolver } from '@hookform/resolvers/zod';
+import {useForm} from 'react-hook-form';
+import {checkForOverlap, initialAvailability} from '../../utils/availability';
+import {createTimeOptions} from '../../utils/timeOptions';
+import {FormData, FormValues, FormValuesSchema} from '../../types/availability';
+import {useEffect, useState} from 'react';
+import {zodResolver} from '@hookform/resolvers/zod';
 
 const ZodClientAvailabilityForm = () => {
   const [forceUpdate, setForceUpdate] = useState(0);
@@ -19,11 +15,11 @@ const ZodClientAvailabilityForm = () => {
     setValue,
     setError,
     clearErrors,
-    formState: { errors },
+    formState: {errors},
     register,
   } = useForm<FormValues>({
     resolver: zodResolver(FormValuesSchema),
-    defaultValues: { availability: initialAvailability },
+    defaultValues: {availability: initialAvailability},
   });
 
   const availability = watch('availability', initialAvailability);
@@ -40,12 +36,12 @@ const ZodClientAvailabilityForm = () => {
         const overlapError = checkForOverlap(day);
 
         if (overlapError) {
-          const { message, slotIndices } = overlapError;
+          const {message, slotIndices} = overlapError;
 
           slotIndices.forEach(index => {
             const errorPath =
               `availability.${dayIndex}.slots.${index}` as const;
-            setError(errorPath, { message });
+            setError(errorPath, {message});
           });
 
           setForceUpdate(prev => prev + 1);
@@ -53,6 +49,7 @@ const ZodClientAvailabilityForm = () => {
           const errorPath =
             `availability.${dayIndex}.slots.${slotIndex}` as const;
           clearErrors(errorPath);
+          //TODO fix the need for forcing the update
           setForceUpdate(prev => prev + 1);
         }
       });
@@ -62,7 +59,7 @@ const ZodClientAvailabilityForm = () => {
   const addSlot = (dayIndex: number) => {
     setValue(`availability.${dayIndex}.slots`, [
       ...(availability[dayIndex].slots || []),
-      { from: '', to: '' },
+      {from: '', to: ''},
     ]);
   };
 
@@ -94,14 +91,10 @@ const ZodClientAvailabilityForm = () => {
                       <select
                         {...register(
                           `availability.${dayIndex}.slots.${slotIndex}.from`
-                        )}
-                      >
-                        <option value=''>Select Time</option>
+                        )}>
+                        <option value="">Select Time</option>
                         {timeOptions.map((timeOption, index) => (
-                          <option
-                            key={index}
-                            value={timeOption}
-                          >
+                          <option key={index} value={timeOption}>
                             {timeOption}
                           </option>
                         ))}
@@ -110,21 +103,17 @@ const ZodClientAvailabilityForm = () => {
                       <select
                         {...register(
                           `availability.${dayIndex}.slots.${slotIndex}.to`
-                        )}
-                      >
-                        <option value=''>Select Time</option>
+                        )}>
+                        <option value="">Select Time</option>
                         {timeOptions.map((timeOption, index) => (
-                          <option
-                            key={index}
-                            value={timeOption}
-                          >
+                          <option key={index} value={timeOption}>
                             {timeOption}
                           </option>
                         ))}
                       </select>
                       {getSlotErrorMessage(dayIndex, slotIndex) && (
-                        <div className='error'>
-                          <p className='text-red-600'>
+                        <div className="error">
+                          <p className="text-red-600">
                             {getSlotErrorMessage(dayIndex, slotIndex)}
                           </p>
                         </div>
@@ -135,10 +124,9 @@ const ZodClientAvailabilityForm = () => {
                   <p>No slots added</p>
                 )}
                 <button
-                  type='button'
+                  type="button"
                   onClick={() => addSlot(dayIndex)}
-                  className='bg-red-200 rounded py-1 px-2 m-1'
-                >
+                  className="bg-red-200 rounded py-1 px-2 m-1">
                   Add Slot
                 </button>
               </label>
@@ -148,7 +136,7 @@ const ZodClientAvailabilityForm = () => {
           <p>No availability data</p>
         )}
 
-        <button type='submit'>Submit</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );

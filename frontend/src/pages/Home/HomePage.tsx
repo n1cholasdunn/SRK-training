@@ -91,8 +91,12 @@ const HomePage = () => {
         <div>UPDATE AVAILABILITY</div>
       </Link>
       <div>...</div>
-      <Link to={'/username/update/info/'}>
+      <Link to={'/username/info/update/'}>
         <div>UPDATE Client INFO</div>
+      </Link>
+      <div>...</div>
+      <Link to={'/username/program/update/'}>
+        <div>UPDATE Program INFO</div>
       </Link>
       <div>...</div>
     </div>

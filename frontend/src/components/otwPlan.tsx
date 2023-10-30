@@ -1,6 +1,6 @@
 // import { useEffect } from 'react';
 // import { TOKEN_KEY } from '../api';
-import GSheetForm from './form/GSheetForm';
+import GSheetForm from './forms/GSheetForm';
 
 const OtwPlan = () => {
   // const token = localStorage.getItem(TOKEN_KEY);

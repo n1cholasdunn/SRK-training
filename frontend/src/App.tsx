@@ -7,11 +7,12 @@ import GymPlan from './components/GymPlan';
 import PrehabPlan from './components/PrehabPlan';
 import PlanListGym from './components/PlanListGym';
 import PlanListPrehab from './components/PlanListPrehab';
-import TestForm from './components/form/TestForm';
+import TestForm from './components/forms/TestForm';
 import AssessmentList from './components/AssessmentList';
 import SingleTest from './components/HealthMarkersTest';
-import ClientAvailabilityForm from './components/form/ClientAvailabilityForm';
-import ClientInfoForm from './components/form/ClientInfoForm';
+import ClientAvailabilityForm from './components/forms/ClientAvailabilityForm';
+import ClientInfoForm from './components/forms/ClientInfoForm';
+import ClientProgramForm from './components/forms/ClientProgramForm';
 
 function App() {
   return (
@@ -51,7 +52,11 @@ function App() {
             element={<ClientAvailabilityForm />}
           />
           {/* TODO create a container component for all of the client forms */}
-          <Route path="/username/update/info/" element={<ClientInfoForm />} />
+          <Route path="/username/info/update/" element={<ClientInfoForm />} />
+          <Route
+            path="/username/program/update/"
+            element={<ClientProgramForm />}
+          />
           {/* <div>
             {profile ? (
               <h1>Hello {profile.firstName}!</h1>
