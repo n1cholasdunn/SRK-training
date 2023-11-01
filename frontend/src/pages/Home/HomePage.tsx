@@ -99,6 +99,14 @@ const HomePage = () => {
         <div>UPDATE Program INFO</div>
       </Link>
       <div>...</div>
+      <Link to={'/username/equipment/update/'}>
+        <div>UPDATE Equipment INFO</div>
+      </Link>
+      <div>...</div>
+      <Link to={'/climbing/assesments/'}>
+        <div>INPUT CLIMBING ASSESSMENT</div>
+      </Link>
+      <div>...</div>
     </div>
   );
 };

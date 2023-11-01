@@ -13,6 +13,8 @@ import SingleTest from './components/HealthMarkersTest';
 import ClientAvailabilityForm from './components/forms/ClientAvailabilityForm';
 import ClientInfoForm from './components/forms/ClientInfoForm';
 import ClientProgramForm from './components/forms/ClientProgramForm';
+import ClientEquipmentForm from './components/forms/ClientEquipmentForm';
+import ClimbingAssessmentForm from './components/forms/ClimbingAssessmentForm';
 
 function App() {
   return (
@@ -56,6 +58,14 @@ function App() {
           <Route
             path="/username/program/update/"
             element={<ClientProgramForm />}
+          />
+          <Route
+            path="/username/equipment/update/"
+            element={<ClientEquipmentForm />}
+          />
+          <Route
+            path="/climbing/assesments/"
+            element={<ClimbingAssessmentForm />}
           />
           {/* <div>
             {profile ? (
