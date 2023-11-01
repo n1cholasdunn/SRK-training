@@ -5,7 +5,7 @@ import {
   useFieldArray,
 } from 'react-hook-form';
 import {AssessmentFormValues} from '../../types/assessments/climbing';
-import {useEffect} from 'react';
+import {useEffect, useRef} from 'react';
 
 type Props = {
   control: Control<AssessmentFormValues>;
@@ -19,11 +19,14 @@ const OAPinchAssessment = ({control, register, errors}: Props) => {
     name: 'oa_pinch_strength.assessments',
   });
 
+  const initialRender = useRef(true);
+
   useEffect(() => {
-    if (fields.length === 0) {
+    if (initialRender.current) {
       append({left: undefined, right: undefined});
+      initialRender.current = false;
     }
-  }, [fields, append]);
+  }, [append]);
   return (
     <>
       {fields.map((field, index) => (

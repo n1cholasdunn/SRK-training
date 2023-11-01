@@ -5,7 +5,7 @@ import {
   useFieldArray,
 } from 'react-hook-form';
 import {AssessmentFormValues} from '../../types/assessments/climbing';
-import {useEffect} from 'react';
+import {useEffect, useRef} from 'react';
 
 type Props = {
   control: Control<AssessmentFormValues>;
@@ -18,11 +18,14 @@ const MaxPullupsAssessment = ({control, register, errors}: Props) => {
     name: 'max_pullups.assessments',
   });
 
+  const initialRender = useRef(true);
+
   useEffect(() => {
-    if (fields.length === 0) {
+    if (initialRender.current) {
       append({reps: undefined});
+      initialRender.current = false;
     }
-  }, [fields, append]);
+  }, [append]);
 
   return (
     <>
