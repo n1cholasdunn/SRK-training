@@ -1,8 +1,8 @@
-import { z } from 'zod';
+import {z} from 'zod';
 
 const SlotSchema = z.object({
-  from: z.string().nonempty('From time is required'),
-  to: z.string().nonempty('To time is required'),
+  from: z.string().min(1, {message: 'From time is required'}),
+  to: z.string().min(1, {message: 'To time is required'}),
 });
 
 const DaySchema = z.object({
@@ -16,9 +16,9 @@ export const FormValuesSchema = z.object({
 });
 export type FormData = z.infer<typeof FormValuesSchema>;
 
-export type Day = { day: string; slots: Slot[]; comment: string };
+export type Day = {day: string; slots: Slot[]; comment: string};
 
-export type Slot = { from: string; to: string };
+export type Slot = {from: string; to: string};
 
 export type FormValues = {
   availability: Day[];
