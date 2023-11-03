@@ -107,6 +107,10 @@ const HomePage = () => {
         <div>INPUT CLIMBING ASSESSMENT</div>
       </Link>
       <div>...</div>
+      <Link to={'/fitness/assesments/'}>
+        <div>INPUT Fitness ASSESSMENT</div>
+      </Link>
+      <div>...</div>
     </div>
   );
 };
