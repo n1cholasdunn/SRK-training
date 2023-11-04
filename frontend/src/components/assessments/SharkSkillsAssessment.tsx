@@ -6,6 +6,7 @@ import {
 } from 'react-hook-form';
 import {AssessmentFormValues} from '../../types/assessments/fitness';
 import {useEffect, useMemo, useRef} from 'react';
+import SharkSkillsSide from './SharkSkillsSide';
 
 type Props = {
   control: Control<AssessmentFormValues>;
@@ -18,14 +19,12 @@ const SharkSkillsAssessment = ({control, register, errors}: Props) => {
     control,
     name: 'shark_skills.assessments',
   });
-  // const emptySide = {
-  //   time: undefined,
-  //   deduction_tally: undefined,
-  //   total_deducted: undefined,
-  //   final_total: undefined,
-  // };
 
   const initialRender = useRef(true);
+
+  useEffect(() => {
+    console.log(fields);
+  }, [fields]);
 
   const emptySide = useMemo(
     () => ({
@@ -48,14 +47,7 @@ const SharkSkillsAssessment = ({control, register, errors}: Props) => {
     }),
     [emptySide]
   );
-  // const emptyTest = {
-  //   practice_left: emptySide,
-  //   practice_right: emptySide,
-  //   first_left: emptySide,
-  //   first_right: emptySide,
-  //   second_left: emptySide,
-  //   second_right: emptySide,
-  // };
+
   useEffect(() => {
     if (initialRender.current) {
       append(emptyTest);
@@ -68,87 +60,44 @@ const SharkSkillsAssessment = ({control, register, errors}: Props) => {
     <>
       {fields.map((field, index) => (
         <div key={field.id}>
-          <input
-            {...register(
-              `shark_skills.assessments.${index}.practice_left` as const
-            )}
-            defaultValue={undefined}
-            placeholder="Practice Left"
+          <SharkSkillsSide
+            register={register}
+            index={index}
+            side="practice_left"
+            errors={errors}
           />
-          {errors?.shark_skills?.assessments?.[index]?.practice_left && (
-            <p className={'text-red-500 px-2'}>
-              {
-                errors?.shark_skills?.assessments?.[index]?.practice_left
-                  ?.message
-              }
-            </p>
-          )}
-          <input
-            {...register(
-              `shark_skills.assessments.${index}.practice_right` as const
-            )}
-            defaultValue={undefined}
-            placeholder="Practice Right"
+          <SharkSkillsSide
+            register={register}
+            index={index}
+            side="practice_right"
+            errors={errors}
           />
-          {errors?.shark_skills?.assessments?.[index]?.practice_right && (
-            <p className={'text-red-500 px-2'}>
-              {
-                errors?.shark_skills?.assessments?.[index]?.practice_right
-                  ?.message
-              }
-            </p>
-          )}
-          <input
-            {...register(
-              `shark_skills.assessments.${index}.first_left` as const
-            )}
-            defaultValue={undefined}
-            placeholder="First Left"
+          <SharkSkillsSide
+            register={register}
+            index={index}
+            side="first_left"
+            errors={errors}
           />
-          {errors?.shark_skills?.assessments?.[index]?.first_left && (
-            <p className={'text-red-500 px-2'}>
-              {errors?.shark_skills?.assessments?.[index]?.first_left?.message}
-            </p>
-          )}
-          <input
-            {...register(
-              `shark_skills.assessments.${index}.first_right` as const
-            )}
-            defaultValue={undefined}
-            placeholder="First Right"
+          <SharkSkillsSide
+            register={register}
+            index={index}
+            side="first_right"
+            errors={errors}
           />
-          {errors?.shark_skills?.assessments?.[index]?.first_right && (
-            <p className={'text-red-500 px-2'}>
-              {errors?.shark_skills?.assessments?.[index]?.first_right?.message}
-            </p>
-          )}
-          <input
-            {...register(
-              `shark_skills.assessments.${index}.second_left` as const
-            )}
-            defaultValue={undefined}
-            placeholder="Second Left"
+
+          <SharkSkillsSide
+            register={register}
+            index={index}
+            side="second_left"
+            errors={errors}
           />
-          {errors?.shark_skills?.assessments?.[index]?.second_left && (
-            <p className={'text-red-500 px-2'}>
-              {errors?.shark_skills?.assessments?.[index]?.second_left?.message}
-            </p>
-          )}
-          <input
-            {...register(
-              `shark_skills.assessments.${index}.second_right` as const
-            )}
-            defaultValue={undefined}
-            placeholder="Second Right"
+          <SharkSkillsSide
+            register={register}
+            index={index}
+            side="second_right"
+            errors={errors}
           />
-          {errors?.shark_skills?.assessments?.[index]?.second_right && (
-            <p className={'text-red-500 px-2'}>
-              {
-                errors?.shark_skills?.assessments?.[index]?.second_right
-                  ?.message
-              }
-            </p>
-          )}
+
           {fields.length > 1 && (
             <button type="button" onClick={() => remove(index)}>
               Remove
@@ -156,6 +105,7 @@ const SharkSkillsAssessment = ({control, register, errors}: Props) => {
           )}
         </div>
       ))}
+
       <button type="button" onClick={() => append(emptyTest)}>
         Add Shark Skills Test
       </button>
