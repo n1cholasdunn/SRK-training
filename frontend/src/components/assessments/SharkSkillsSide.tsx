@@ -14,6 +14,15 @@ type SharkSkillsSideProps = {
   errors?: FieldErrors<AssessmentFormValues>;
 };
 
+const getSideName = (side: string) => {
+  if (side === 'practice_left') return 'Practice Left';
+  if (side === 'practice_right') return 'Practice Right';
+  if (side === 'first_left') return 'First Left';
+  if (side === 'first_right') return 'First Right';
+  if (side === 'second_left') return 'Second Left';
+  if (side === 'second_right') return 'Second Right';
+};
+
 const SharkSkillsSide = ({
   register,
   index,
@@ -21,7 +30,8 @@ const SharkSkillsSide = ({
   errors,
 }: SharkSkillsSideProps) => {
   return (
-    <>
+    <div className="flex space-y-1">
+      <h3 className="mr-2">{getSideName(side)}:</h3>
       <input
         {...register(`shark_skills.assessments.${index}.${side}.time`)}
         defaultValue=""
@@ -75,7 +85,7 @@ const SharkSkillsSide = ({
           {errors.shark_skills.assessments[index]?.[side]?.final_total?.message}
         </p>
       )}
-    </>
+    </div>
   );
 };
 
