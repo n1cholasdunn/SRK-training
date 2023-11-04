@@ -16,6 +16,7 @@ import ClientProgramForm from './components/forms/ClientProgramForm';
 import ClientEquipmentForm from './components/forms/ClientEquipmentForm';
 import ClimbingAssessmentForm from './components/forms/ClimbingAssessmentForm';
 import FitnessAssessmentForm from './components/forms/FitnessAssessmentForm';
+import TrainingForm from './components/forms/TrainingForm';
 
 function App() {
   return (
@@ -72,6 +73,7 @@ function App() {
             path="/fitness/assesments/"
             element={<FitnessAssessmentForm />}
           />
+          <Route path="/training/plans/create/" element={<TrainingForm />} />
           {/* <div>
             {profile ? (
               <h1>Hello {profile.firstName}!</h1>

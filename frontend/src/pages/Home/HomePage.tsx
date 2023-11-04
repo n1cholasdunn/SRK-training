@@ -111,6 +111,10 @@ const HomePage = () => {
         <div>INPUT Fitness ASSESSMENT</div>
       </Link>
       <div>...</div>
+      <Link to={'/training/plans/create/'}>
+        <div>INPUT Training Plans</div>
+      </Link>
+      <div>...</div>
     </div>
   );
 };
