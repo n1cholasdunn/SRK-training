@@ -21,7 +21,7 @@ finger_strength = [
     ["187lb ", "190lb", "192lb"],
     ["119%", "121%", "122%"],
 ]
-# >>> from planApi.utils.crud.climbing.oa_finger_strength import test_func
+# >>> from common.utils.crud.climbing.oa_finger_strength import test_func
 # [{'Test': 'Pre-training Test', 'Left': 110, 'Right': 110, 'LeftPercentage': 0.92, 'RightPercentage': 0.92}, {'Test': 'Test 1', 'Left': 115, 'Right': 115, 'LeftPercentage': 0.94, 'RightPercentage': 0.94}, {'Test': 'Test 2', 'Left': 118, 'Right': 118, 'LeftPercentage': 0.96, 'RightPercentage': 0.96}]
 # >>> print(test_func())
 # [{'Test': 'Pre-training Test', 'Left': 110, 'Right': 110, 'LeftPercentage': 0.92, 'RightPercentage': 0.92}, {'Test': 'Test 1', 'Left': 115, 'Right': 115, 'LeftPercentage': 0.94, 'RightPercentage': 0.94}, {'Test': 'Test 2', 'Left': 118, 'Right': 118, 'LeftPercentage': 0.96, 'RightPercentage': 0.96}]

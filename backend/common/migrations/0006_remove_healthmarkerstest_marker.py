@@ -4,14 +4,13 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('planApi', '0005_healthmarkerstest_delete_healthmarkertest'),
+        ("common", "0005_healthmarkerstest_delete_healthmarkertest"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='healthmarkerstest',
-            name='marker',
+            model_name="healthmarkerstest",
+            name="marker",
         ),
     ]

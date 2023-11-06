@@ -1,5 +1,5 @@
 from django.contrib import admin
-from planApi.models.fitness_models import (
+from common.models.fitness_models import (
     HealthMarkersTest,
     HealthMarkersAssessments,
     MeasurementsAssessments,

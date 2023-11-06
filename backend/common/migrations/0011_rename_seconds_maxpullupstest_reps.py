@@ -4,15 +4,14 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('planApi', '0010_fingerstrengthtest_left_fingerstrengthtest_right_and_more'),
+        ("common", "0010_fingerstrengthtest_left_fingerstrengthtest_right_and_more"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='maxpullupstest',
-            old_name='seconds',
-            new_name='reps',
+            model_name="maxpullupstest",
+            old_name="seconds",
+            new_name="reps",
         ),
     ]

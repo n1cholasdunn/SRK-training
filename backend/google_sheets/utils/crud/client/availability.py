@@ -2,8 +2,8 @@ from core.models import User
 from django.shortcuts import get_object_or_404
 from google_sheets.utils.getters.get_client import get_availability
 from google_sheets.utils.fetch_by_url import fetch_url_data
-from planApi.models.client_models import ClientAvailability
-from planApi.models.common import BaseClientInfo
+from common.models.client_models import ClientAvailability
+from common.models.common import BaseClientInfo
 import requests
 from rest_framework import status
 from rest_framework.response import Response

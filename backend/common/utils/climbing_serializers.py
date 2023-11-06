@@ -1,4 +1,4 @@
-from planApi.models.climbing_models import (
+from common.models.climbing_models import (
     FingerStrengthAssessments,
     FingerStrengthTest,
     MaxLockoffAssessments,

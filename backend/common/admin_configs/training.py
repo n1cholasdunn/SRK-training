@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html_join
 
-from planApi.models.training_models import (
+from common.models.training_models import (
     OTWTrainingPlan,
     TrainingExercise,
     GymTrainingExercise,
@@ -49,7 +49,7 @@ class OTWTrainingPlanAdmin(admin.ModelAdmin):
             (
                 (
                     # reverse(
-                    #     "admin:planapi_trainingexercise_change", args=[exercise.pk]
+                    #     "admin:common_trainingexercise_change", args=[exercise.pk]
                     # ),
                     reverse(
                         "admin:%s_%s_change"
@@ -102,7 +102,7 @@ class OTWTrainingPlanAdmin(admin.ModelAdmin):
             (
                 (
                     # reverse(
-                    #     "admin:planapi_trainingexercise_change", args=[exercise.pk]
+                    #     "admin:common_trainingexercise_change", args=[exercise.pk]
                     # ),
                     reverse(
                         "admin:%s_%s_change"
@@ -155,7 +155,7 @@ class OTWTrainingPlanAdmin(admin.ModelAdmin):
             (
                 (
                     # reverse(
-                    #     "admin:planapi_trainingexercise_change", args=[exercise.pk]
+                    #     "admin:common_trainingexercise_change", args=[exercise.pk]
                     # ),
                     reverse(
                         "admin:%s_%s_change"

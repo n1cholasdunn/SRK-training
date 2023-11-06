@@ -1,6 +1,6 @@
 from core.models import User
 from django.forms import ValidationError
-from planApi.models.client_models import ClientEquipment
+from common.models.client_models import ClientEquipment
 import requests
 from rest_framework import status
 from django.shortcuts import get_object_or_404

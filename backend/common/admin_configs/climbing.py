@@ -1,5 +1,5 @@
 from django.contrib import admin
-from planApi.models.climbing_models import (
+from common.models.climbing_models import (
     PowerEnduranceAssessments,
     PowerEnduranceTest,
     MaxLockoffAssessments,

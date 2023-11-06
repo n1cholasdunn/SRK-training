@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     "anymail",
     "phonenumber_field",
     "core",
-    "planApi",
+    "common",
     "google_sheets",
     "react_forms",
 ]

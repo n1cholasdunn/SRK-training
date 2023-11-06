@@ -1,7 +1,7 @@
 from core.models import User
 from django.forms import ValidationError
-from planApi.models.fitness_models import YMCAStepAssessments, YMCAStepTest
-from planApi.utils.fitness_serializers import (
+from common.models.fitness_models import YMCAStepAssessments, YMCAStepTest
+from common.utils.fitness_serializers import (
     YMCAStepAssessmentsSerializer,
     YMCAStepTestSerializer,
 )

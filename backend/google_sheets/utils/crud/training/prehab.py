@@ -1,10 +1,10 @@
 from google_sheets.utils.getters.get_training import get_prehab_training
-from planApi.models.training_models import (
+from common.models.training_models import (
     PrehabTrainingExercise,
     PrehabTrainingPlan,
     TrainingExercise,
 )
-from planApi.utils.training_serializers import PrehabTrainingExerciseSerializer
+from common.utils.training_serializers import PrehabTrainingExerciseSerializer
 from rest_framework.response import Response
 from rest_framework import status
 import requests

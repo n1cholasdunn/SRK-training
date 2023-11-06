@@ -5,12 +5,12 @@ from django.shortcuts import get_object_or_404
 from google_sheets.utils.fetch_by_url import fetch_url_data
 from rest_framework.response import Response
 from google_sheets.utils.getters.get_fitness_assessments import get_sharks_skills
-from planApi.models.fitness_models import (
+from common.models.fitness_models import (
     SharkSkillsAssessments,
     SharkSkillsSide,
     SharkSkillsTest,
 )
-from planApi.utils.fitness_serializers import (
+from common.utils.fitness_serializers import (
     SharkSkillsAssessmentsSerializer,
     SharkSkillsTestSerializer,
 )

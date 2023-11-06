@@ -1,5 +1,5 @@
-from planApi.models.common import BaseClientInfo
-from planApi.models.client_models import (
+from common.models.common import BaseClientInfo
+from common.models.client_models import (
     ClientAvailability,
     ClientEquipment,
     ClientProgramInfo,

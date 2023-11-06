@@ -1,6 +1,6 @@
-from planApi.utils.client_serializers import DayAvailabilitySerializer
+from common.utils.client_serializers import DayAvailabilitySerializer
 from django.shortcuts import get_object_or_404
-from planApi.models.client_models import (
+from common.models.client_models import (
     DayAvailability,
     GeneralClientInfo,
 )

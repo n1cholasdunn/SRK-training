@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html_join
 from django.utils.safestring import mark_safe
-from planApi.models.client_models import (
+from common.models.client_models import (
     GeneralClientInfo,
     DayAvailability,
     ClientAvailability,

@@ -6,8 +6,8 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.response import Response
 from google_sheets.utils.fetch_by_url import fetch_url_data
-from planApi.models.climbing_models import PowerEnduranceAssessments, PowerEnduranceTest
-from planApi.utils.climbing_serializers import (
+from common.models.climbing_models import PowerEnduranceAssessments, PowerEnduranceTest
+from common.utils.climbing_serializers import (
     PowerEnduranceAssessmentsSerializer,
     PowerEnduranceTestSerializer,
 )

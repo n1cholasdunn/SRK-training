@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from planApi.models.fitness_models import (
+from common.models.fitness_models import (
     HealthMarkersAssessments,
     HealthMarkersTest,
     MeasurementsAssessments,

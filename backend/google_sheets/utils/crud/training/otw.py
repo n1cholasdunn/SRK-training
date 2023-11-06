@@ -1,6 +1,6 @@
 from google_sheets.utils.getters.get_training import get_otw_training
-from planApi.models.training_models import OTWTrainingPlan, TrainingExercise
-from planApi.utils.training_serializers import TrainingExerciseSerializer
+from common.models.training_models import OTWTrainingPlan, TrainingExercise
+from common.utils.training_serializers import TrainingExerciseSerializer
 from google_sheets.utils.fetch_by_url import fetch_url_data
 from rest_framework.response import Response
 from rest_framework import status

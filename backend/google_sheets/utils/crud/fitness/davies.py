@@ -2,8 +2,8 @@ from decimal import InvalidOperation
 from core.models import User
 from django.forms import ValidationError
 from google_sheets.utils.getters.get_fitness_assessments import get_davies
-from planApi.models.fitness_models import DaviesAssessments, DaviesTest
-from planApi.utils.fitness_serializers import (
+from common.models.fitness_models import DaviesAssessments, DaviesTest
+from common.utils.fitness_serializers import (
     DaviesAssessmentsSerializer,
     DaviesTestSerializer,
 )

@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from planApi.models.training_models import (
+from common.models.training_models import (
     OTWTrainingPlan,
     TrainingExercise,
     GymTrainingPlan,

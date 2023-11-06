@@ -5,8 +5,8 @@ from google_sheets.utils.fetch_by_url import fetch_url_data
 import requests
 from rest_framework import status
 from rest_framework.response import Response
-from planApi.models.client_models import GeneralClientInfo
-from planApi.utils.client_serializers import (
+from common.models.client_models import GeneralClientInfo
+from common.utils.client_serializers import (
     GeneralClientInfoSerializer,
 )
 
