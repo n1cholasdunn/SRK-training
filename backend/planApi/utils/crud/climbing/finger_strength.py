@@ -57,17 +57,15 @@ def input_finger_strength_test(request):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        labels = data[0]
         total_load = data[1]
         percentage_bodyweight = data[2]
 
         new_assessment = FingerStrengthAssessments.objects.create(trainee=request.user)
 
-        for i in range(len(labels)):
+        for i in range(len(total_load)):
             try:
                 test = FingerStrengthTest(
                     assessment=new_assessment,
-                    test=labels[i],
                     total_load=total_load[i],
                     percentage_bodyweight=percentage_bodyweight[i],
                 )
@@ -104,13 +102,11 @@ def update_finger_strength_test(request, test_id):
     except FingerStrengthTest.DoesNotExist:
         return Response({"error": "Test not found"}, status=status.HTTP_404_NOT_FOUND)
 
-    labels = data[0]
     total_load = data[1]
     percentage_bodyweight = data[2]
 
-    for i in range(len(labels)):
+    for i in range(len(total_load)):
         try:
-            test_instance.test = labels[i]
             test_instance.total_load = total_load[i]
             test_instance.percentage_bodyweight = percentage_bodyweight[i]
 

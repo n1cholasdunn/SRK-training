@@ -70,7 +70,6 @@ def input_oa_finger_strength_test(request):
         for test_data in data:
             test = OAFingerStrengthTest(
                 assessment=new_assessment,
-                test=test_data["Test"],
                 left=test_data["Left"],
                 right=test_data["Right"],
                 left_percentage=test_data["LeftPercentage"],

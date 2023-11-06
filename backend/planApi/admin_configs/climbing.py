@@ -17,7 +17,7 @@ from planApi.models.climbing_models import (
 
 @admin.register(PowerEnduranceTest)
 class PowerEnduranceTestAdmin(admin.ModelAdmin):
-    list_display = ["test"]
+    pass
 
 
 @admin.register(PowerEnduranceAssessments)
@@ -31,7 +31,7 @@ class PowerEnduranceAssessmentsAdmin(admin.ModelAdmin):
 
 @admin.register(MaxLockoffTest)
 class MaxLockoffTestAdmin(admin.ModelAdmin):
-    list_display = ["test"]
+    pass
 
 
 @admin.register(MaxLockoffAssessments)
@@ -45,7 +45,7 @@ class MaxLockoffAssessmentsAdmin(admin.ModelAdmin):
 
 @admin.register(MaxPullupsTest)
 class MaxPullupsTestAdmin(admin.ModelAdmin):
-    list_display = ["test"]
+    pass
 
 
 @admin.register(MaxPullupsAssessments)
@@ -59,7 +59,7 @@ class MaxPullupsAssessmentsAdmin(admin.ModelAdmin):
 
 @admin.register(FingerStrengthTest)
 class FingerStrengthTestAdmin(admin.ModelAdmin):
-    list_display = ["test"]
+    pass
 
 
 @admin.register(FingerStrengthAssessments)
@@ -73,7 +73,7 @@ class FingerStrengthAssessmentsAdmin(admin.ModelAdmin):
 
 @admin.register(OAFingerStrengthTest)
 class OAFingerStrengthTestAdmin(admin.ModelAdmin):
-    list_display = ["test"]
+    pass
 
 
 @admin.register(OAFingerStrengthAssessments)
@@ -87,7 +87,7 @@ class OAFingerStrengthAssessmentsAdmin(admin.ModelAdmin):
 
 @admin.register(OAPinchTest)
 class OAPinchTestAdmin(admin.ModelAdmin):
-    list_display = ["test"]
+    pass
 
 
 @admin.register(OAPinchAssessments)

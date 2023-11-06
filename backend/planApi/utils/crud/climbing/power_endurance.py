@@ -65,7 +65,6 @@ def input_power_endurance_test(request):
         for i in range(len(test_names)):
             test = PowerEnduranceTest(
                 assessment=new_assessment,
-                test=test_names[i],
                 seconds=values[i],
             )
             test.save()
@@ -104,12 +103,10 @@ def update_power_endurance_test(request):
     except PowerEnduranceTest.DoesNotExist:
         return Response({"error": "Test not found"}, status=status.HTTP_404_NOT_FOUND)
 
-    test_names = data[0]
     values = data[1]
 
-    for i in range(len(test_names)):
+    for i in range(len(values)):
         try:
-            test_instance.test = test_names[i]
             test_instance.seconds = values[i]
         except ValidationError as e:
             return Response(

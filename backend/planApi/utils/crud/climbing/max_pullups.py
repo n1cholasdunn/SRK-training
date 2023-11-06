@@ -59,13 +59,11 @@ def input_max_pullups_test(request):
 
         new_assessment = MaxPullupsAssessments.objects.create(trainee=request.user)
 
-        test_names = data[0]
         values = data[1]
 
-        for i in range(len(test_names)):
+        for i in range(len(values)):
             test = MaxPullupsTest(
                 assessment=new_assessment,
-                test=test_names[i],
                 reps=values[i],
             )
             test.save()
@@ -104,12 +102,10 @@ def update_max_pullups_test(request):
     except MaxPullupsTest.DoesNotExist:
         return Response({"error": "Test not found"}, status=status.HTTP_404_NOT_FOUND)
 
-    test_names = data[0]
     values = data[1]
 
-    for i in range(len(test_names)):
+    for i in range(len(values)):
         try:
-            test_instance.test = test_names[i]
             test_instance.reps = values[i]
         except ValidationError as e:
             return Response(

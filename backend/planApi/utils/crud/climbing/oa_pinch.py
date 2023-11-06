@@ -64,7 +64,6 @@ def input_oa_pinch_test(request):
         for test_data in data:
             test = OAPinchTest(
                 assessment=new_assessment,
-                test=test_data["Test"],
                 left=test_data["Left"],
                 right=test_data["Right"],
             )

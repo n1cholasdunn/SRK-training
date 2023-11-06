@@ -18,7 +18,7 @@ from rest_framework.serializers import ModelSerializer
 class PowerEnduranceTestSerializer(ModelSerializer):
     class Meta:
         model = PowerEnduranceTest
-        fields = ["test"]
+        fields = "__all__"
 
 
 class PowerEnduranceAssessmentsSerializer(ModelSerializer):
@@ -26,7 +26,7 @@ class PowerEnduranceAssessmentsSerializer(ModelSerializer):
 
     class Meta:
         model = PowerEnduranceAssessments
-        fields = ["id", "tests"]
+        fields = "__all__"
 
 
 class MaxPullupsTestSerializer(ModelSerializer):
