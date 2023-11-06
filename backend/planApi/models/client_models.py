@@ -27,9 +27,12 @@ class GeneralClientInfo(BaseClientInfo):
 # TODO fix client availability to fit the format by supplying a day as well
 class DayAvailability(models.Model):
     client = models.ForeignKey(
-        GeneralClientInfo, on_delete=models.CASCADE, related_name="availabilities"
+        GeneralClientInfo,
+        on_delete=models.CASCADE,
+        related_name="availabilities",
+        null=True,
     )
-    day = models.CharField(max_length=10)
+    day = models.CharField(max_length=10, null=True)
     slots = JSONField(null=True, blank=True)
     am = models.CharField(max_length=25, null=True, blank=True)
     pm = models.CharField(max_length=25, null=True, blank=True)
@@ -45,7 +48,10 @@ class DayAvailability(models.Model):
 
 class ClientAvailability(models.Model):
     client = models.OneToOneField(
-        GeneralClientInfo, on_delete=models.CASCADE, related_name="availability"
+        GeneralClientInfo,
+        on_delete=models.CASCADE,
+        related_name="availability",
+        null=True,
     )
 
     def __str__(self):
