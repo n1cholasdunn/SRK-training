@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import JSONField
 from .common import BaseClientInfo
 
 from phonenumber_field.modelfields import PhoneNumberField  # type:ignore
@@ -23,61 +24,32 @@ class GeneralClientInfo(BaseClientInfo):
     liability_waiver = models.BooleanField(default=False)
 
 
+# TODO fix client availability to fit the format by supplying a day as well
 class DayAvailability(models.Model):
+    client = models.ForeignKey(
+        GeneralClientInfo, on_delete=models.CASCADE, related_name="availabilities"
+    )
+    day = models.CharField(max_length=10)
+    slots = JSONField(null=True, blank=True)
     am = models.CharField(max_length=25, null=True, blank=True)
     pm = models.CharField(max_length=25, null=True, blank=True)
+    comment = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.day} - {self.client.name}"
+
+    class Meta:
+        unique_together = ("client", "day")
+        # ensures one  availability per day
 
 
-class ClientAvailability(BaseClientInfo):
-    monday = models.ForeignKey(
-        DayAvailability,
-        related_name="monday_availability",
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
+class ClientAvailability(models.Model):
+    client = models.OneToOneField(
+        GeneralClientInfo, on_delete=models.CASCADE, related_name="availability"
     )
-    tuesday = models.ForeignKey(
-        DayAvailability,
-        related_name="tuesday_availability",
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-    )
-    wednesday = models.ForeignKey(
-        DayAvailability,
-        related_name="wednesday_availability",
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-    )
-    thursday = models.ForeignKey(
-        DayAvailability,
-        related_name="thursday_availability",
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-    )
-    friday = models.ForeignKey(
-        DayAvailability,
-        related_name="friday_availability",
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-    )
-    saturday = models.ForeignKey(
-        DayAvailability,
-        related_name="saturday_availability",
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-    )
-    sunday = models.ForeignKey(
-        DayAvailability,
-        related_name="sunday_availability",
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-    )
+
+    def __str__(self):
+        return f"Availability for {self.client.name}"
 
 
 class Equipment(models.Model):
@@ -97,7 +69,7 @@ class ClientEquipment(BaseClientInfo):
 class ClientProgramInfo(BaseClientInfo):
     program_type = models.CharField(max_length=30)
     training_style = models.CharField(max_length=30)
-    #TODO convert to integer in getter or just numbers in a string then coerce in frontend
+    # TODO convert to integer in getter or just numbers in a string then coerce in frontend
     payment_rate = models.CharField(max_length=25)
     program_start = models.CharField(max_length=25, blank=True, null=True)
     outdoor_max = models.CharField(max_length=5, null=True, blank=True)

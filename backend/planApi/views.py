@@ -1,4 +1,10 @@
 from django.shortcuts import render
+from planApi.utils.react_crud.availability import (
+    create_availability,
+    delete_availability,
+    get_availabilities,
+    update_availability,
+)
 from planApi.utils.crud.fitness.core import (
     delete_core_assessments,
     delete_core_test,
@@ -415,3 +421,17 @@ def handle_shark_skills_tests(request, pk):
         return update_shark_skills_test(request, pk)
     if request.method == "DELETE":
         return delete_shark_skills_test(request, pk)
+
+
+#
+@api_view(["GET", "PUT", "POST", "DELETE"])
+@permission_classes([IsAuthenticated])
+def handle_react_availability(request, pk):
+    if request.method == "GET":
+        return get_availabilities(request)
+    if request.method == "PUT":
+        return update_availability(request, pk)
+    if request.method == "POST":
+        return create_availability(request)
+    if request.method == "DELETE":
+        return delete_availability(request, pk)

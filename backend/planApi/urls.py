@@ -27,6 +27,7 @@ from .views import (
     handle_pushup_assessments,
     handle_pushup_input,
     handle_pushup_tests,
+    handle_react_availability,
     handle_shark_skills_assessments,
     handle_shark_skills_input,
     handle_shark_skills_tests,
@@ -325,5 +326,10 @@ urlpatterns = [
         "tests/shark-skills/delete/<int:pk>/",
         handle_shark_skills_tests,
         name="delete-shark-skills-test",
+    ),
+    path(
+        "client/availability",
+        handle_react_availability,
+        name="handle-react-availability",
     ),
 ]
