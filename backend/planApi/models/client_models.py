@@ -97,6 +97,7 @@ class ClientEquipment(BaseClientInfo):
 class ClientProgramInfo(BaseClientInfo):
     program_type = models.CharField(max_length=30)
     training_style = models.CharField(max_length=30)
+    #TODO convert to integer in getter or just numbers in a string then coerce in frontend
     payment_rate = models.CharField(max_length=25)
     program_start = models.CharField(max_length=25, blank=True, null=True)
     outdoor_max = models.CharField(max_length=5, null=True, blank=True)

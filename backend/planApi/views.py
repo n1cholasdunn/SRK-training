@@ -1,21 +1,100 @@
 from django.shortcuts import render
-from planApi.utils.crud.fitness.core import delete_core_assessments, delete_core_test, get_core_assessments, get_core_test, input_core_test, update_core_test
-from planApi.utils.crud.fitness.davies import delete_davies_assessments, delete_davies_test, get_davies_assessments, get_davies_test, input_davies_test, update_davies_test
-from planApi.utils.crud.fitness.health_markers import delete_health_markers_assessments, delete_health_markers_test, get_health_markers_assessments, get_health_markers_test, input_health_markers_test, update_health_markers_test
-from planApi.utils.crud.fitness.measurements import delete_measurements_assessments, delete_measurements_test, get_measurements_assessments, get_measurements_test, input_measurements_test, update_measurements_test
-from planApi.utils.crud.fitness.overhead_squat import delete_overhead_squat_assessments, delete_overhead_squat_test, get_overhead_squat_assessments, get_overhead_squat_test, input_overhead_squat_test, update_overhead_squat_test
-from planApi.utils.crud.fitness.pushup import delete_pushup_assessments, delete_pushup_test, get_pushup_assessments, get_pushup_test, input_pushup_test, update_pushup_test
-from planApi.utils.crud.fitness.sit_reach import delete_sit_reach_assessments, delete_sit_reach_test, get_sit_reach_assessments, get_sit_reach_test, input_sit_reach_test, update_sit_reach_test
-from planApi.utils.crud.fitness.ymca_step import delete_ymca_step_assessments, delete_ymca_step_test, get_ymca_step_assessments, get_ymca_step_test, input_ymca_step_test, update_ymca_step_test
-from planApi.utils.crud.training.gym import delete_gym_plan, get_gym_exercises, input_gym_plan, update_gym_plan
-from planApi.utils.crud.training.otw import delete_otw_plan, get_otw_exercises, input_otw_plan, update_otw_plan
-from planApi.utils.crud.training.prehab import delete_prehab_plan, get_prehab_exercises, input_prehab_plan, update_prehab_plan
+from planApi.utils.crud.fitness.core import (
+    delete_core_assessments,
+    delete_core_test,
+    get_core_assessments,
+    get_core_test,
+    input_core_test,
+    update_core_test,
+)
+from planApi.utils.crud.fitness.davies import (
+    delete_davies_assessments,
+    delete_davies_test,
+    get_davies_assessments,
+    get_davies_test,
+    input_davies_test,
+    update_davies_test,
+)
+from planApi.utils.crud.fitness.health_markers import (
+    delete_health_markers_assessments,
+    delete_health_markers_test,
+    get_health_markers_assessments,
+    get_health_markers_test,
+    input_health_markers_test,
+    update_health_markers_test,
+)
+from planApi.utils.crud.fitness.measurements import (
+    delete_measurements_assessments,
+    delete_measurements_test,
+    get_measurements_assessments,
+    get_measurements_test,
+    input_measurements_test,
+    update_measurements_test,
+)
+from planApi.utils.crud.fitness.overhead_squat import (
+    delete_overhead_squat_assessments,
+    delete_overhead_squat_test,
+    get_overhead_squat_assessments,
+    get_overhead_squat_test,
+    input_overhead_squat_test,
+    update_overhead_squat_test,
+)
+from planApi.utils.crud.fitness.pushup import (
+    delete_pushup_assessments,
+    delete_pushup_test,
+    get_pushup_assessments,
+    get_pushup_test,
+    input_pushup_test,
+    update_pushup_test,
+)
+from planApi.utils.crud.fitness.sit_reach import (
+    delete_sit_reach_assessments,
+    delete_sit_reach_test,
+    get_sit_reach_assessments,
+    get_sit_reach_test,
+    input_sit_reach_test,
+    update_sit_reach_test,
+)
+from planApi.utils.crud.fitness.ymca_step import (
+    delete_ymca_step_assessments,
+    delete_ymca_step_test,
+    get_ymca_step_assessments,
+    get_ymca_step_test,
+    input_ymca_step_test,
+    update_ymca_step_test,
+)
+from planApi.utils.crud.training.gym import (
+    delete_gym_plan,
+    get_gym_exercises,
+    input_gym_plan,
+    update_gym_plan,
+)
+from planApi.utils.crud.training.otw import (
+    delete_otw_plan,
+    get_otw_exercises,
+    input_otw_plan,
+    update_otw_plan,
+)
+from planApi.utils.crud.training.prehab import (
+    delete_prehab_plan,
+    get_prehab_exercises,
+    input_prehab_plan,
+    update_prehab_plan,
+)
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 
 
-from .utils.crud.fitness.shark_skills import get_shark_skills_assessments,get_shark_skills_test,update_shark_skills_test,input_shark_skills_test,delete_shark_skills_assessments, delete_shark_skills_test
+from .utils.crud.fitness.shark_skills import (
+    get_shark_skills_assessments,
+    get_shark_skills_test,
+    update_shark_skills_test,
+    input_shark_skills_test,
+    delete_shark_skills_assessments,
+    delete_shark_skills_test,
+)
+
 
 @api_view(["GET"])
 def getRoutes(request):

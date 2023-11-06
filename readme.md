@@ -1,0 +1,1 @@
+A web app that allows the coach to create and assign users a training plan. The coaches former medium for training plans was Google Sheets, so it can access the former plans through a Google Service Account and extract the plan into the same database models as the usual React Forms used for plan creation.

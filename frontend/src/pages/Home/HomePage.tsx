@@ -2,7 +2,12 @@ import {useEffect} from 'react';
 import useGoogleAuthToken from '../../hooks/useGoogleAuthToken';
 import useGoogleAuthLink from '../../hooks/useGoogleAuthLink';
 import useProfile from '../../hooks/useProfile';
-import {Link} from 'react-router-dom';
+import AboutMe from '../../components/AboutMe';
+import Intro from '../../components/Intro';
+import SectionDivider from '../../components/ui/SectionDivider';
+import Coaching from '../../components/Coaching';
+import {BsGoogle} from 'react-icons/bs';
+import Contact from '../../components/Contact';
 
 const HomePage = () => {
   const {data: profile, refetch: fetchProfile} = useProfile();
@@ -42,80 +47,21 @@ const HomePage = () => {
     fetchGoogleAuth();
   };
   return (
-    <div>
+    <main className="flex flex-col items-center px-4">
       {profile ? (
         <h1>Hello {profile.firstName}!</h1>
       ) : (
-        <button onClick={handleGoogleLogin}>Login with Google</button>
+        <button onClick={handleGoogleLogin}>
+          Sign In <BsGoogle />
+        </button>
       )}
-      <Link to={'/training/assessments/shark-skills/create/'}>
-        <div>CLICK FOR Shark skills CREATION</div>
-      </Link>
-      <div>...</div>
-      <Link to={'/training/plans/otw/1/'}>
-        <div>CLICK TO GET OTW PLAN </div>
-      </Link>
-      <div>...</div>
-      <Link to={'/training/plans/gym/create/'}>
-        <div>CLICK FOR gym PLAN CREATION</div>
-      </Link>
-      <div>...</div>
-      <Link to={'/training/plans/gym/1/'}>
-        <div>CLICK TO GET gym PLAN </div>
-      </Link>
-      <div>...</div>
-      <Link to={'/training/plans/prehab/create/'}>
-        <div>CLICK FOR prehab PLAN CREATION</div>
-      </Link>
-      <div>...</div>
-      <Link to={'/training/plans/prehab/1/'}>
-        <div>CLICK TO GET prehab PLAN </div>
-      </Link>
-      <div>...</div>
-      <Link to={'/training/tests/health-markers/33/'}>
-        <div>CLICK TO GET test with id 33 </div>
-      </Link>
-      <div>...</div>
-      <Link to={'/training/assessments/health-markers/3/'}>
-        <div>CLICK TO GET assessments for user 3 </div>
-      </Link>
-      <div>...</div>
-      {/* <Link to={'/training/tests/shark-skills/create/'}>
-        <div>CLICK TO Create shark skills test </div>
-      </Link>
-      <div>...</div> */}
-      <Link to={'/training/assessments/health-markers/create/'}>
-        <div>CLICK TO create health markers plan</div>
-      </Link>
-      <Link to={'/username/update/availability/'}>
-        <div>UPDATE AVAILABILITY</div>
-      </Link>
-      <div>...</div>
-      <Link to={'/username/info/update/'}>
-        <div>UPDATE Client INFO</div>
-      </Link>
-      <div>...</div>
-      <Link to={'/username/program/update/'}>
-        <div>UPDATE Program INFO</div>
-      </Link>
-      <div>...</div>
-      <Link to={'/username/equipment/update/'}>
-        <div>UPDATE Equipment INFO</div>
-      </Link>
-      <div>...</div>
-      <Link to={'/climbing/assesments/'}>
-        <div>INPUT CLIMBING ASSESSMENT</div>
-      </Link>
-      <div>...</div>
-      <Link to={'/fitness/assesments/'}>
-        <div>INPUT Fitness ASSESSMENT</div>
-      </Link>
-      <div>...</div>
-      <Link to={'/training/plans/create/'}>
-        <div>INPUT Training Plans</div>
-      </Link>
-      <div>...</div>
-    </div>
+      <Intro />
+      <SectionDivider />
+      <AboutMe />
+      <SectionDivider />
+      <Coaching />
+      <Contact />
+    </main>
   );
 };
 

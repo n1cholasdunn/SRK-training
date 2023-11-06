@@ -15,12 +15,12 @@ from decouple import config  # type:ignore
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-print(BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# TODO create new secret key before deployment
 SECRET_KEY = "django-insecure-sa8xm%)it670q!97a3foc4a)smem%a16i6hh89^e%)ct8qdqx6"
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "djoser",
     "social_django",
+    "anymail",
     "phonenumber_field",
     "core",
     "planApi",
@@ -171,3 +172,9 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
     "openid",
 ]
 SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = ["first_name", "last_name"]
+
+EMAIL_BACKEND = "anymail.backends.sendinblue.EmailBackend"
+DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
+ANYMAIL = {
+    "SENDINBLUE_API_KEY": config("SENDINBLUE_API_KEY"),
+}

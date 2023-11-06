@@ -215,6 +215,7 @@ class CoreAssessments(BaseAssessment):
     pass
 
 
+# TODO convert to seconds in fetch call and save in second format of intergers
 class CoreTest(models.Model):
     assessment: models.ForeignKey[CoreAssessments] = models.ForeignKey(
         "CoreAssessments", related_name="tests", on_delete=models.CASCADE
