@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     "phonenumber_field",
     "core",
     "planApi",
+    "google_sheets",
+    "react_forms",
 ]
 
 MIDDLEWARE = [
