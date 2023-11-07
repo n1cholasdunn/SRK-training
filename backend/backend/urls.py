@@ -24,6 +24,7 @@ urlpatterns = [
     path("auth/", include("djoser.urls")),
     path("auth/", include("djoser.urls.authtoken")),
     path("auth/", include("djoser.social.urls")),
+    path("user/", include("core.urls")),
     path("gsheets/", include("google_sheets.urls")),
     path("", include("react_forms.urls")),
     path(

@@ -48,5 +48,6 @@ export const getGoogleAuthToken = async (credential: OAuthCredential) => {
 // TODo use to attach superuser status from backend and render different header page based on such
 export const getProfile = async () => {
   const response = await client.get<Profile>('/auth/users/me/');
+
   return response.data;
 };

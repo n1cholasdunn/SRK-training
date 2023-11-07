@@ -8,11 +8,14 @@ import SectionDivider from '../../components/ui/SectionDivider';
 import Coaching from '../../components/Coaching';
 import {BsGoogle} from 'react-icons/bs';
 import Contact from '../../components/Contact';
+import {useUserPerms} from '../../hooks/useUserPerms';
 
 const HomePage = () => {
   const {data: profile, refetch: fetchProfile} = useProfile();
   const {data: googleAuth, refetch: fetchGoogleAuth} = useGoogleAuthLink();
   const {mutate, isSuccess} = useGoogleAuthToken();
+
+  const {data: userPerms, isLoading, isError, error} = useUserPerms();
 
   useEffect(() => {
     if (googleAuth) {
