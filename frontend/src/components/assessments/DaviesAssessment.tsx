@@ -16,7 +16,7 @@ type Props = {
 const DaviesAssessment = ({control, register, errors}: Props) => {
   const {fields, append, remove} = useFieldArray({
     control,
-    name: 'davies.assessments',
+    name: 'davies.tests',
   });
 
   const initialRender = useRef(true);
@@ -38,33 +38,33 @@ const DaviesAssessment = ({control, register, errors}: Props) => {
       {fields.map((field, index) => (
         <div key={field.id}>
           <input
-            {...register(`davies.assessments.${index}.first_trial` as const)}
+            {...register(`davies.tests.${index}.first_trial` as const)}
             defaultValue={undefined}
             placeholder="First Trial"
           />
-          {errors?.davies?.assessments?.[index]?.first_trial && (
+          {errors?.davies?.tests?.[index]?.first_trial && (
             <p className={'text-red-500 px-2'}>
-              {errors?.davies?.assessments?.[index]?.first_trial?.message}
+              {errors?.davies?.tests?.[index]?.first_trial?.message}
             </p>
           )}
           <input
-            {...register(`davies.assessments.${index}.second_trial` as const)}
+            {...register(`davies.tests.${index}.second_trial` as const)}
             defaultValue={undefined}
             placeholder="Second Trial"
           />
-          {errors?.davies?.assessments?.[index]?.second_trial && (
+          {errors?.davies?.tests?.[index]?.second_trial && (
             <p className={'text-red-500 px-2'}>
-              {errors?.davies?.assessments?.[index]?.second_trial?.message}
+              {errors?.davies?.tests?.[index]?.second_trial?.message}
             </p>
           )}
           <input
-            {...register(`davies.assessments.${index}.third_trial` as const)}
+            {...register(`davies.tests.${index}.third_trial` as const)}
             defaultValue={undefined}
             placeholder="Third Trial"
           />
-          {errors?.davies?.assessments?.[index]?.third_trial && (
+          {errors?.davies?.tests?.[index]?.third_trial && (
             <p className={'text-red-500 px-2'}>
-              {errors?.davies?.assessments?.[index]?.third_trial?.message}
+              {errors?.davies?.tests?.[index]?.third_trial?.message}
             </p>
           )}
           {fields.length > 1 && (

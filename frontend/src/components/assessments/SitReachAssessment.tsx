@@ -16,7 +16,7 @@ type Props = {
 const SitReachAssessment = ({control, register, errors}: Props) => {
   const {fields, append, remove} = useFieldArray({
     control,
-    name: 'sit_reach.assessments',
+    name: 'sit_reach.tests',
   });
 
   const initialRender = useRef(true);
@@ -38,48 +38,35 @@ const SitReachAssessment = ({control, register, errors}: Props) => {
       {fields.map((field, index) => (
         <div key={field.id}>
           <input
-            {...register(
-              `sit_reach.assessments.${index}.first_measurement` as const
-            )}
+            {...register(`sit_reach.tests.${index}.first_measurement` as const)}
             defaultValue={undefined}
             placeholder="First Measurement"
           />
-          {errors?.sit_reach?.assessments?.[index]?.first_measurement && (
+          {errors?.sit_reach?.tests?.[index]?.first_measurement && (
             <p className={'text-red-500 px-2'}>
-              {
-                errors?.sit_reach?.assessments?.[index]?.first_measurement
-                  ?.message
-              }
+              {errors?.sit_reach?.tests?.[index]?.first_measurement?.message}
             </p>
           )}
           <input
             {...register(
-              `sit_reach.assessments.${index}.second_measurement` as const
+              `sit_reach.tests.${index}.second_measurement` as const
             )}
             defaultValue={undefined}
             placeholder="Second Measurement"
           />
-          {errors?.sit_reach?.assessments?.[index]?.second_measurement && (
+          {errors?.sit_reach?.tests?.[index]?.second_measurement && (
             <p className={'text-red-500 px-2'}>
-              {
-                errors?.sit_reach?.assessments?.[index]?.second_measurement
-                  ?.message
-              }
+              {errors?.sit_reach?.tests?.[index]?.second_measurement?.message}
             </p>
           )}
           <input
-            {...register(
-              `sit_reach.assessments.${index}.third_measurement` as const
-            )}
+            {...register(`sit_reach.tests.${index}.third_measurement` as const)}
             defaultValue={undefined}
             placeholder="Third Measurement"
           />
-          {errors?.sit_reach?.assessments?.[index]?.third_measurement && (
+          {errors?.sit_reach?.tests?.[index]?.third_measurement && (
             <p className={'text-red-500 px-2'}>
-              {
-                errors?.sit_reach?.assessments?.[index]?.third_measurement
-                  ?.message
-              }
+              {errors?.sit_reach?.tests?.[index]?.third_measurement?.message}
             </p>
           )}
           {fields.length > 1 && (

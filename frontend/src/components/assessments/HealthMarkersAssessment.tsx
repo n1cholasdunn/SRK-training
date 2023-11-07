@@ -16,7 +16,7 @@ type Props = {
 const HealthMarkersAssessment = ({control, register, errors}: Props) => {
   const {fields, append, remove} = useFieldArray({
     control,
-    name: 'health_markers.assessments',
+    name: 'health_markers.tests',
   });
 
   const initialRender = useRef(true);
@@ -41,80 +41,67 @@ const HealthMarkersAssessment = ({control, register, errors}: Props) => {
       {fields.map((field, index) => (
         <div key={field.id}>
           <input
-            {...register(`health_markers.assessments.${index}.weight` as const)}
+            {...register(`health_markers.tests.${index}.weight` as const)}
             defaultValue={undefined}
             placeholder="Weight"
           />
-          {errors?.health_markers?.assessments?.[index]?.weight && (
+          {errors?.health_markers?.tests?.[index]?.weight && (
             <p className={'text-red-500 px-2'}>
-              {errors?.health_markers?.assessments?.[index]?.weight?.message}
+              {errors?.health_markers?.tests?.[index]?.weight?.message}
             </p>
           )}
           <input
-            {...register(`health_markers.assessments.${index}.bmi` as const)}
+            {...register(`health_markers.tests.${index}.bmi` as const)}
             defaultValue={undefined}
             placeholder="BMI"
           />
-          {errors?.health_markers?.assessments?.[index]?.bmi && (
+          {errors?.health_markers?.tests?.[index]?.bmi && (
             <p className={'text-red-500 px-2'}>
-              {errors?.health_markers?.assessments?.[index]?.bmi?.message}
+              {errors?.health_markers?.tests?.[index]?.bmi?.message}
             </p>
           )}
           <input
             {...register(
-              `health_markers.assessments.${index}.waist_hip_ratio` as const
+              `health_markers.tests.${index}.waist_hip_ratio` as const
             )}
             defaultValue={undefined}
             placeholder="Waist-Hip Ratio"
           />
-          {errors?.health_markers?.assessments?.[index]?.waist_hip_ratio && (
+          {errors?.health_markers?.tests?.[index]?.waist_hip_ratio && (
             <p className={'text-red-500 px-2'}>
-              {
-                errors?.health_markers?.assessments?.[index]?.waist_hip_ratio
-                  ?.message
-              }
+              {errors?.health_markers?.tests?.[index]?.waist_hip_ratio?.message}
             </p>
           )}
           <input
-            {...register(
-              `health_markers.assessments.${index}.resting_hr` as const
-            )}
+            {...register(`health_markers.tests.${index}.resting_hr` as const)}
             defaultValue={undefined}
             placeholder="Resting HR"
           />
-          {errors?.health_markers?.assessments?.[index]?.resting_hr && (
+          {errors?.health_markers?.tests?.[index]?.resting_hr && (
             <p className={'text-red-500 px-2'}>
-              {
-                errors?.health_markers?.assessments?.[index]?.resting_hr
-                  ?.message
-              }
+              {errors?.health_markers?.tests?.[index]?.resting_hr?.message}
             </p>
           )}
           <input
             {...register(
-              `health_markers.assessments.${index}.blood_pressure` as const
+              `health_markers.tests.${index}.blood_pressure` as const
             )}
             defaultValue={undefined}
             placeholder="Blood Pressure"
           />
-          {errors?.health_markers?.assessments?.[index]?.blood_pressure && (
+          {errors?.health_markers?.tests?.[index]?.blood_pressure && (
             <p className={'text-red-500 px-2'}>
-              {
-                errors?.health_markers?.assessments?.[index]?.blood_pressure
-                  ?.message
-              }
+              {errors?.health_markers?.tests?.[index]?.blood_pressure?.message}
             </p>
           )}
           <input
-            {...register(
-              `health_markers.assessments.${index}.vo2_max` as const
-            )}
+            {...register(`health_markers.tests.${index}.vo2_max` as const)}
             defaultValue={undefined}
             placeholder="VO2 Max"
           />
-          {errors?.health_markers?.assessments?.[index]?.vo2_max && (
+          {errors?.health_markers?.tests?.[index]?.vo2_max && (
             <p className={'text-red-500 px-2'}>
-              {errors?.health_markers?.assessments?.[index]?.vo2_max?.message}
+              {errors?.health_markers?.tests?.[index]?.vo2_max?.message}
             </p>
           )}
           {fields.length > 1 && (

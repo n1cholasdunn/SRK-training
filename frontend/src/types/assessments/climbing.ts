@@ -20,7 +20,7 @@ const MaxPullupsTest = z.object({
     .nullish(),
 });
 export const MaxPullupsSchema = z.object({
-  assessments: z
+  tests: z
     .array(MaxPullupsTest)
     .nonempty({message: 'Requires tests to be created'}),
 });
@@ -33,7 +33,7 @@ const MaxLockoffTest = z.object({
     .nullish(),
 });
 export const MaxLockoffSchema = z.object({
-  assessments: z
+  tests: z
     .array(MaxLockoffTest)
     .nonempty({message: 'Requires tests to be created'}),
 });
@@ -50,7 +50,7 @@ const FingerStrengthTest = z.object({
     .nullish(),
 });
 export const FingerStrengthSchema = z.object({
-  assessments: z
+  tests: z
     .array(FingerStrengthTest)
     .nonempty({message: 'Requires tests to be created'}),
 });
@@ -75,7 +75,7 @@ const OAFingerStrengthTest = z.object({
     .nullish(),
 });
 export const OAFingerStrengthSchema = z.object({
-  assessments: z
+  tests: z
     .array(OAFingerStrengthTest)
     .nonempty({message: 'Requires tests to be created'}),
 });
@@ -92,7 +92,7 @@ const OAPinchTest = z.object({
     .nullish(),
 });
 export const OAPinchSchema = z.object({
-  assessments: z
+  tests: z
     .array(OAPinchTest)
     .nonempty({message: 'Requires tests to be created'}),
 });
@@ -101,18 +101,18 @@ type OAPinch = z.infer<typeof OAPinchSchema>;
 
 export type AssessmentFormValues = {
   power_endurance: PowerEndurance;
-  // max_pullups: MaxPullups;
-  // max_lockoff: MaxLockoff;
-  // finger_strength: FingerStrength;
-  // oa_finger_strength: OAFingerStrength;
-  // oa_pinch_strength: OAPinch;
+  max_pullups: MaxPullups;
+  max_lockoff: MaxLockoff;
+  finger_strength: FingerStrength;
+  oa_finger_strength: OAFingerStrength;
+  oa_pinch_strength: OAPinch;
 };
 
 export const AssessmentFormSchema = z.object({
   power_endurance: PowerEnduranceSchema,
-  // max_pullups: MaxPullupsSchema,
-  // max_lockoff: MaxLockoffSchema,
-  // finger_strength: FingerStrengthSchema,
-  // oa_finger_strength: OAFingerStrengthSchema,
-  // oa_pinch_strength: OAPinchSchema,
+  max_pullups: MaxPullupsSchema,
+  max_lockoff: MaxLockoffSchema,
+  finger_strength: FingerStrengthSchema,
+  oa_finger_strength: OAFingerStrengthSchema,
+  oa_pinch_strength: OAPinchSchema,
 });

@@ -17,7 +17,7 @@ type Props = {
 const SharkSkillsAssessment = ({control, register, errors}: Props) => {
   const {fields, append, remove} = useFieldArray({
     control,
-    name: 'shark_skills.assessments',
+    name: 'shark_skills.tests',
   });
 
   const initialRender = useRef(true);

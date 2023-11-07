@@ -16,7 +16,7 @@ type Props = {
 const MeasurementsAssessment = ({control, register, errors}: Props) => {
   const {fields, append, remove} = useFieldArray({
     control,
-    name: 'measurements.assessments',
+    name: 'measurements.tests',
   });
 
   const initialRender = useRef(true);
@@ -43,92 +43,83 @@ const MeasurementsAssessment = ({control, register, errors}: Props) => {
       {fields.map((field, index) => (
         <div key={field.id}>
           <input
-            {...register(`measurements.assessments.${index}.chest` as const)}
+            {...register(`measurements.tests.${index}.chest` as const)}
             defaultValue={undefined}
             placeholder="Chest"
           />
-          {errors?.measurements?.assessments?.[index]?.chest && (
+          {errors?.measurements?.tests?.[index]?.chest && (
             <p className={'text-red-500 px-2'}>
-              {errors?.measurements?.assessments?.[index]?.chest?.message}
+              {errors?.measurements?.tests?.[index]?.chest?.message}
             </p>
           )}
           <input
-            {...register(`measurements.assessments.${index}.biceps` as const)}
+            {...register(`measurements.tests.${index}.biceps` as const)}
             defaultValue={undefined}
             placeholder="Biceps"
           />
-          {errors?.measurements?.assessments?.[index]?.biceps && (
+          {errors?.measurements?.tests?.[index]?.biceps && (
             <p className={'text-red-500 px-2'}>
-              {errors?.measurements?.assessments?.[index]?.biceps?.message}
+              {errors?.measurements?.tests?.[index]?.biceps?.message}
             </p>
           )}
           <input
-            {...register(`measurements.assessments.${index}.forearms` as const)}
+            {...register(`measurements.tests.${index}.forearms` as const)}
             defaultValue={undefined}
             placeholder="Forearms"
           />
-          {errors?.measurements?.assessments?.[index]?.forearms && (
+          {errors?.measurements?.tests?.[index]?.forearms && (
             <p className={'text-red-500 px-2'}>
-              {errors?.measurements?.assessments?.[index]?.forearms?.message}
+              {errors?.measurements?.tests?.[index]?.forearms?.message}
             </p>
           )}
           <input
-            {...register(
-              `measurements.assessments.${index}.lower_abdomen` as const
-            )}
+            {...register(`measurements.tests.${index}.lower_abdomen` as const)}
             defaultValue={undefined}
             placeholder="Lower Abdomen"
           />
-          {errors?.measurements?.assessments?.[index]?.lower_abdomen && (
+          {errors?.measurements?.tests?.[index]?.lower_abdomen && (
             <p className={'text-red-500 px-2'}>
-              {
-                errors?.measurements?.assessments?.[index]?.lower_abdomen
-                  ?.message
-              }
+              {errors?.measurements?.tests?.[index]?.lower_abdomen?.message}
             </p>
           )}
           <input
-            {...register(`measurements.assessments.${index}.hips` as const)}
+            {...register(`measurements.tests.${index}.hips` as const)}
             defaultValue={undefined}
             placeholder="Hips"
           />
-          {errors?.measurements?.assessments?.[index]?.hips && (
+          {errors?.measurements?.tests?.[index]?.hips && (
             <p className={'text-red-500 px-2'}>
-              {errors?.measurements?.assessments?.[index]?.hips?.message}
+              {errors?.measurements?.tests?.[index]?.hips?.message}
             </p>
           )}
           <input
-            {...register(
-              `measurements.assessments.${index}.upper_thigh` as const
-            )}
+            {...register(`measurements.tests.${index}.upper_thigh` as const)}
             defaultValue={undefined}
             placeholder="Upper Thigh"
           />
-          {errors?.measurements?.assessments?.[index]?.upper_thigh && (
+          {errors?.measurements?.tests?.[index]?.upper_thigh && (
             <p className={'text-red-500 px-2'}>
-              {errors?.measurements?.assessments?.[index]?.upper_thigh?.message}
+              {errors?.measurements?.tests?.[index]?.upper_thigh?.message}
             </p>
           )}
           <input
-            {...register(
-              `measurements.assessments.${index}.mid_thigh` as const
-            )}
+            {...register(`measurements.tests.${index}.mid_thigh` as const)}
             defaultValue={undefined}
             placeholder="Mid Thigh"
           />
-          {errors?.measurements?.assessments?.[index]?.mid_thigh && (
+          {errors?.measurements?.tests?.[index]?.mid_thigh && (
             <p className={'text-red-500 px-2'}>
-              {errors?.measurements?.assessments?.[index]?.mid_thigh?.message}
+              {errors?.measurements?.tests?.[index]?.mid_thigh?.message}
             </p>
           )}
           <input
-            {...register(`measurements.assessments.${index}.calves` as const)}
+            {...register(`measurements.tests.${index}.calves` as const)}
             defaultValue={undefined}
             placeholder="Calves"
           />
-          {errors?.measurements?.assessments?.[index]?.calves && (
+          {errors?.measurements?.tests?.[index]?.calves && (
             <p className={'text-red-500 px-2'}>
-              {errors?.measurements?.assessments?.[index]?.calves?.message}
+              {errors?.measurements?.tests?.[index]?.calves?.message}
             </p>
           )}
           {fields.length > 1 && (

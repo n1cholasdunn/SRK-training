@@ -16,7 +16,7 @@ type Props = {
 const PushUpAssessment = ({control, register, errors}: Props) => {
   const {fields, append, remove} = useFieldArray({
     control,
-    name: 'pushup.assessments',
+    name: 'pushup.tests',
   });
 
   const initialRender = useRef(true);
@@ -34,25 +34,25 @@ const PushUpAssessment = ({control, register, errors}: Props) => {
       {fields.map((field, index) => (
         <div key={field.id}>
           <input
-            {...register(`pushup.assessments.${index}.num_pushups` as const)}
+            {...register(`pushup.tests.${index}.num_pushups` as const)}
             defaultValue={undefined}
             placeholder="# of Pushups"
           />
-          {errors?.pushup?.assessments?.[index]?.num_pushups && (
+          {errors?.pushup?.tests?.[index]?.num_pushups && (
             <p className={'text-red-500 px-2'}>
-              {errors?.pushup?.assessments?.[index]?.num_pushups?.message}
+              {errors?.pushup?.tests?.[index]?.num_pushups?.message}
             </p>
           )}
           <label htmlFor="pushup-checkbox">Completed(Y/N): </label>
           <input
             type="checkbox"
             id="pushup-checkbox"
-            {...register(`pushup.assessments.${index}.completed` as const)}
+            {...register(`pushup.tests.${index}.completed` as const)}
             defaultValue={'false'}
           />
-          {errors?.pushup?.assessments?.[index]?.completed && (
+          {errors?.pushup?.tests?.[index]?.completed && (
             <p className={'text-red-500 px-2'}>
-              {errors?.pushup?.assessments?.[index]?.completed?.message}
+              {errors?.pushup?.tests?.[index]?.completed?.message}
             </p>
           )}
           {fields.length > 1 && (

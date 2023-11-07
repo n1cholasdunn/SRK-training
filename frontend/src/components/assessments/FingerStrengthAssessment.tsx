@@ -16,7 +16,7 @@ type Props = {
 const FingerStrengthAssessment = ({control, register, errors}: Props) => {
   const {fields, append, remove} = useFieldArray({
     control,
-    name: 'finger_strength.assessments',
+    name: 'finger_strength.tests',
   });
 
   const initialRender = useRef(true);
@@ -33,34 +33,28 @@ const FingerStrengthAssessment = ({control, register, errors}: Props) => {
       {fields.map((field, index) => (
         <div key={field.id}>
           <input
-            {...register(
-              `finger_strength.assessments.${index}.total_load` as const
-            )}
+            {...register(`finger_strength.tests.${index}.total_load` as const)}
             defaultValue={undefined}
             placeholder="Total Load"
           />
-          {errors?.finger_strength?.assessments?.[index]?.total_load && (
+          {errors?.finger_strength?.tests?.[index]?.total_load && (
             <p className={'text-red-500 px-2'}>
-              {
-                errors?.finger_strength?.assessments?.[index]?.total_load
-                  ?.message
-              }
+              {errors?.finger_strength?.tests?.[index]?.total_load?.message}
             </p>
           )}
 
           <input
             {...register(
-              `finger_strength.assessments.${index}.percentage_bodyweight` as const
+              `finger_strength.tests.${index}.percentage_bodyweight` as const
             )}
             defaultValue={undefined}
             placeholder="% of Bodyweight"
           />
-          {errors?.finger_strength?.assessments?.[index]
-            ?.percentage_bodyweight && (
+          {errors?.finger_strength?.tests?.[index]?.percentage_bodyweight && (
             <p className={'text-red-500 px-2'}>
               {
-                errors?.finger_strength?.assessments?.[index]
-                  ?.percentage_bodyweight?.message
+                errors?.finger_strength?.tests?.[index]?.percentage_bodyweight
+                  ?.message
               }
             </p>
           )}

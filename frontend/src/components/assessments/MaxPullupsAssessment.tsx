@@ -15,7 +15,7 @@ type Props = {
 const MaxPullupsAssessment = ({control, register, errors}: Props) => {
   const {fields, append, remove} = useFieldArray({
     control,
-    name: 'max_pullups.assessments',
+    name: 'max_pullups.tests',
   });
 
   const initialRender = useRef(true);
@@ -32,13 +32,13 @@ const MaxPullupsAssessment = ({control, register, errors}: Props) => {
       {fields.map((field, index) => (
         <div key={field.id}>
           <input
-            {...register(`max_pullups.assessments.${index}.reps` as const)}
+            {...register(`max_pullups.tests.${index}.reps` as const)}
             defaultValue={undefined}
             placeholder="Reps"
           />
-          {errors?.max_pullups?.assessments?.[index]?.reps && (
+          {errors?.max_pullups?.tests?.[index]?.reps && (
             <p className={'text-red-500 px-2'}>
-              {errors?.max_pullups?.assessments?.[index]?.reps?.message}
+              {errors?.max_pullups?.tests?.[index]?.reps?.message}
             </p>
           )}
           {fields.length > 1 && (

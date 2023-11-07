@@ -16,7 +16,7 @@ type Props = {
 const CoreAssessment = ({control, register, errors}: Props) => {
   const {fields, append, remove} = useFieldArray({
     control,
-    name: 'core.assessments',
+    name: 'core.tests',
   });
 
   const initialRender = useRef(true);
@@ -34,23 +34,23 @@ const CoreAssessment = ({control, register, errors}: Props) => {
       {fields.map((field, index) => (
         <div key={field.id}>
           <input
-            {...register(`core.assessments.${index}.first_trial` as const)}
+            {...register(`core.tests.${index}.first_trial` as const)}
             defaultValue={undefined}
             placeholder="First Trial"
           />
-          {errors?.core?.assessments?.[index]?.first_trial && (
+          {errors?.core?.tests?.[index]?.first_trial && (
             <p className={'text-red-500 px-2'}>
-              {errors?.core?.assessments?.[index]?.first_trial?.message}
+              {errors?.core?.tests?.[index]?.first_trial?.message}
             </p>
           )}
           <input
-            {...register(`core.assessments.${index}.second_trial` as const)}
+            {...register(`core.tests.${index}.second_trial` as const)}
             defaultValue={undefined}
             placeholder="Second Trial"
           />
-          {errors?.core?.assessments?.[index]?.second_trial && (
+          {errors?.core?.tests?.[index]?.second_trial && (
             <p className={'text-red-500 px-2'}>
-              {errors?.core?.assessments?.[index]?.second_trial?.message}
+              {errors?.core?.tests?.[index]?.second_trial?.message}
             </p>
           )}
           {fields.length > 1 && (

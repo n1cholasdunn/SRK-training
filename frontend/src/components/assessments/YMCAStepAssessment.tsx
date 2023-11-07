@@ -16,7 +16,7 @@ type Props = {
 const YMCAStepAssessment = ({control, register, errors}: Props) => {
   const {fields, append, remove} = useFieldArray({
     control,
-    name: 'ymca_step.assessments',
+    name: 'ymca_step.tests',
   });
 
   const initialRender = useRef(true);
@@ -34,23 +34,23 @@ const YMCAStepAssessment = ({control, register, errors}: Props) => {
       {fields.map((field, index) => (
         <div key={field.id}>
           <input
-            {...register(`ymca_step.assessments.${index}.recovery_hr` as const)}
+            {...register(`ymca_step.tests.${index}.recovery_hr` as const)}
             defaultValue={undefined}
             placeholder="Recovery HR"
           />
-          {errors?.ymca_step?.assessments?.[index]?.recovery_hr && (
+          {errors?.ymca_step?.tests?.[index]?.recovery_hr && (
             <p className={'text-red-500 px-2'}>
-              {errors?.ymca_step?.assessments?.[index]?.recovery_hr?.message}
+              {errors?.ymca_step?.tests?.[index]?.recovery_hr?.message}
             </p>
           )}
           <input
-            {...register(`ymca_step.assessments.${index}.rating` as const)}
+            {...register(`ymca_step.tests.${index}.rating` as const)}
             defaultValue={undefined}
             placeholder="Rating"
           />
-          {errors?.ymca_step?.assessments?.[index]?.rating && (
+          {errors?.ymca_step?.tests?.[index]?.rating && (
             <p className={'text-red-500 px-2'}>
-              {errors?.ymca_step?.assessments?.[index]?.rating?.message}
+              {errors?.ymca_step?.tests?.[index]?.rating?.message}
             </p>
           )}
           {fields.length > 1 && (

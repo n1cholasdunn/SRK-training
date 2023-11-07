@@ -16,7 +16,7 @@ type Props = {
 const OverheadSquatAssessment = ({control, register, errors}: Props) => {
   const {fields, append, remove} = useFieldArray({
     control,
-    name: 'overhead_squat.assessments',
+    name: 'overhead_squat.tests',
   });
 
   const initialRender = useRef(true);
@@ -34,62 +34,53 @@ const OverheadSquatAssessment = ({control, register, errors}: Props) => {
       {fields.map((field, index) => (
         <div key={field.id}>
           <input
-            {...register(
-              `overhead_squat.assessments.${index}.foot_ankle` as const
-            )}
+            {...register(`overhead_squat.tests.${index}.foot_ankle` as const)}
             defaultValue={undefined}
             placeholder="Foot & Ankle"
           />
-          {errors?.overhead_squat?.assessments?.[index]?.foot_ankle && (
+          {errors?.overhead_squat?.tests?.[index]?.foot_ankle && (
             <p className={'text-red-500 px-2'}>
-              {
-                errors?.overhead_squat?.assessments?.[index]?.foot_ankle
-                  ?.message
-              }
+              {errors?.overhead_squat?.tests?.[index]?.foot_ankle?.message}
             </p>
           )}
           <input
-            {...register(`overhead_squat.assessments.${index}.knee` as const)}
+            {...register(`overhead_squat.tests.${index}.knee` as const)}
             defaultValue={undefined}
             placeholder="Knee"
           />
-          {errors?.overhead_squat?.assessments?.[index]?.knee && (
+          {errors?.overhead_squat?.tests?.[index]?.knee && (
             <p className={'text-red-500 px-2'}>
-              {errors?.overhead_squat?.assessments?.[index]?.knee?.message}
+              {errors?.overhead_squat?.tests?.[index]?.knee?.message}
             </p>
           )}
           <input
-            {...register(`overhead_squat.assessments.${index}.lphc` as const)}
+            {...register(`overhead_squat.tests.${index}.lphc` as const)}
             defaultValue={undefined}
             placeholder="LPHC"
           />
-          {errors?.overhead_squat?.assessments?.[index]?.lphc && (
+          {errors?.overhead_squat?.tests?.[index]?.lphc && (
             <p className={'text-red-500 px-2'}>
-              {errors?.overhead_squat?.assessments?.[index]?.lphc?.message}
+              {errors?.overhead_squat?.tests?.[index]?.lphc?.message}
             </p>
           )}
           <input
-            {...register(
-              `overhead_squat.assessments.${index}.shoulder` as const
-            )}
+            {...register(`overhead_squat.tests.${index}.shoulder` as const)}
             defaultValue={undefined}
             placeholder="Shoulder"
           />
-          {errors?.overhead_squat?.assessments?.[index]?.shoulder && (
+          {errors?.overhead_squat?.tests?.[index]?.shoulder && (
             <p className={'text-red-500 px-2'}>
-              {errors?.overhead_squat?.assessments?.[index]?.shoulder?.message}
+              {errors?.overhead_squat?.tests?.[index]?.shoulder?.message}
             </p>
           )}
           <textarea
-            {...register(
-              `overhead_squat.assessments.${index}.solutions` as const
-            )}
+            {...register(`overhead_squat.tests.${index}.solutions` as const)}
             defaultValue={undefined}
             placeholder="Solutions"
           />
-          {errors?.overhead_squat?.assessments?.[index]?.solutions && (
+          {errors?.overhead_squat?.tests?.[index]?.solutions && (
             <p className={'text-red-500 px-2'}>
-              {errors?.overhead_squat?.assessments?.[index]?.solutions?.message}
+              {errors?.overhead_squat?.tests?.[index]?.solutions?.message}
             </p>
           )}
           {fields.length > 1 && (

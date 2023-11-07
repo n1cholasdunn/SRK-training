@@ -16,7 +16,7 @@ type Props = {
 const MaxLockoffAssessment = ({control, register, errors}: Props) => {
   const {fields, append, remove} = useFieldArray({
     control,
-    name: 'max_lockoff.assessments',
+    name: 'max_lockoff.tests',
   });
 
   const initialRender = useRef(true);
@@ -33,13 +33,13 @@ const MaxLockoffAssessment = ({control, register, errors}: Props) => {
       {fields.map((field, index) => (
         <div key={field.id}>
           <input
-            {...register(`max_lockoff.assessments.${index}.seconds` as const)}
+            {...register(`max_lockoff.tests.${index}.seconds` as const)}
             defaultValue={undefined}
             placeholder="Seconds"
           />
-          {errors?.max_lockoff?.assessments?.[index]?.seconds && (
+          {errors?.max_lockoff?.tests?.[index]?.seconds && (
             <p className={'text-red-500 px-2'}>
-              {errors?.max_lockoff?.assessments?.[index]?.seconds?.message}
+              {errors?.max_lockoff?.tests?.[index]?.seconds?.message}
             </p>
           )}
           {fields.length > 1 && (

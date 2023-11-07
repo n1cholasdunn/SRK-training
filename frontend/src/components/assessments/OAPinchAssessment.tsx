@@ -16,7 +16,7 @@ type Props = {
 const OAPinchAssessment = ({control, register, errors}: Props) => {
   const {fields, append, remove} = useFieldArray({
     control,
-    name: 'oa_pinch_strength.assessments',
+    name: 'oa_pinch_strength.tests',
   });
 
   const initialRender = useRef(true);
@@ -32,28 +32,24 @@ const OAPinchAssessment = ({control, register, errors}: Props) => {
       {fields.map((field, index) => (
         <div key={field.id}>
           <input
-            {...register(
-              `oa_pinch_strength.assessments.${index}.left` as const
-            )}
+            {...register(`oa_pinch_strength.tests.${index}.left` as const)}
             defaultValue={undefined}
             placeholder="Left"
           />
-          {errors?.oa_pinch_strength?.assessments?.[index]?.left && (
+          {errors?.oa_pinch_strength?.tests?.[index]?.left && (
             <p className={'text-red-500 px-2'}>
-              {errors?.oa_pinch_strength?.assessments?.[index]?.left?.message}
+              {errors?.oa_pinch_strength?.tests?.[index]?.left?.message}
             </p>
           )}
 
           <input
-            {...register(
-              `oa_pinch_strength.assessments.${index}.right` as const
-            )}
+            {...register(`oa_pinch_strength.tests.${index}.right` as const)}
             defaultValue={undefined}
             placeholder="Right"
           />
-          {errors?.oa_pinch_strength?.assessments?.[index]?.right && (
+          {errors?.oa_pinch_strength?.tests?.[index]?.right && (
             <p className={'text-red-500 px-2'}>
-              {errors?.oa_pinch_strength?.assessments?.[index]?.right?.message}
+              {errors?.oa_pinch_strength?.tests?.[index]?.right?.message}
             </p>
           )}
           {fields.length > 1 && (

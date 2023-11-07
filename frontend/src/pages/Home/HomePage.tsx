@@ -16,7 +16,9 @@ const HomePage = () => {
   const {mutate, isSuccess} = useGoogleAuthToken();
 
   const {data: userPerms, isLoading, isError, error} = useUserPerms();
-
+  useEffect(() => {
+    console.log(userPerms, 'USER PERMS');
+  });
   useEffect(() => {
     if (googleAuth) {
       window.location.replace(googleAuth.authorizationUrl);

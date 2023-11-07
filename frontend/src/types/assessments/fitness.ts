@@ -25,7 +25,7 @@ const HealthMarkersTest = z.object({
 });
 
 export const HealthMarkersSchema = z.object({
-  assessments: z
+  tests: z
     .array(HealthMarkersTest)
     .nonempty({message: 'Requires tests to be created'}),
 });
@@ -68,7 +68,7 @@ const MeasurementsTest = z.object({
 });
 
 export const MeasurementsSchema = z.object({
-  assessments: z
+  tests: z
     .array(MeasurementsTest)
     .nonempty({message: 'Requires tests to be created'}),
 });
@@ -84,7 +84,7 @@ const OverheadSquatTest = z.object({
 });
 
 const OverheadSquatSchema = z.object({
-  assessments: z
+  tests: z
     .array(OverheadSquatTest)
     .nonempty({message: 'Requires tests to be created'}),
 });
@@ -100,7 +100,7 @@ const YMCAStepTest = z.object({
 });
 
 const YMCAStepSchema = z.object({
-  assessments: z
+  tests: z
     .array(YMCAStepTest)
     .nonempty({message: 'Requires tests to be created'}),
 });
@@ -124,7 +124,7 @@ const SitReachTest = z.object({
 });
 
 const SitReachSchema = z.object({
-  assessments: z
+  tests: z
     .array(SitReachTest)
     .nonempty({message: 'Requires tests to be created'}),
 });
@@ -140,7 +140,7 @@ const PushUpTest = z.object({
 });
 
 const PushUpSchema = z.object({
-  assessments: z
+  tests: z
     .array(PushUpTest)
     .nonempty({message: 'Requires tests to be created'}),
 });
@@ -163,7 +163,7 @@ const DaviesTest = z.object({
 });
 
 const DaviesSchema = z.object({
-  assessments: z
+  tests: z
     .array(DaviesTest)
     .nonempty({message: 'Requires tests to be created'}),
 });
@@ -199,7 +199,7 @@ const SharkSkillsTest = z.object({
 });
 
 const SharkSkillsSchema = z.object({
-  assessments: z
+  tests: z
     .array(SharkSkillsTest)
     .nonempty({message: 'Requires tests to be created'}),
 });
@@ -218,9 +218,7 @@ const CoreTest = z.object({
 });
 
 const CoreSchema = z.object({
-  assessments: z
-    .array(CoreTest)
-    .nonempty({message: 'Requires tests to be created'}),
+  tests: z.array(CoreTest).nonempty({message: 'Requires tests to be created'}),
 });
 
 type Core = z.infer<typeof CoreSchema>;

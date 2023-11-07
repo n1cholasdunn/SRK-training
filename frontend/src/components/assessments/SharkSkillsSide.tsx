@@ -33,56 +33,52 @@ const SharkSkillsSide = ({
     <div className="flex space-y-1">
       <h3 className="mr-2">{getSideName(side)}:</h3>
       <input
-        {...register(`shark_skills.assessments.${index}.${side}.time`)}
+        {...register(`shark_skills.tests.${index}.${side}.time`)}
         defaultValue=""
         placeholder="Time"
       />
-      {errors?.shark_skills?.assessments?.[index]?.[side]?.time && (
+      {errors?.shark_skills?.tests?.[index]?.[side]?.time && (
         <p className="text-red-500 px-2">
-          {errors.shark_skills.assessments?.[index]?.[side]?.time?.message}
+          {errors.shark_skills.tests?.[index]?.[side]?.time?.message}
         </p>
       )}
 
       <input
-        {...register(
-          `shark_skills.assessments.${index}.${side}.deduction_tally`
-        )}
+        {...register(`shark_skills.tests.${index}.${side}.deduction_tally`)}
         defaultValue=""
         placeholder="Deduction Tally"
       />
-      {errors?.shark_skills?.assessments?.[index]?.[side]?.deduction_tally && (
+      {errors?.shark_skills?.tests?.[index]?.[side]?.deduction_tally && (
         <p className="text-red-500 px-2">
           {
-            errors?.shark_skills?.assessments?.[index]?.[side]?.deduction_tally
+            errors?.shark_skills?.tests?.[index]?.[side]?.deduction_tally
               ?.message
           }
         </p>
       )}
 
       <input
-        {...register(
-          `shark_skills.assessments.${index}.${side}.total_deducted`
-        )}
+        {...register(`shark_skills.tests.${index}.${side}.total_deducted`)}
         defaultValue=""
         placeholder="Total Deducted"
       />
-      {errors?.shark_skills?.assessments?.[index]?.[side]?.total_deducted && (
+      {errors?.shark_skills?.tests?.[index]?.[side]?.total_deducted && (
         <p className="text-red-500 px-2">
           {
-            errors?.shark_skills?.assessments?.[index]?.[side]?.total_deducted
+            errors?.shark_skills?.tests?.[index]?.[side]?.total_deducted
               ?.message
           }
         </p>
       )}
 
       <input
-        {...register(`shark_skills.assessments.${index}.${side}.final_total`)}
+        {...register(`shark_skills.tests.${index}.${side}.final_total`)}
         defaultValue=""
         placeholder="Final Total"
       />
-      {errors?.shark_skills?.assessments?.[index]?.[side]?.final_total && (
+      {errors?.shark_skills?.tests?.[index]?.[side]?.final_total && (
         <p className="text-red-500 px-2">
-          {errors.shark_skills.assessments[index]?.[side]?.final_total?.message}
+          {errors.shark_skills.tests[index]?.[side]?.final_total?.message}
         </p>
       )}
     </div>
