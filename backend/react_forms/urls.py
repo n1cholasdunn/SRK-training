@@ -3,6 +3,8 @@ from react_forms.views import (
     handle_availability,
     handle_equipment,
     handle_general_client_info,
+    handle_program,
+    handle_power_endurance_assessment,
 )
 
 urlpatterns = [
@@ -21,5 +23,15 @@ urlpatterns = [
         "client/equipment/",
         handle_equipment,
         name="handle-equipment",
+    ),
+    path(
+        "client/program/",
+        handle_program,
+        name="handle-program",
+    ),
+    path(
+        "assessments/climbing/testing/create/",
+        handle_power_endurance_assessment,
+        name="handle-program",
     ),
 ]

@@ -1,19 +1,21 @@
-from common.utils.client_serializers import ClientEquipmentSerializer
-from common.models.client_models import ClientEquipment
+from common.utils.client_serializers import (
+    ClientProgramInfoSerializer,
+)
+from common.models.client_models import ClientProgramInfo
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.response import Response
 
 
-def get_equipment(request):
+def get_program(request):
     user = request.user
-    equipment = get_object_or_404(ClientEquipment, trainee=user)
-    serializer = ClientEquipmentSerializer(equipment)
+    program = get_object_or_404(ClientProgramInfo, trainee=user)
+    serializer = ClientProgramInfoSerializer(program)
     return Response(serializer.data)
 
 
-def create_equipment(request):
-    serializer = ClientEquipmentSerializer(
+def create_program(request):
+    serializer = ClientProgramInfoSerializer(
         data=request.data, context={"request": request}
     )
     if serializer.is_valid():
@@ -22,14 +24,14 @@ def create_equipment(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-def update_equipment(request, pk):
+def update_program(request, pk):
     try:
-        equipment = ClientEquipment.objects.get(pk=pk, trainee=request.user)
-    except ClientEquipment.DoesNotExist:
+        program = ClientProgramInfo.objects.get(pk=pk, trainee=request.user)
+    except ClientProgramInfo.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    serializer = ClientEquipmentSerializer(
-        equipment, data=request.data, partial=request.method == "PATCH"
+    serializer = ClientProgramInfoSerializer(
+        program, data=request.data, partial=request.method == "PATCH"
     )
     if serializer.is_valid():
         serializer.save()
@@ -37,11 +39,11 @@ def update_equipment(request, pk):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-def delete_equipment(request, pk):
+def delete_program(request, pk):
     try:
-        equipment = ClientEquipment.objects.get(pk=pk, trainee=request.user)
-    except ClientEquipment.DoesNotExist:
+        program = ClientProgramInfo.objects.get(pk=pk, trainee=request.user)
+    except ClientProgramInfo.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    equipment.delete()
+    program.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)

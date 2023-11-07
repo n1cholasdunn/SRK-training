@@ -22,6 +22,19 @@ from react_forms.utils.client.availability import (
     update_availability,
 )
 
+from react_forms.utils.client.program import (
+    get_program,
+    create_program,
+    update_program,
+    delete_program,
+)
+from react_forms.utils.climbing.power_endurance import (
+    get_power_endurance_assessment,
+    create_power_endurance_assessment,
+    update_power_endurance_assessment,
+    delete_power_endurance_assessment,
+)
+
 
 @api_view(["GET", "PUT", "POST", "DELETE"])
 @permission_classes([IsAuthenticated])
@@ -60,3 +73,29 @@ def handle_equipment(request):
         return create_equipment(request)
     if request.method == "DELETE":
         return delete_equipment(request)
+
+
+@api_view(["GET", "PUT", "POST", "PATCH", "DELETE"])
+@permission_classes([IsAuthenticated])
+def handle_program(request):
+    if request.method == "GET":
+        return get_program(request)
+    if request.method == "PUT":
+        return update_program(request)
+    if request.method == "POST" or request.method == "PATCH":
+        return create_program(request)
+    if request.method == "DELETE":
+        return delete_program(request)
+
+
+@api_view(["GET", "PUT", "POST", "PATCH", "DELETE"])
+@permission_classes([IsAuthenticated])
+def handle_power_endurance_assessment(request):
+    if request.method == "GET":
+        return get_power_endurance_assessment(request)
+    if request.method == "PUT":
+        return update_power_endurance_assessment(request)
+    if request.method == "POST" or request.method == "PATCH":
+        return create_power_endurance_assessment(request)
+    if request.method == "DELETE":
+        return delete_power_endurance_assessment(request)

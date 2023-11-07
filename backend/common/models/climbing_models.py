@@ -7,8 +7,11 @@ class PowerEnduranceAssessments(BaseAssessment):
 
 
 class PowerEnduranceTest(models.Model):
-    assessment: models.ForeignKey[PowerEnduranceAssessments] = models.ForeignKey(
-        "PowerEnduranceAssessments", related_name="tests", on_delete=models.CASCADE
+    assessment = models.ForeignKey(
+        PowerEnduranceAssessments,
+        related_name="tests",
+        on_delete=models.CASCADE,
+        null=True,
     )
     seconds = models.IntegerField(null=True, blank=True)
 
@@ -21,8 +24,8 @@ class MaxPullupsAssessments(BaseAssessment):
 
 
 class MaxPullupsTest(models.Model):
-    assessment: models.ForeignKey[MaxPullupsAssessments] = models.ForeignKey(
-        "MaxPullupsAssessments", related_name="tests", on_delete=models.CASCADE
+    assessment = models.ForeignKey(
+        MaxPullupsAssessments, related_name="tests", on_delete=models.CASCADE, null=True
     )
     reps = models.IntegerField(null=True, blank=True)
 
@@ -35,8 +38,8 @@ class MaxLockoffAssessments(BaseAssessment):
 
 
 class MaxLockoffTest(models.Model):
-    assessment: models.ForeignKey[MaxLockoffAssessments] = models.ForeignKey(
-        "MaxLockoffAssessments", related_name="tests", on_delete=models.CASCADE
+    assessment = models.ForeignKey(
+        MaxLockoffAssessments, related_name="tests", on_delete=models.CASCADE, null=True
     )
     seconds = models.IntegerField(null=True, blank=True)
 
@@ -49,8 +52,11 @@ class FingerStrengthAssessments(BaseAssessment):
 
 
 class FingerStrengthTest(models.Model):
-    assessment: models.ForeignKey[FingerStrengthAssessments] = models.ForeignKey(
-        "FingerStrengthAssessments", related_name="tests", on_delete=models.CASCADE
+    assessment = models.ForeignKey(
+        FingerStrengthAssessments,
+        related_name="tests",
+        on_delete=models.CASCADE,
+        null=True,
     )
     total_load = models.DecimalField(
         decimal_places=2, max_digits=5, null=True, blank=True
@@ -68,8 +74,11 @@ class OAFingerStrengthAssessments(BaseAssessment):
 
 
 class OAFingerStrengthTest(models.Model):
-    assessment: models.ForeignKey[OAFingerStrengthAssessments] = models.ForeignKey(
-        "OAFingerStrengthAssessments", related_name="tests", on_delete=models.CASCADE
+    assessment = models.ForeignKey(
+        OAFingerStrengthAssessments,
+        related_name="tests",
+        on_delete=models.CASCADE,
+        null=True,
     )
     left = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
     right = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
@@ -89,8 +98,8 @@ class OAPinchAssessments(BaseAssessment):
 
 
 class OAPinchTest(models.Model):
-    assessment: models.ForeignKey[OAPinchAssessments] = models.ForeignKey(
-        "OAPinchAssessments", related_name="tests", on_delete=models.CASCADE
+    assessment = models.ForeignKey(
+        OAPinchAssessments, related_name="tests", on_delete=models.CASCADE, null=True
     )
     left = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
     right = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)

@@ -54,7 +54,8 @@ class ClientEquipmentSerializer(BaseOwnerFieldSerializer):
         return client_equipment
 
 
-class ClientProgramInfoSerializer(ModelSerializer):
-    class Meta:
+class ClientProgramInfoSerializer(BaseOwnerFieldSerializer):
+    class Meta(BaseOwnerFieldSerializer.Meta):
         model = ClientProgramInfo
         fields = "__all__"
+        extra_kwargs = {"trainee": {"read_only": True}}
