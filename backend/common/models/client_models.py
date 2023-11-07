@@ -63,12 +63,10 @@ class Equipment(models.Model):
 
 
 class ClientEquipment(BaseClientInfo):
-    equipment = models.ForeignKey(
+    equipment = models.ManyToManyField(
         Equipment,
         related_name="client_equipment",
-        on_delete=models.CASCADE,
         blank=True,
-        null=True,
     )
 
 

@@ -2,6 +2,12 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
+from react_forms.utils.client.equipment import (
+    create_equipment,
+    delete_equipment,
+    get_equipment,
+    update_equipment,
+)
 from react_forms.utils.client.general_client_info import (
     create_general_client_info,
     delete_general_client_info,
@@ -30,21 +36,27 @@ def handle_availability(request, pk):
         return delete_availability(request, pk)
 
 
-@api_view(["POST"])
+@api_view(["GET", "PUT", "POST", "PATCH", "DELETE"])
 @permission_classes([IsAuthenticated])
-def handle_general_client_info_input(request):
-    if request.method == "POST":
-        return create_general_client_info(request)
-
-
-@api_view(["GET", "PUT", "DELETE"])
-@permission_classes([IsAuthenticated])
-def handle_general_client_info(request, pk):
+def handle_general_client_info(request):
     if request.method == "GET":
         return get_general_client_info(request)
     if request.method == "PUT":
-        return update_general_client_info(request, pk)
-    if request.method == "POST":
+        return update_general_client_info(request)
+    if request.method == "POST" or request.method == "PATCH":
         return create_general_client_info(request)
     if request.method == "DELETE":
-        return delete_general_client_info(request, pk)
+        return delete_general_client_info(request)
+
+
+@api_view(["GET", "PUT", "POST", "PATCH", "DELETE"])
+@permission_classes([IsAuthenticated])
+def handle_equipment(request):
+    if request.method == "GET":
+        return get_equipment(request)
+    if request.method == "PUT":
+        return update_equipment(request)
+    if request.method == "POST" or request.method == "PATCH":
+        return create_equipment(request)
+    if request.method == "DELETE":
+        return delete_equipment(request)

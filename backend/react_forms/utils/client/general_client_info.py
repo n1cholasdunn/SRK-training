@@ -13,21 +13,25 @@ def get_general_client_info(request):
 
 
 def create_general_client_info(request):
-    serializer = GeneralClientInfoSerializer(data=request.data)
+    serializer = GeneralClientInfoSerializer(
+        data=request.data, context={"request": request}
+    )
     if serializer.is_valid():
-        serializer.save(trainee=request.user)
+        serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-def update_general_client_info(request, pk):
+def update_general_client_info(request):
     try:
-        general_client_info = GeneralClientInfo.objects.get(pk=pk, trainee=request.user)
+        general_client_info = GeneralClientInfo.objects.get(trainee=request.user)
     except GeneralClientInfo.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     serializer = GeneralClientInfoSerializer(
-        general_client_info, data=request.data, partial=request.method == "PATCH"
+        general_client_info,
+        data=request.data,
+        partial=request.method == "PATCH",
     )
     if serializer.is_valid():
         serializer.save()
@@ -35,9 +39,9 @@ def update_general_client_info(request, pk):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-def delete_general_client_info(request, pk):
+def delete_general_client_info(request):
     try:
-        general_client_info = GeneralClientInfo.objects.get(pk=pk, trainee=request.user)
+        general_client_info = GeneralClientInfo.objects.get(trainee=request.user)
     except GeneralClientInfo.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 

@@ -1,8 +1,8 @@
 from django.urls import path
 from react_forms.views import (
     handle_availability,
+    handle_equipment,
     handle_general_client_info,
-    handle_general_client_info_input,
 )
 
 urlpatterns = [
@@ -13,8 +13,13 @@ urlpatterns = [
     ),
     # TODO make path dynamic for username or something
     path(
-        "client/info/create/",
-        handle_general_client_info_input,
+        "client/info/",
+        handle_general_client_info,
         name="handle-general-client-info",
+    ),
+    path(
+        "client/equipment/",
+        handle_equipment,
+        name="handle-equipment",
     ),
 ]

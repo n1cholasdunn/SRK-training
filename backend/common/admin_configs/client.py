@@ -67,7 +67,12 @@ class EquipmentAdmin(admin.ModelAdmin):
 
 @admin.register(ClientEquipment)
 class ClientEquipmentAdmin(admin.ModelAdmin):
-    list_display = ["equipment"]
+    list_display = ["trainee", "list_equipment"]
+
+    def list_equipment(self, obj):
+        return ", ".join([equipment.name for equipment in obj.equipment.all()])
+
+    list_equipment.short_description = "Equipment"
 
 
 @admin.register(ClientProgramInfo)

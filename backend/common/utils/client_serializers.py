@@ -7,6 +7,7 @@ from common.models.client_models import (
     Equipment,
     GeneralClientInfo,
 )
+from common.utils.base_serializer import BaseOwnerFieldSerializer
 from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 
 
@@ -16,11 +17,10 @@ class DayAvailabilitySerializer(ModelSerializer):
         fields = "__all__"
 
 
-class GeneralClientInfoSerializer(ModelSerializer):
-    trainee = PrimaryKeyRelatedField(read_only=True)
+class GeneralClientInfoSerializer(BaseOwnerFieldSerializer):
     availabilities = DayAvailabilitySerializer(many=True, read_only=True)
 
-    class Meta:
+    class Meta(BaseOwnerFieldSerializer.Meta):
         model = GeneralClientInfo
         fields = "__all__"
 
@@ -37,12 +37,21 @@ class EquipmentSerializer(ModelSerializer):
         fields = "__all__"
 
 
-class ClientEquipmentSerializer(ModelSerializer):
-    equipment = EquipmentSerializer()
+class ClientEquipmentSerializer(BaseOwnerFieldSerializer):
+    equipment = EquipmentSerializer(many=True, required=False)
 
-    class Meta:
+    class Meta(BaseOwnerFieldSerializer.Meta):
         model = ClientEquipment
         fields = "__all__"
+        extra_kwargs = {"trainee": {"read_only": True}}
+
+    def create(self, validated_data):
+        equipment_data = validated_data.pop("equipment", [])
+        client_equipment = ClientEquipment.objects.create(**validated_data)
+        for equipment_item in equipment_data:
+            eq, created = Equipment.objects.get_or_create(**equipment_item)
+            client_equipment.equipment.add(eq)
+        return client_equipment
 
 
 class ClientProgramInfoSerializer(ModelSerializer):
