@@ -1,15 +1,18 @@
 from django.db import models
-from .common import BaseAssessment
+from .common import UserTimeStamp
 
 
 # TODO format data to be integers and floats to be stored in DB properly and have forms be reusable for react forms
-class HealthMarkersAssessments(BaseAssessment):
+class FitnessAssessments(UserTimeStamp):
     pass
 
 
-class HealthMarkersTest(models.Model):
-    assessment: models.ForeignKey[HealthMarkersAssessments] = models.ForeignKey(
-        "HealthMarkersAssessments", related_name="tests", on_delete=models.CASCADE
+class HealthMarkersTest(UserTimeStamp):
+    assessment = models.ForeignKey(
+        FitnessAssessments,
+        related_name="health_markers_tests",
+        on_delete=models.CASCADE,
+        null=True,
     )
     weight = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
     bmi = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
@@ -26,13 +29,12 @@ class HealthMarkersTest(models.Model):
         return f"{self.weight} - {self.bmi} - {self.waist_hip_ratio} - {self.resting_hr} - {self.blood_pressure} - {self.vo2_max}"
 
 
-class MeasurementsAssessments(BaseAssessment):
-    pass
-
-
-class MeasurementsTest(models.Model):
-    assessment: models.ForeignKey[MeasurementsAssessments] = models.ForeignKey(
-        "MeasurementsAssessments", related_name="tests", on_delete=models.CASCADE
+class MeasurementsTest(UserTimeStamp):
+    assessment = models.ForeignKey(
+        FitnessAssessments,
+        related_name="measurements_tests",
+        on_delete=models.CASCADE,
+        null=True,
     )
     chest = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
     biceps = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
@@ -55,13 +57,12 @@ class MeasurementsTest(models.Model):
         return f"{self.chest} - {self.biceps} - {self.forearms} - {self.lower_abdomen} - {self.hips} - {self.upper_thigh} - {self.mid_thigh} - {self.calves}"
 
 
-class OverheadSquatAssessments(BaseAssessment):
-    pass
-
-
-class OverheadSquatTest(models.Model):
-    assessment: models.ForeignKey[OverheadSquatAssessments] = models.ForeignKey(
-        "OverheadSquatAssessments", related_name="tests", on_delete=models.CASCADE
+class OverheadSquatTest(UserTimeStamp):
+    assessment = models.ForeignKey(
+        FitnessAssessments,
+        related_name="overhead_squat_tests",
+        on_delete=models.CASCADE,
+        null=True,
     )
     foot_ankle = models.CharField(max_length=250, null=True, blank=True)
     knee = models.CharField(max_length=250, null=True, blank=True)
@@ -73,14 +74,14 @@ class OverheadSquatTest(models.Model):
         return f"{self.foot_ankle} - {self.knee} - {self.lphc} - {self.shoulder} - {self.solutions}"
 
 
-class YMCAStepAssessments(BaseAssessment):
-    pass
-
-
-class YMCAStepTest(models.Model):
-    assessment: models.ForeignKey[YMCAStepAssessments] = models.ForeignKey(
-        "YMCAStepAssessments", related_name="tests", on_delete=models.CASCADE
+class YMCAStepTest(UserTimeStamp):
+    assessment = models.ForeignKey(
+        FitnessAssessments,
+        related_name="ymca_step_tests",
+        on_delete=models.CASCADE,
+        null=True,
     )
+
     recovery_hr = models.DecimalField(
         decimal_places=2, max_digits=5, null=True, blank=True
     )
@@ -90,14 +91,14 @@ class YMCAStepTest(models.Model):
         return f"{self.recovery_hr} - {self.rating}"
 
 
-class SitReachAssessments(BaseAssessment):
-    pass
-
-
-class SitReachTest(models.Model):
-    assessment: models.ForeignKey[SitReachAssessments] = models.ForeignKey(
-        "SitReachAssessments", related_name="tests", on_delete=models.CASCADE
+class SitReachTest(UserTimeStamp):
+    assessment = models.ForeignKey(
+        FitnessAssessments,
+        related_name="sit_reach_tests",
+        on_delete=models.CASCADE,
+        null=True,
     )
+
     first_measurement = models.DecimalField(
         decimal_places=2, max_digits=5, null=True, blank=True
     )
@@ -112,13 +113,12 @@ class SitReachTest(models.Model):
         return f"{self.first_measurement - {self.second_measurement} - {self.third_measurement}}"
 
 
-class PushUpAssessments(BaseAssessment):
-    pass
-
-
-class PushUpTest(models.Model):
-    assessment: models.ForeignKey[PushUpAssessments] = models.ForeignKey(
-        "PushUpAssessments", related_name="tests", on_delete=models.CASCADE
+class PushUpTest(UserTimeStamp):
+    assessment = models.ForeignKey(
+        FitnessAssessments,
+        related_name="push_up_tests",
+        on_delete=models.CASCADE,
+        null=True,
     )
     num_pushups = models.IntegerField(null=True, blank=True)
     completed = models.BooleanField(null=True, blank=True, default=False)
@@ -127,13 +127,12 @@ class PushUpTest(models.Model):
         return f"{self.num_pushups}"
 
 
-class DaviesAssessments(BaseAssessment):
-    pass
-
-
-class DaviesTest(models.Model):
-    assessment: models.ForeignKey[DaviesAssessments] = models.ForeignKey(
-        "DaviesAssessments", related_name="tests", on_delete=models.CASCADE
+class DaviesTest(UserTimeStamp):
+    assessment = models.ForeignKey(
+        FitnessAssessments,
+        related_name="davies_tests",
+        on_delete=models.CASCADE,
+        null=True,
     )
     first_trial = models.IntegerField(null=True, blank=True)
     second_trial = models.IntegerField(null=True, blank=True)
@@ -143,11 +142,7 @@ class DaviesTest(models.Model):
         return f"{self.first_trial} - {self.second_trial} - {self.third_trial}"
 
 
-class SharkSkillsAssessments(BaseAssessment):
-    pass
-
-
-class SharkSkillsSide(models.Model):
+class SharkSkillsSide(UserTimeStamp):
     time = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
     deduction_tally = models.DecimalField(
         decimal_places=2, max_digits=5, null=True, blank=True
@@ -160,9 +155,12 @@ class SharkSkillsSide(models.Model):
     )
 
 
-class SharkSkillsTest(models.Model):
-    assessment: models.ForeignKey[SharkSkillsAssessments] = models.ForeignKey(
-        "SharkSkillsAssessments", related_name="tests", on_delete=models.CASCADE
+class SharkSkillsTest(UserTimeStamp):
+    assessment = models.ForeignKey(
+        FitnessAssessments,
+        related_name="shark_skills_tests",
+        on_delete=models.CASCADE,
+        null=True,
     )
     practice_left = models.ForeignKey(
         SharkSkillsSide,
@@ -211,14 +209,13 @@ class SharkSkillsTest(models.Model):
         return f"{self.practice_left} - {self.practice_right} - {self.first_left} - {self.first_right} - {self.second_left} - {self.second_right}"
 
 
-class CoreAssessments(BaseAssessment):
-    pass
-
-
 # TODO convert to seconds in fetch call and save in second format of intergers
-class CoreTest(models.Model):
-    assessment: models.ForeignKey[CoreAssessments] = models.ForeignKey(
-        "CoreAssessments", related_name="tests", on_delete=models.CASCADE
+class CoreTest(UserTimeStamp):
+    assessment = models.ForeignKey(
+        FitnessAssessments,
+        related_name="core_tests",
+        on_delete=models.CASCADE,
+        null=True,
     )
     first_trial = models.CharField(max_length=6, null=True, blank=True)
     second_trial = models.CharField(max_length=6, null=True, blank=True)

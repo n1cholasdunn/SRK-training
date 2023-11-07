@@ -1,25 +1,13 @@
 from django.db import models
 from core.models import User
+from common.models.common import UserTimeStamp
 
 
 # TODO Update plans to use Integer or Decimal Fields and alter formatting function to switch it up
-class BaseTrainingPlan(models.Model):
-    updated = models.DateTimeField(auto_now=True)
-    created = models.DateTimeField(auto_now_add=True)
-    trainee = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    class Meta:
-        abstract = True
 
 
-class OTWTrainingPlan(BaseTrainingPlan):
+class OTWTrainingExercise(UserTimeStamp):
     warmup = models.TextField(null=True, blank=True)
-
-
-class TrainingExercise(models.Model):
-    training_plan: models.ForeignKey[OTWTrainingPlan] = models.ForeignKey(
-        "OTWTrainingPlan", related_name="exercises", on_delete=models.CASCADE
-    )
     name = models.CharField(max_length=255)
     equipment_used = models.CharField(max_length=100)
     rest = models.CharField(max_length=100)
@@ -30,18 +18,8 @@ class TrainingExercise(models.Model):
         return f"{self.name} - {self.equipment_used} - {self.rest} - {self.sets} - {self.notes}"
 
 
-# class OTWTrainingPlan(BaseTrainingPlan):
-#     warmup = models.TextField(null=True, blank=True)
-
-
-class GymTrainingPlan(BaseTrainingPlan):
-    pass
-
-
-class GymTrainingExercise(models.Model):
-    training_plan: models.ForeignKey[GymTrainingPlan] = models.ForeignKey(
-        "GymTrainingPlan", related_name="exercises", on_delete=models.CASCADE
-    )
+class GymTrainingExercise(UserTimeStamp):
+    warmup = models.TextField(null=True, blank=True)
     name = models.CharField(max_length=255)
     equipment_used = models.CharField(max_length=100)
     rest = models.CharField(max_length=100)
@@ -52,14 +30,8 @@ class GymTrainingExercise(models.Model):
         return f"{self.name} - {self.equipment_used} - {self.rest} - {self.sets} - {self.notes}"
 
 
-class PrehabTrainingPlan(BaseTrainingPlan):
-    pass
-
-
-class PrehabTrainingExercise(models.Model):
-    training_plan: models.ForeignKey[PrehabTrainingPlan] = models.ForeignKey(
-        "PrehabTrainingPlan", related_name="exercises", on_delete=models.CASCADE
-    )
+class PrehabTrainingExercise(UserTimeStamp):
+    warmup = models.TextField(null=True, blank=True)
     name = models.CharField(max_length=255)
     equipment_used = models.CharField(max_length=100)
     rest = models.CharField(max_length=100)

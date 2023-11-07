@@ -7,48 +7,31 @@ from .client_models import (
 )
 
 from .climbing_models import (
-    OAFingerStrengthAssessments,
+    ClimbingAssessments,
     OAFingerStrengthTest,
-    OAPinchAssessments,
     OAPinchTest,
-    PowerEnduranceAssessments,
     PowerEnduranceTest,
-    MaxLockoffAssessments,
     MaxLockoffTest,
-    MaxPullupsAssessments,
     MaxPullupsTest,
-    FingerStrengthAssessments,
     FingerStrengthTest,
 )
 from .fitness_models import (
-    HealthMarkersAssessments,
+    FitnessAssessments,
     HealthMarkersTest,
-    MeasurementsAssessments,
     MeasurementsTest,
-    OverheadSquatAssessments,
     OverheadSquatTest,
-    YMCAStepAssessments,
     YMCAStepTest,
-    SitReachAssessments,
     SitReachTest,
-    PushUpAssessments,
     PushUpTest,
-    DaviesAssessments,
     DaviesTest,
-    SharkSkillsAssessments,
     SharkSkillsSide,
     SharkSkillsTest,
-    CoreAssessments,
     CoreTest,
 )
 from .training_models import (
-    BaseTrainingPlan,
-    TrainingExercise,
-    OTWTrainingPlan,
+    OTWTrainingExercise,
     GymTrainingExercise,
-    GymTrainingPlan,
     PrehabTrainingExercise,
-    PrehabTrainingPlan,
 )
 
-from .common import BaseAssessment, BaseClientInfo
+from .common import UserTimeStamp, BaseClientInfo

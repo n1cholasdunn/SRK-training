@@ -27,6 +27,7 @@ import FitnessAssessmentForm from './components/forms/FitnessAssessmentForm';
 import RootLayout from './components/layouts/RootLayout';
 import TrainingLayout from './components/layouts/TrainingLayout';
 import ActiveSectionContextProvider from './context/ActiveSectionContext';
+import TestAssessmentForm from './components/forms/TestForm';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -55,6 +56,9 @@ const router = createBrowserRouter(
       <Route path="assessments">
         <Route path="climbing">
           <Route path="create" element={<ClimbingAssessmentForm />} />
+          <Route path="testing">
+            <Route path="create" element={<TestAssessmentForm />}></Route>
+          </Route>
         </Route>
         <Route path="fitness">
           <Route path="create" element={<FitnessAssessmentForm />} />

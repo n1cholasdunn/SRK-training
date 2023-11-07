@@ -7,7 +7,7 @@ const PowerEnduranceTest = z.object({
     .nullish(),
 });
 export const PowerEnduranceSchema = z.object({
-  assessments: z
+  tests: z
     .array(PowerEnduranceTest)
     .nonempty({message: 'Requires tests to be created'}),
 });
@@ -101,18 +101,18 @@ type OAPinch = z.infer<typeof OAPinchSchema>;
 
 export type AssessmentFormValues = {
   power_endurance: PowerEndurance;
-  max_pullups: MaxPullups;
-  max_lockoff: MaxLockoff;
-  finger_strength: FingerStrength;
-  oa_finger_strength: OAFingerStrength;
-  oa_pinch_strength: OAPinch;
+  // max_pullups: MaxPullups;
+  // max_lockoff: MaxLockoff;
+  // finger_strength: FingerStrength;
+  // oa_finger_strength: OAFingerStrength;
+  // oa_pinch_strength: OAPinch;
 };
 
 export const AssessmentFormSchema = z.object({
   power_endurance: PowerEnduranceSchema,
-  max_pullups: MaxPullupsSchema,
-  max_lockoff: MaxLockoffSchema,
-  finger_strength: FingerStrengthSchema,
-  oa_finger_strength: OAFingerStrengthSchema,
-  oa_pinch_strength: OAPinchSchema,
+  // max_pullups: MaxPullupsSchema,
+  // max_lockoff: MaxLockoffSchema,
+  // finger_strength: FingerStrengthSchema,
+  // oa_finger_strength: OAFingerStrengthSchema,
+  // oa_pinch_strength: OAPinchSchema,
 });

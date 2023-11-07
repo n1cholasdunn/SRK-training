@@ -18,7 +18,7 @@ const ClientInfoForm = () => {
     ClientInfoSchema.parse(data);
     console.log('data shape!!', data);
 
-    fetch('http://127.0.0.1:8000/client/info/create/', {
+    fetch('http://127.0.0.1:8000/client/info/', {
       method: 'POST',
       headers: {
         Authorization: `Token ${token}`,

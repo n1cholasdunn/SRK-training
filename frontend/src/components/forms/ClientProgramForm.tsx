@@ -9,13 +9,14 @@ import {
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import {useState} from 'react';
-import ClimbTypeCheckbox from '../climbTypeCheckbox';
+import ClimbTypeCheckbox from '../ClimbTypeCheckbox';
 import {
   fontBoulderingGrades,
   sportFrenchGrades,
   sportYDSGrades,
   vBoulderingGrades,
 } from '../../utils/climbingGrades';
+import {TOKEN_KEY} from '../../api';
 
 const ClientProgramForm = () => {
   const [gradingSystem, setGradingSystem] = useState('');
@@ -55,19 +56,33 @@ const ClientProgramForm = () => {
     setClimbingType(system);
   };
 
-  // useEffect(() => {
-  //   console.log(gradingSystem);
-  // }, [gradingSystem]);
+  const token = localStorage.getItem(TOKEN_KEY);
 
   const onSubmit = (data: ProgramFormValues) => {
-    try {
-      ProgramInfoSchema.parse(data);
-      console.log(data);
+    ProgramInfoSchema.parse(data);
+    console.log('data shape!!', data);
 
-      // TODO add submit logic
-    } catch (error) {
-      // TODO add error handling
-    }
+    fetch('http://127.0.0.1:8000/client/program/', {
+      method: 'POST',
+      headers: {
+        Authorization: `Token ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then(response => {
+        if (response.ok) {
+          console.log(response.json(), 'RESPONSE');
+        } else {
+          throw new Error('Server returned non-OK status: ' + response.status);
+        }
+      })
+      .then(data => {
+        console.log(data); // "Data inputted successfully!"
+      })
+      .catch(error => {
+        console.error('There was an error!', error);
+      });
   };
 
   const renderGradeOptions = () => {

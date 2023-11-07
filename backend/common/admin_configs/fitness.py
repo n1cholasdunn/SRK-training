@@ -1,23 +1,14 @@
 from django.contrib import admin
 from common.models.fitness_models import (
     HealthMarkersTest,
-    HealthMarkersAssessments,
-    MeasurementsAssessments,
     MeasurementsTest,
-    OverheadSquatAssessments,
     OverheadSquatTest,
-    YMCAStepAssessments,
     YMCAStepTest,
-    SitReachAssessments,
     SitReachTest,
-    PushUpAssessments,
     PushUpTest,
-    DaviesAssessments,
     DaviesTest,
-    SharkSkillsAssessments,
     SharkSkillsSide,
     SharkSkillsTest,
-    CoreAssessments,
     CoreTest,
 )
 
@@ -35,15 +26,6 @@ class HealthMarkersTestAdmin(admin.ModelAdmin):
     ]
 
 
-@admin.register(HealthMarkersAssessments)
-class HealthMarkersAssessmentsAdmin(admin.ModelAdmin):
-    list_display = ["id", "created", "updated", "test_list"]
-
-    def test_list(self, obj):
-        tests = obj.tests.all()
-        return tests
-
-
 @admin.register(MeasurementsTest)
 class MeasurementsTestAdmin(admin.ModelAdmin):
     list_display = [
@@ -58,27 +40,9 @@ class MeasurementsTestAdmin(admin.ModelAdmin):
     ]
 
 
-@admin.register(MeasurementsAssessments)
-class MeasurementsAssessmentsAdmin(admin.ModelAdmin):
-    list_display = ["id", "created", "updated", "test_list"]
-
-    def test_list(self, obj):
-        tests = obj.tests.all()
-        return tests
-
-
 @admin.register(OverheadSquatTest)
 class OverheadSquatTestAdmin(admin.ModelAdmin):
     list_display = ["foot_ankle", "knee", "lphc", "shoulder", "solutions"]
-
-
-@admin.register(OverheadSquatAssessments)
-class OverheadSquatAssessmentsAdmin(admin.ModelAdmin):
-    list_display = ["id", "created", "updated", "test_list"]
-
-    def test_list(self, obj):
-        tests = obj.tests.all()
-        return tests
 
 
 @admin.register(SitReachTest)
@@ -86,27 +50,9 @@ class SitReachTestAdmin(admin.ModelAdmin):
     list_display = ["first_measurement", "second_measurement", "third_measurement"]
 
 
-@admin.register(SitReachAssessments)
-class SitReachAssessmentsAdmin(admin.ModelAdmin):
-    list_display = ["id", "created", "updated", "test_list"]
-
-    def test_list(self, obj):
-        tests = obj.tests.all()
-        return tests
-
-
 @admin.register(YMCAStepTest)
 class YMCAStepTestAdmin(admin.ModelAdmin):
     list_display = ["recovery_hr", "rating"]
-
-
-@admin.register(YMCAStepAssessments)
-class YMCAStepAssessmentsAdmin(admin.ModelAdmin):
-    list_display = ["id", "created", "updated", "test_list"]
-
-    def test_list(self, obj):
-        tests = obj.tests.all()
-        return tests
 
 
 @admin.register(PushUpTest)
@@ -114,27 +60,9 @@ class PushUpTestAdmin(admin.ModelAdmin):
     list_display = ["num_pushups", "completed"]
 
 
-@admin.register(PushUpAssessments)
-class PushUpAssessmentsAdmin(admin.ModelAdmin):
-    list_display = ["id", "created", "updated", "test_list"]
-
-    def test_list(self, obj):
-        tests = obj.tests.all()
-        return tests
-
-
 @admin.register(DaviesTest)
 class DaviesTestAdmin(admin.ModelAdmin):
     list_display = ["first_trial", "second_trial", "third_trial"]
-
-
-@admin.register(DaviesAssessments)
-class DaviesAssessmentsAdmin(admin.ModelAdmin):
-    list_display = ["id", "created", "updated", "test_list"]
-
-    def test_list(self, obj):
-        tests = obj.tests.all()
-        return tests
 
 
 @admin.register(SharkSkillsSide)
@@ -154,24 +82,6 @@ class SharkSkillsTestAdmin(admin.ModelAdmin):
     ]
 
 
-@admin.register(SharkSkillsAssessments)
-class SharkSkillsAssessmentsAdmin(admin.ModelAdmin):
-    list_display = ["id", "created", "updated", "test_list"]
-
-    def test_list(self, obj):
-        tests = obj.tests.all()
-        return tests
-
-
 @admin.register(CoreTest)
 class CoreTestAdmin(admin.ModelAdmin):
     list_display = ["first_trial", "second_trial"]
-
-
-@admin.register(CoreAssessments)
-class CoreAssessmentsAdmin(admin.ModelAdmin):
-    list_display = ["id", "created", "updated", "test_list"]
-
-    def test_list(self, obj):
-        tests = obj.tests.all()
-        return tests

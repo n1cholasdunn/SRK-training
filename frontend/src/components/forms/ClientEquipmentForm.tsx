@@ -1,6 +1,7 @@
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useFieldArray, useForm} from 'react-hook-form';
 import {EquipmentFormData, EquipmentFormSchema} from '../../types/equipment';
+import {TOKEN_KEY} from '../../api';
 
 const ClientEquipmentForm = () => {
   const {
@@ -20,15 +21,32 @@ const ClientEquipmentForm = () => {
     name: 'equipment',
   });
 
-  const onSubmit = (data: EquipmentFormData) => {
-    try {
-      EquipmentFormSchema.parse(data);
-      console.log(data);
+  const token = localStorage.getItem(TOKEN_KEY);
 
-      // TODO add submit logic
-    } catch (error) {
-      // TODO add error handling
-    }
+  const onSubmit = (data: EquipmentFormData) => {
+    EquipmentFormSchema.parse(data);
+    console.log(data);
+    fetch('http://127.0.0.1:8000/client/equipment/', {
+      method: 'POST',
+      headers: {
+        Authorization: `Token ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then(response => {
+        if (response.ok) {
+          console.log(response.json(), 'RESPONSE');
+        } else {
+          throw new Error('Server returned non-OK status: ' + response.status);
+        }
+      })
+      .then(data => {
+        console.log(data); // "Data inputted successfully!"
+      })
+      .catch(error => {
+        console.error('There was an error!', error);
+      });
   };
 
   return (

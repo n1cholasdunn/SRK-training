@@ -1,5 +1,5 @@
 from django.db import models
-from .common import UserTimeStamp
+from common.models.common import UserTimeStamp
 
 
 class ClimbingAssessments(UserTimeStamp):

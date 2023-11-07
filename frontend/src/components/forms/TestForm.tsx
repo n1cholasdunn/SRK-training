@@ -1,52 +1,99 @@
-import { useState, FormEvent } from 'react';
-import { TOKEN_KEY } from '../../api';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import {TOKEN_KEY} from '../../api';
+import {zodResolver} from '@hookform/resolvers/zod';
+import {
+  AssessmentFormSchema,
+  AssessmentFormValues,
+} from '../../types/assessments/climbing';
+import {useForm} from 'react-hook-form';
+import PowerEnduranceAssessment from '../assessments/PowerEnduranceAssessment';
+import MaxPullupsAssessment from '../assessments/MaxPullupsAssessment';
+import MaxLockoffAssessment from '../assessments/MaxLockoffAssessment';
+import FingerStrengthAssessment from '../assessments/FingerStrengthAssessment';
+import OAFingerStrengthAssessment from '../assessments/OAFingerStrengthAssessment';
+import OAPinchAssessment from '../assessments/OAPinchAssessment';
 
-const GSheetForm = () => {
-  const [url, setUrl] = useState('');
+const TestAssessmentForm = () => {
+  const {
+    handleSubmit,
+    register,
+    control,
+    formState: {errors},
+  } = useForm<AssessmentFormValues>({
+    resolver: zodResolver(AssessmentFormSchema),
+  });
   const token = localStorage.getItem(TOKEN_KEY);
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
 
-    console.log(url);
+  const onSubmit = (data: AssessmentFormValues) => {
+    AssessmentFormSchema.parse(data);
+    console.log('data shape!!', data);
 
-    try {
-      const response = await fetch(
-        'http://127.0.0.1:8000/training/assessments/health-markers/create/',
-        {
-          method: 'POST',
-          headers: {
-            Authorization: `Token ${token}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ url }), // Sends the URL to the backend
+    fetch('http://127.0.0.1:8000/assessments/climbing/testing/create/', {
+      method: 'POST',
+      headers: {
+        Authorization: `Token ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then(response => {
+        if (response.ok) {
+          console.log(response.json(), 'RESPONSE');
+        } else {
+          throw new Error('Server returned non-OK status: ' + response.status);
         }
-      );
-
-      if (response.ok) {
-        const responseBody = await response.json();
-        console.log('Form submitted successfully', responseBody);
-      } else {
-        console.error('Failed to submit the form', response);
-      }
-    } catch (error) {
-      console.error('Failed to submit the form', error);
-    }
+      })
+      .then(data => {
+        console.log(data); // "Data inputted successfully!"
+      })
+      .catch(error => {
+        console.error('There was an error!', error);
+      });
   };
-
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        URL:
-        <input
-          type='url'
-          value={url}
-          onChange={e => setUrl(e.target.value)}
-          required
-        />
-      </label>
-      <button type='submit'>Submit</button>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className=" flex flex-col space-y-2">
+      <h2>Power Endurance Assessment</h2>
+      <PowerEnduranceAssessment
+        control={control}
+        register={register}
+        errors={errors}
+      />
+      {/* <h2>Max Pullups Assessment</h2>
+      <MaxPullupsAssessment
+        control={control}
+        register={register}
+        errors={errors}
+      />
+      <h2>Max Lockoff Assessment</h2>
+      <MaxLockoffAssessment
+        control={control}
+        register={register}
+        errors={errors}
+      />
+      <h2>Finger Strength Assessment</h2>
+      <FingerStrengthAssessment
+        control={control}
+        register={register}
+        errors={errors}
+      />
+      <h2>One Arm Finger Strength Assessment</h2>
+      <OAFingerStrengthAssessment
+        control={control}
+        register={register}
+        errors={errors}
+      />
+      <h2>One Arm Pinch Strength Assessment</h2>
+      <OAPinchAssessment
+        control={control}
+        register={register}
+        errors={errors}
+      /> */}
+
+      <button type="submit">Submit Assessments</button>
     </form>
   );
 };
 
-export default GSheetForm;
+export default TestAssessmentForm;

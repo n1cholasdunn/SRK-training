@@ -9,7 +9,15 @@ export const ClientInfoSchema = z.object({
     .min(2, {message: 'Name must be more than 2 characters long'}),
   phone: z
     .string()
-    .min(10, {message: 'Phone numbers are a minimum of 10 digits'}),
+    .min(10, {
+      message: `Phone number must include a '+' follow the E.164 format (e.g., +1234567890)`,
+    })
+    .max(14, {
+      message: `Phone number must include a '+' follow the E.164 format (e.g., +1234567890)`,
+    })
+    .refine(val => /^\+\d{1,14}$/.test(val), {
+      message: `Phone number must include a '+' follow the E.164 format (e.g., +1234567890)`,
+    }),
   age: z.coerce.number().min(2, {message: 'Age must be 2 digits'}),
   email: z
     .string()
