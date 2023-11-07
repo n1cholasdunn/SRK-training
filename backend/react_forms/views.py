@@ -30,7 +30,14 @@ def handle_availability(request, pk):
         return delete_availability(request, pk)
 
 
-@api_view(["GET", "PUT", "POST", "DELETE"])
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def handle_general_client_info_input(request):
+    if request.method == "POST":
+        return create_general_client_info(request)
+
+
+@api_view(["GET", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
 def handle_general_client_info(request, pk):
     if request.method == "GET":

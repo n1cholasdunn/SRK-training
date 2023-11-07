@@ -7,7 +7,7 @@ from common.models.client_models import (
     Equipment,
     GeneralClientInfo,
 )
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 
 
 class DayAvailabilitySerializer(ModelSerializer):
@@ -17,6 +17,7 @@ class DayAvailabilitySerializer(ModelSerializer):
 
 
 class GeneralClientInfoSerializer(ModelSerializer):
+    trainee = PrimaryKeyRelatedField(read_only=True)
     availabilities = DayAvailabilitySerializer(many=True, read_only=True)
 
     class Meta:

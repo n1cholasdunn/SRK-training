@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { camelizeKeys } from 'humps';
-import { OAuthCredential, OAuthUrl, Profile } from './types';
+import {camelizeKeys} from 'humps';
+import {OAuthCredential, OAuthUrl, Profile} from './types';
 
-export type { OAuthCredential, OAuthUrl };
+export type {OAuthCredential, OAuthUrl};
 
 export const TOKEN_KEY = 'token';
 
@@ -39,12 +39,13 @@ export const getGoogleAuthLink = async () => {
 
 export const getGoogleAuthToken = async (credential: OAuthCredential) => {
   const response = await client.post('/auth/o/google-oauth2/', credential, {
-    headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    headers: {'content-type': 'application/x-www-form-urlencoded'},
     withCredentials: true,
   });
   return response.data;
 };
 
+// TODo use to attach superuser status from backend and render different header page based on such
 export const getProfile = async () => {
   const response = await client.get<Profile>('/auth/users/me/');
   return response.data;

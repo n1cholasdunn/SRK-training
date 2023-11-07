@@ -27,7 +27,7 @@ export const ClientInfoSchema = z.object({
     .string()
     .min(10, {message: 'Phone numbers are minimum of 10 digits'}),
   height: z.string().min(1, {message: 'Height is required'}).trim(),
-  weight: z.string().min(1, {message: 'Weight is required'}).trim(),
+  weight: z.coerce.number().min(1, {message: 'Weight is required'}),
   ape_index: z
     .string({description: 'Your wingspan minus your height'})
     .trim()

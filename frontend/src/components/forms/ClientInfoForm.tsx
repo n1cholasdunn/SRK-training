@@ -1,6 +1,7 @@
 import {useForm} from 'react-hook-form';
 import {ClientFormValues, ClientInfoSchema} from '../../types/clientInfo';
 import {zodResolver} from '@hookform/resolvers/zod';
+import {TOKEN_KEY} from '../../api';
 
 const ClientInfoForm = () => {
   const {
@@ -10,15 +11,34 @@ const ClientInfoForm = () => {
   } = useForm<ClientFormValues>({
     resolver: zodResolver(ClientInfoSchema),
   });
-  const onSubmit = (data: ClientFormValues) => {
-    try {
-      ClientInfoSchema.parse(data);
-      console.log(data);
 
-      // TODO add submit logic
-    } catch (error) {
-      // TODO add error handling
-    }
+  const token = localStorage.getItem(TOKEN_KEY);
+
+  const onSubmit = (data: ClientFormValues) => {
+    ClientInfoSchema.parse(data);
+    console.log('data shape!!', data);
+
+    fetch('http://127.0.0.1:8000/client/info/create/', {
+      method: 'POST',
+      headers: {
+        Authorization: `Token ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then(response => {
+        if (response.ok) {
+          console.log(response.json(), 'RESPONSE');
+        } else {
+          throw new Error('Server returned non-OK status: ' + response.status);
+        }
+      })
+      .then(data => {
+        console.log(data); // "Data inputted successfully!"
+      })
+      .catch(error => {
+        console.error('There was an error!', error);
+      });
   };
   return (
     <div className="my-6">

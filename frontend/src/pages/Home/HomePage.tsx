@@ -58,7 +58,6 @@ const HomePage = () => {
       <Intro />
       <SectionDivider />
       <AboutMe />
-      <SectionDivider />
       <Coaching />
       <Contact />
     </main>

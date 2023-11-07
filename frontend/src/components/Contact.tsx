@@ -27,7 +27,7 @@ const Contact = () => {
     })
       .then(response => {
         if (response.ok) {
-          console.log(response.json());
+          console.log(response.json(), 'RESPONSE');
         } else {
           throw new Error('Server returned non-OK status: ' + response.status);
         }
