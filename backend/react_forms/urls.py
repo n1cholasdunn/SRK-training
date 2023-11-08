@@ -4,7 +4,7 @@ from react_forms.views import (
     handle_equipment,
     handle_general_client_info,
     handle_program,
-    handle_power_endurance_assessment,
+    handle_power_endurance_test,
 )
 
 urlpatterns = [
@@ -31,7 +31,7 @@ urlpatterns = [
     ),
     path(
         "assessments/climbing/testing/create/",
-        handle_power_endurance_assessment,
+        handle_power_endurance_test,
         name="handle-program",
     ),
 ]

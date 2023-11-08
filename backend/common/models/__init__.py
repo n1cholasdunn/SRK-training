@@ -7,7 +7,6 @@ from .client_models import (
 )
 
 from .climbing_models import (
-    ClimbingAssessments,
     OAFingerStrengthTest,
     OAPinchTest,
     PowerEnduranceTest,
@@ -16,7 +15,6 @@ from .climbing_models import (
     FingerStrengthTest,
 )
 from .fitness_models import (
-    FitnessAssessments,
     HealthMarkersTest,
     MeasurementsTest,
     OverheadSquatTest,

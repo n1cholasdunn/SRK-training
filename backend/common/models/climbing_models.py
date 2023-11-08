@@ -2,17 +2,7 @@ from django.db import models
 from .common import UserTimeStamp
 
 
-class ClimbingAssessments(UserTimeStamp):
-    pass
-
-
 class PowerEnduranceTest(UserTimeStamp):
-    assessment = models.ForeignKey(
-        ClimbingAssessments,
-        related_name="power_endurance_tests",
-        on_delete=models.CASCADE,
-        null=True,
-    )
     seconds = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
@@ -30,12 +20,6 @@ class PowerEnduranceTest(UserTimeStamp):
 
 
 class MaxPullupsTest(UserTimeStamp):
-    assessment = models.ForeignKey(
-        ClimbingAssessments,
-        related_name="max_pullups_tests",
-        on_delete=models.CASCADE,
-        null=True,
-    )
     reps = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
@@ -49,12 +33,6 @@ class MaxPullupsTest(UserTimeStamp):
 
 
 class MaxLockoffTest(UserTimeStamp):
-    assessment = models.ForeignKey(
-        ClimbingAssessments,
-        related_name="max_lockoff_tests",
-        on_delete=models.CASCADE,
-        null=True,
-    )
     seconds = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
@@ -72,12 +50,6 @@ class MaxLockoffTest(UserTimeStamp):
 
 
 class FingerStrengthTest(UserTimeStamp):
-    assessment = models.ForeignKey(
-        ClimbingAssessments,
-        related_name="finger_strength_tests",
-        on_delete=models.CASCADE,
-        null=True,
-    )
     total_load = models.DecimalField(
         decimal_places=2, max_digits=5, null=True, blank=True
     )
@@ -105,12 +77,6 @@ class FingerStrengthTest(UserTimeStamp):
 
 
 class OAFingerStrengthTest(UserTimeStamp):
-    assessment = models.ForeignKey(
-        ClimbingAssessments,
-        related_name="oa_finger_strength_tests",
-        on_delete=models.CASCADE,
-        null=True,
-    )
     left = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
     right = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
     left_percentage = models.DecimalField(
@@ -146,12 +112,6 @@ class OAFingerStrengthTest(UserTimeStamp):
 
 
 class OAPinchTest(UserTimeStamp):
-    assessment = models.ForeignKey(
-        ClimbingAssessments,
-        related_name="oa_pinch_tests",
-        on_delete=models.CASCADE,
-        null=True,
-    )
     left = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
     right = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
 

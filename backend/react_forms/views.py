@@ -30,10 +30,10 @@ from react_forms.utils.client.program import (
 )
 
 from react_forms.utils.climbing.power_endurance import (
-    get_power_endurance_assessment,
-    create_power_endurance_assessment,
-    update_power_endurance_assessment,
-    delete_power_endurance_assessment,
+    get_power_endurance_tests,
+    create_power_endurance_test,
+    update_power_endurance_test,
+    delete_power_endurance_test,
 )
 
 
@@ -91,12 +91,12 @@ def handle_program(request):
 
 @api_view(["GET", "PUT", "POST", "PATCH", "DELETE"])
 @permission_classes([IsAuthenticated])
-def handle_power_endurance_assessment(request):
+def handle_power_endurance_test(request):
     if request.method == "GET":
-        return get_power_endurance_assessment(request)
+        return get_power_endurance_tests(request)
     if request.method == "PUT":
-        return update_power_endurance_assessment(request)
+        return update_power_endurance_test(request)
     if request.method == "POST" or request.method == "PATCH":
-        return create_power_endurance_assessment(request)
+        return create_power_endurance_test(request)
     if request.method == "DELETE":
-        return delete_power_endurance_assessment(request)
+        return delete_power_endurance_test(request)

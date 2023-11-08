@@ -3,17 +3,9 @@ from .common import UserTimeStamp
 
 
 # TODO format data to be integers and floats to be stored in DB properly and have forms be reusable for react forms
-class FitnessAssessments(UserTimeStamp):
-    pass
 
 
 class HealthMarkersTest(UserTimeStamp):
-    assessment = models.ForeignKey(
-        FitnessAssessments,
-        related_name="health_markers_tests",
-        on_delete=models.CASCADE,
-        null=True,
-    )
     weight = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
     bmi = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
     waist_hip_ratio = models.DecimalField(
@@ -30,12 +22,6 @@ class HealthMarkersTest(UserTimeStamp):
 
 
 class MeasurementsTest(UserTimeStamp):
-    assessment = models.ForeignKey(
-        FitnessAssessments,
-        related_name="measurements_tests",
-        on_delete=models.CASCADE,
-        null=True,
-    )
     chest = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
     biceps = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
     forearms = models.DecimalField(
@@ -58,12 +44,6 @@ class MeasurementsTest(UserTimeStamp):
 
 
 class OverheadSquatTest(UserTimeStamp):
-    assessment = models.ForeignKey(
-        FitnessAssessments,
-        related_name="overhead_squat_tests",
-        on_delete=models.CASCADE,
-        null=True,
-    )
     foot_ankle = models.CharField(max_length=250, null=True, blank=True)
     knee = models.CharField(max_length=250, null=True, blank=True)
     lphc = models.CharField(max_length=250, null=True, blank=True)
@@ -75,13 +55,6 @@ class OverheadSquatTest(UserTimeStamp):
 
 
 class YMCAStepTest(UserTimeStamp):
-    assessment = models.ForeignKey(
-        FitnessAssessments,
-        related_name="ymca_step_tests",
-        on_delete=models.CASCADE,
-        null=True,
-    )
-
     recovery_hr = models.DecimalField(
         decimal_places=2, max_digits=5, null=True, blank=True
     )
@@ -92,13 +65,6 @@ class YMCAStepTest(UserTimeStamp):
 
 
 class SitReachTest(UserTimeStamp):
-    assessment = models.ForeignKey(
-        FitnessAssessments,
-        related_name="sit_reach_tests",
-        on_delete=models.CASCADE,
-        null=True,
-    )
-
     first_measurement = models.DecimalField(
         decimal_places=2, max_digits=5, null=True, blank=True
     )
@@ -114,12 +80,6 @@ class SitReachTest(UserTimeStamp):
 
 
 class PushUpTest(UserTimeStamp):
-    assessment = models.ForeignKey(
-        FitnessAssessments,
-        related_name="push_up_tests",
-        on_delete=models.CASCADE,
-        null=True,
-    )
     num_pushups = models.IntegerField(null=True, blank=True)
     completed = models.BooleanField(null=True, blank=True, default=False)
 
@@ -128,12 +88,6 @@ class PushUpTest(UserTimeStamp):
 
 
 class DaviesTest(UserTimeStamp):
-    assessment = models.ForeignKey(
-        FitnessAssessments,
-        related_name="davies_tests",
-        on_delete=models.CASCADE,
-        null=True,
-    )
     first_trial = models.IntegerField(null=True, blank=True)
     second_trial = models.IntegerField(null=True, blank=True)
     third_trial = models.IntegerField(null=True, blank=True)
@@ -156,12 +110,6 @@ class SharkSkillsSide(UserTimeStamp):
 
 
 class SharkSkillsTest(UserTimeStamp):
-    assessment = models.ForeignKey(
-        FitnessAssessments,
-        related_name="shark_skills_tests",
-        on_delete=models.CASCADE,
-        null=True,
-    )
     practice_left = models.ForeignKey(
         SharkSkillsSide,
         related_name="practice_lefts",
@@ -211,12 +159,6 @@ class SharkSkillsTest(UserTimeStamp):
 
 # TODO convert to seconds in fetch call and save in second format of intergers
 class CoreTest(UserTimeStamp):
-    assessment = models.ForeignKey(
-        FitnessAssessments,
-        related_name="core_tests",
-        on_delete=models.CASCADE,
-        null=True,
-    )
     first_trial = models.CharField(max_length=6, null=True, blank=True)
     second_trial = models.CharField(max_length=6, null=True, blank=True)
 
