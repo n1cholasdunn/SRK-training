@@ -4,13 +4,13 @@ import {
   UseFormRegister,
   useFieldArray,
 } from 'react-hook-form';
-import {AssessmentFormValues} from '../../types/assessments/climbing';
+import {ClimbingAssessmentFormValues} from '../../types/assessments/climbing';
 import {useEffect, useRef} from 'react';
 
 type Props = {
-  control: Control<AssessmentFormValues>;
-  register: UseFormRegister<AssessmentFormValues>;
-  errors?: FieldErrors<AssessmentFormValues>;
+  control: Control<ClimbingAssessmentFormValues>;
+  register: UseFormRegister<ClimbingAssessmentFormValues>;
+  errors?: FieldErrors<ClimbingAssessmentFormValues>;
 };
 
 const OAPinchAssessment = ({control, register, errors}: Props) => {

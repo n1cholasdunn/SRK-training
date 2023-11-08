@@ -99,20 +99,20 @@ export const OAPinchSchema = z.object({
 
 type OAPinch = z.infer<typeof OAPinchSchema>;
 
-export type AssessmentFormValues = {
-  power_endurance: PowerEndurance;
-  max_pullups: MaxPullups;
-  max_lockoff: MaxLockoff;
-  finger_strength: FingerStrength;
-  oa_finger_strength: OAFingerStrength;
-  oa_pinch_strength: OAPinch;
+export type ClimbingAssessmentFormValues = {
+  power_endurance?: PowerEndurance;
+  max_pullups?: MaxPullups;
+  max_lockoff?: MaxLockoff;
+  finger_strength?: FingerStrength;
+  oa_finger_strength?: OAFingerStrength;
+  oa_pinch_strength?: OAPinch;
 };
 
-export const AssessmentFormSchema = z.object({
-  power_endurance: PowerEnduranceSchema,
-  max_pullups: MaxPullupsSchema,
-  max_lockoff: MaxLockoffSchema,
-  finger_strength: FingerStrengthSchema,
-  oa_finger_strength: OAFingerStrengthSchema,
-  oa_pinch_strength: OAPinchSchema,
+export const ClimbingAssessmentFormSchema = z.object({
+  power_endurance: PowerEnduranceSchema.optional(),
+  max_pullups: MaxPullupsSchema.optional(),
+  max_lockoff: MaxLockoffSchema.optional(),
+  finger_strength: FingerStrengthSchema.optional(),
+  oa_finger_strength: OAFingerStrengthSchema.optional(),
+  oa_pinch_strength: OAPinchSchema.optional(),
 });

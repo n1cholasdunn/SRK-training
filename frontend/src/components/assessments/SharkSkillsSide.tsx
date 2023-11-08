@@ -1,5 +1,5 @@
 import {FieldErrors, UseFormRegister} from 'react-hook-form';
-import {AssessmentFormValues} from '../../types/assessments/fitness';
+import {FitnessAssessmentFormValues} from '../../types/assessments/fitness';
 
 type SharkSkillsSideProps = {
   index: number;
@@ -10,8 +10,8 @@ type SharkSkillsSideProps = {
     | 'first_right'
     | 'second_left'
     | 'second_right';
-  register: UseFormRegister<AssessmentFormValues>;
-  errors?: FieldErrors<AssessmentFormValues>;
+  register: UseFormRegister<FitnessAssessmentFormValues>;
+  errors?: FieldErrors<FitnessAssessmentFormValues>;
 };
 
 const getSideName = (side: string) => {

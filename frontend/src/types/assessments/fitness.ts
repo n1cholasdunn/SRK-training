@@ -30,7 +30,7 @@ export const HealthMarkersSchema = z.object({
     .nonempty({message: 'Requires tests to be created'}),
 });
 
-type HealthMarkers = z.infer<typeof HealthMarkersSchema>;
+export type HealthMarkers = z.infer<typeof HealthMarkersSchema>;
 
 const MeasurementsTest = z.object({
   chest: z.coerce
@@ -73,7 +73,7 @@ export const MeasurementsSchema = z.object({
     .nonempty({message: 'Requires tests to be created'}),
 });
 
-type Measurements = z.infer<typeof MeasurementsSchema>;
+export type Measurements = z.infer<typeof MeasurementsSchema>;
 
 const OverheadSquatTest = z.object({
   foot_ankle: z.string().optional(),
@@ -89,7 +89,7 @@ const OverheadSquatSchema = z.object({
     .nonempty({message: 'Requires tests to be created'}),
 });
 
-type OverheadSquat = z.infer<typeof OverheadSquatSchema>;
+export type OverheadSquat = z.infer<typeof OverheadSquatSchema>;
 
 const YMCAStepTest = z.object({
   recovery_hr: z.coerce
@@ -105,7 +105,7 @@ const YMCAStepSchema = z.object({
     .nonempty({message: 'Requires tests to be created'}),
 });
 
-type YMCAStep = z.infer<typeof YMCAStepSchema>;
+export type YMCAStep = z.infer<typeof YMCAStepSchema>;
 
 const SitReachTest = z.object({
   first_measurement: z.coerce
@@ -145,7 +145,7 @@ const PushUpSchema = z.object({
     .nonempty({message: 'Requires tests to be created'}),
 });
 
-type PushUp = z.infer<typeof PushUpSchema>;
+export type PushUp = z.infer<typeof PushUpSchema>;
 
 const DaviesTest = z.object({
   first_trial: z.coerce
@@ -168,7 +168,7 @@ const DaviesSchema = z.object({
     .nonempty({message: 'Requires tests to be created'}),
 });
 
-type Davies = z.infer<typeof DaviesSchema>;
+export type Davies = z.infer<typeof DaviesSchema>;
 
 const SharkSkillsSide = z.object({
   time: z.coerce
@@ -204,7 +204,7 @@ const SharkSkillsSchema = z.object({
     .nonempty({message: 'Requires tests to be created'}),
 });
 
-type SharkSkills = z.infer<typeof SharkSkillsSchema>;
+export type SharkSkills = z.infer<typeof SharkSkillsSchema>;
 
 const CoreTest = z.object({
   first_trial: z.coerce
@@ -221,21 +221,21 @@ const CoreSchema = z.object({
   tests: z.array(CoreTest).nonempty({message: 'Requires tests to be created'}),
 });
 
-type Core = z.infer<typeof CoreSchema>;
+export type Core = z.infer<typeof CoreSchema>;
 
-export type AssessmentFormValues = {
-  health_markers: HealthMarkers;
-  measurements: Measurements;
-  overhead_squat: OverheadSquat;
-  ymca_step: YMCAStep;
-  sit_reach: SitReach;
-  pushup: PushUp;
-  davies: Davies;
-  shark_skills: SharkSkills;
-  core: Core;
+export type FitnessAssessmentFormValues = {
+  health_markers?: HealthMarkers;
+  measurements?: Measurements;
+  overhead_squat?: OverheadSquat;
+  ymca_step?: YMCAStep;
+  sit_reach?: SitReach;
+  pushup?: PushUp;
+  davies?: Davies;
+  shark_skills?: SharkSkills;
+  core?: Core;
 };
 
-export const AssessmentFormSchema = z.object({
+export const FitnessAssessmentFormSchema = z.object({
   health_markers: HealthMarkersSchema,
   measurements: MeasurementsSchema,
   overhead_squat: OverheadSquatSchema,

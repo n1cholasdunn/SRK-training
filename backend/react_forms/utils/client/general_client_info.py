@@ -1,18 +1,26 @@
-from common.utils.client_serializers import GeneralClientInfoSerializer
-from common.models.client_models import GeneralClientInfo
+from typing import List
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.request import Request
+from common.utils.client_serializers import GeneralClientInfoSerializer
+from common.models.client_models import GeneralClientInfo
 
 
-def get_general_client_info(request):
+def get_general_client_info(request: Request) -> Response:
     user = request.user
     general_client_info = get_object_or_404(GeneralClientInfo, trainee=user)
     serializer = GeneralClientInfoSerializer(general_client_info)
     return Response(serializer.data)
 
 
-def create_general_client_info(request):
+def get_general_client_info_by_id(request: Request, pk: int) -> Response:
+    general_client_info = get_object_or_404(GeneralClientInfo, trainee=pk)
+    serializer = GeneralClientInfoSerializer(general_client_info)
+    return Response(serializer.data)
+
+
+def create_general_client_info(request: Request) -> Response:
     serializer = GeneralClientInfoSerializer(
         data=request.data, context={"request": request}
     )
@@ -22,7 +30,7 @@ def create_general_client_info(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-def update_general_client_info(request):
+def update_general_client_info(request: Request) -> Response:
     try:
         general_client_info = GeneralClientInfo.objects.get(trainee=request.user)
     except GeneralClientInfo.DoesNotExist:
@@ -39,7 +47,20 @@ def update_general_client_info(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-def delete_general_client_info(request):
+def update_general_client_info_by_id(request: Request, pk: int) -> Response:
+    general_client_info = get_object_or_404(GeneralClientInfo, trainee=pk)
+    serializer = GeneralClientInfoSerializer(
+        general_client_info,
+        data=request.data,
+        partial=request.method == "PATCH",
+    )
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+def delete_general_client_info(request: Request) -> Response:
     try:
         general_client_info = GeneralClientInfo.objects.get(trainee=request.user)
     except GeneralClientInfo.DoesNotExist:

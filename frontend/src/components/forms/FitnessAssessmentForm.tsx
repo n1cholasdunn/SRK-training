@@ -1,8 +1,8 @@
 import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {
-  AssessmentFormSchema,
-  AssessmentFormValues,
+  FitnessAssessmentFormSchema,
+  FitnessAssessmentFormValues,
 } from '../../types/assessments/fitness';
 import HealthMarkersAssessment from '../assessments/HealthMarkersAssessment';
 import MeasurementsAssessment from '../assessments/MeasurementsAssessment';
@@ -13,6 +13,7 @@ import PushUpAssessment from '../assessments/PushUpAssessment';
 import DaviesAssessment from '../assessments/DaviesAssessment';
 import CoreAssessment from '../assessments/CoreAssessment';
 import SharkSkillsAssessment from '../assessments/SharkSkillsAssessment';
+import {useSubmitAssessment} from '../../hooks/useSubmitAssessment';
 
 const FitnessAssessmentForm = () => {
   const {
@@ -20,12 +21,18 @@ const FitnessAssessmentForm = () => {
     register,
     control,
     formState: {errors},
-  } = useForm<AssessmentFormValues>({
-    resolver: zodResolver(AssessmentFormSchema),
+  } = useForm<FitnessAssessmentFormValues>({
+    resolver: zodResolver(FitnessAssessmentFormSchema),
   });
 
-  const onSubmit = (data: AssessmentFormValues) => {
-    console.log(data);
+  const {mutate: submitFitness} =
+    useSubmitAssessment<FitnessAssessmentFormValues>(
+      'assessments/fitness/testing/create/',
+      FitnessAssessmentFormSchema
+    );
+
+  const onSubmit = (data: FitnessAssessmentFormValues) => {
+    submitFitness(data);
   };
 
   return (

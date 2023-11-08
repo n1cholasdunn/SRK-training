@@ -10,56 +10,43 @@ from common.models.climbing_models import (
 from rest_framework.serializers import ModelSerializer
 
 
-class PowerEnduranceTestSerializer(ModelSerializer):
-    class Meta:
+class PowerEnduranceTestSerializer(BaseOwnerFieldSerializer):
+    class Meta(BaseOwnerFieldSerializer.Meta):
         model = PowerEnduranceTest
         fields = "__all__"
-        extra_kwargs = {
-            "assessment": {"read_only": True},  # Add this line
-        }
+        extra_kwargs = {"trainee": {"read_only": True}}
 
 
-# class PowerEnduranceAssessmentsSerializer(BaseOwnerFieldSerializer):
-#     tests = PowerEnduranceTestSerializer(many=True, required=False)
-
-#     class Meta(BaseOwnerFieldSerializer.Meta):
-#         model = PowerEnduranceAssessments
-#         fields = "__all__"
-#         extra_kwargs = {"trainee": {"read_only": True}}
-
-#     def create(self, validated_data):
-#         tests_data = validated_data.pop("tests", [])
-#         assessment = PowerEnduranceAssessments.objects.create(**validated_data)
-#         for test_data in tests_data:
-#             PowerEnduranceTest.objects.create(assessment=assessment, **test_data)
-#         return assessment
-
-
-class MaxPullupsTestSerializer(ModelSerializer):
-    class Meta:
+class MaxPullupsTestSerializer(BaseOwnerFieldSerializer):
+    class Meta(BaseOwnerFieldSerializer.Meta):
         model = MaxPullupsTest
         fields = "__all__"
+        extra_kwargs = {"trainee": {"read_only": True}}
 
 
-class MaxLockoffTestSerializer(ModelSerializer):
-    class Meta:
+class MaxLockoffTestSerializer(BaseOwnerFieldSerializer):
+    class Meta(BaseOwnerFieldSerializer.Meta):
         model = MaxLockoffTest
         fields = "__all__"
+        extra_kwargs = {"trainee": {"read_only": True}}
 
 
-class FingerStrengthTestSerializer(ModelSerializer):
-    class Meta:
+class FingerStrengthTestSerializer(BaseOwnerFieldSerializer):
+    class Meta(BaseOwnerFieldSerializer.Meta):
         model = FingerStrengthTest
         fields = "__all__"
+        extra_kwargs = {"trainee": {"read_only": True}}
 
 
-class OAFingerStrengthTestSerializer(ModelSerializer):
-    class Meta:
+class OAFingerStrengthTestSerializer(BaseOwnerFieldSerializer):
+    class Meta(BaseOwnerFieldSerializer.Meta):
         model = OAFingerStrengthTest
         fields = "__all__"
+        extra_kwargs = {"trainee": {"read_only": True}}
 
 
-class OAPinchTestSerializer(ModelSerializer):
-    class Meta:
+class OAPinchTestSerializer(BaseOwnerFieldSerializer):
+    class Meta(BaseOwnerFieldSerializer.Meta):
         model = OAPinchTest
         fields = "__all__"
+        extra_kwargs = {"trainee": {"read_only": True}}

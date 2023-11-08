@@ -2,8 +2,8 @@
 import {TOKEN_KEY} from '../../api';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {
-  AssessmentFormSchema,
-  AssessmentFormValues,
+  ClimbingAssessmentFormSchema,
+  ClimbingAssessmentFormValues,
 } from '../../types/assessments/climbing';
 import {useForm} from 'react-hook-form';
 import PowerEnduranceAssessment from '../assessments/PowerEnduranceAssessment';
@@ -19,13 +19,13 @@ const TestAssessmentForm = () => {
     register,
     control,
     formState: {errors},
-  } = useForm<AssessmentFormValues>({
-    resolver: zodResolver(AssessmentFormSchema),
+  } = useForm<ClimbingAssessmentFormValues>({
+    resolver: zodResolver(ClimbingAssessmentFormSchema),
   });
   const token = localStorage.getItem(TOKEN_KEY);
 
-  const onSubmit = (data: AssessmentFormValues) => {
-    AssessmentFormSchema.parse(data);
+  const onSubmit = (data: ClimbingAssessmentFormValues) => {
+    ClimbingAssessmentFormSchema.parse(data);
     console.log('data shape!!', data);
 
     fetch('http://127.0.0.1:8000/assessments/climbing/testing/create/', {

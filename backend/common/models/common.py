@@ -3,9 +3,9 @@ from core.models import User
 
 
 class UserTimeStamp(models.Model):
-    updated = models.DateTimeField(auto_now=False, null=True, blank=True)
-    created = models.DateTimeField(auto_now_add=False, null=True, blank=True)
-    trainee = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    updated = models.DateTimeField(auto_now=True, null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    trainee = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         abstract = True

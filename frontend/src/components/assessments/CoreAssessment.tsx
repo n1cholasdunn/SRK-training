@@ -4,13 +4,13 @@ import {
   UseFormRegister,
   useFieldArray,
 } from 'react-hook-form';
-import {AssessmentFormValues} from '../../types/assessments/fitness';
+import {type FitnessAssessmentFormValues} from '../../types/assessments/fitness';
 import {useEffect, useRef} from 'react';
 
 type Props = {
-  control: Control<AssessmentFormValues>;
-  register: UseFormRegister<AssessmentFormValues>;
-  errors?: FieldErrors<AssessmentFormValues>;
+  control: Control<FitnessAssessmentFormValues>;
+  register: UseFormRegister<FitnessAssessmentFormValues>;
+  errors?: FieldErrors<FitnessAssessmentFormValues>;
 };
 
 const CoreAssessment = ({control, register, errors}: Props) => {

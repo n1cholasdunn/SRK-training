@@ -3,8 +3,10 @@ from react_forms.views import (
     handle_availability,
     handle_equipment,
     handle_general_client_info,
+    handle_max_pullups_test,
     handle_program,
     handle_power_endurance_test,
+    handle_max_lockoff_test,
 )
 
 urlpatterns = [
@@ -29,9 +31,19 @@ urlpatterns = [
         handle_program,
         name="handle-program",
     ),
+    # path(
+    #     "assessments/climbing/testing/create/",
+    #     handle_power_endurance_test,
+    #     name="handle-power-endurance-test",
+    # ),
+    # path(
+    #     "assessments/climbing/testing/create/",
+    #     handle_max_pullups_test,
+    #     name="handle-max-pullup-test",
+    # ),
     path(
         "assessments/climbing/testing/create/",
-        handle_power_endurance_test,
-        name="handle-program",
+        handle_max_lockoff_test,
+        name="handle-max-lockoff-test",
     ),
 ]

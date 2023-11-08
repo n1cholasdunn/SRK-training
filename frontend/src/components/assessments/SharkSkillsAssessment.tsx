@@ -4,14 +4,14 @@ import {
   UseFormRegister,
   useFieldArray,
 } from 'react-hook-form';
-import {AssessmentFormValues} from '../../types/assessments/fitness';
+import {FitnessAssessmentFormValues} from '../../types/assessments/fitness';
 import {useEffect, useMemo, useRef} from 'react';
 import SharkSkillsSide from './SharkSkillsSide';
 
 type Props = {
-  control: Control<AssessmentFormValues>;
-  register: UseFormRegister<AssessmentFormValues>;
-  errors?: FieldErrors<AssessmentFormValues>;
+  control: Control<FitnessAssessmentFormValues>;
+  register: UseFormRegister<FitnessAssessmentFormValues>;
+  errors?: FieldErrors<FitnessAssessmentFormValues>;
 };
 
 const SharkSkillsAssessment = ({control, register, errors}: Props) => {

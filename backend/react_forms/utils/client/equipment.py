@@ -1,18 +1,25 @@
+from rest_framework.request import Request
+from rest_framework.response import Response
 from common.utils.client_serializers import ClientEquipmentSerializer
 from common.models.client_models import ClientEquipment
 from django.shortcuts import get_object_or_404
 from rest_framework import status
-from rest_framework.response import Response
 
 
-def get_equipment(request):
+def get_equipment(request: Request) -> Response:
     user = request.user
     equipment = get_object_or_404(ClientEquipment, trainee=user)
     serializer = ClientEquipmentSerializer(equipment)
     return Response(serializer.data)
 
 
-def create_equipment(request):
+def get_equipment_by_id(request: Request, pk: int) -> Response:
+    equipment = get_object_or_404(ClientEquipment, pk=pk)
+    serializer = ClientEquipmentSerializer(equipment)
+    return Response(serializer.data)
+
+
+def create_equipment(request: Request) -> Response:
     serializer = ClientEquipmentSerializer(
         data=request.data, context={"request": request}
     )
@@ -22,7 +29,7 @@ def create_equipment(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-def update_equipment(request, pk):
+def update_equipment(request: Request, pk: int) -> Response:
     try:
         equipment = ClientEquipment.objects.get(pk=pk, trainee=request.user)
     except ClientEquipment.DoesNotExist:
@@ -37,7 +44,7 @@ def update_equipment(request, pk):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-def delete_equipment(request, pk):
+def delete_equipment(request: Request, pk: int) -> Response:
     try:
         equipment = ClientEquipment.objects.get(pk=pk, trainee=request.user)
     except ClientEquipment.DoesNotExist:

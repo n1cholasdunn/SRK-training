@@ -6,9 +6,10 @@ from common.models.client_models import (
 )
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.request import Request
 
 
-def get_availabilities(request):
+def get_availabilities(request: Request) -> Response:
     user = request.user
     general_client_info = get_object_or_404(GeneralClientInfo, trainee=user)
     availabilities = DayAvailability.objects.filter(client=general_client_info)
@@ -16,7 +17,14 @@ def get_availabilities(request):
     return Response(serializer.data)
 
 
-def create_availability(request):
+def get_availability_by_id(request: Request, pk: int) -> Response:
+    general_client_info = get_object_or_404(GeneralClientInfo, trainee=pk)
+    availabilities = DayAvailability.objects.filter(client=general_client_info)
+    serializer = DayAvailabilitySerializer(availabilities, many=True)
+    return Response(serializer.data)
+
+
+def create_availability(request: Request) -> Response:
     user = request.user
     general_client_info = get_object_or_404(GeneralClientInfo, trainee=user)
     request.data[
@@ -30,10 +38,10 @@ def create_availability(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-def update_availability(request, pk):
+def update_availability(request: Request) -> Response:
     user = request.user
     try:
-        availability = DayAvailability.objects.get(pk=pk, client__trainee=user)
+        availability = DayAvailability.objects.get(client__trainee=user)
     except DayAvailability.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -44,10 +52,10 @@ def update_availability(request, pk):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-def delete_availability(request, pk):
+def delete_availability(request: Request) -> Response:
     user = request.user
     try:
-        availability = DayAvailability.objects.get(pk=pk, client__trainee=user)
+        availability = DayAvailability.objects.get(client__trainee=user)
     except DayAvailability.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
