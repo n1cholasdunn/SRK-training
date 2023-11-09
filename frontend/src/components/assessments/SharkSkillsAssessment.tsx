@@ -22,9 +22,9 @@ const SharkSkillsAssessment = ({control, register, errors}: Props) => {
 
   const initialRender = useRef(true);
 
-  useEffect(() => {
-    console.log(fields);
-  }, [fields]);
+  // useEffect(() => {
+  //   console.log(fields);
+  // }, [fields]);
 
   const emptySide = useMemo(
     () => ({

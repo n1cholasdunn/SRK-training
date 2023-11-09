@@ -8,18 +8,17 @@ import SectionDivider from '../../components/ui/SectionDivider';
 import Coaching from '../../components/Coaching';
 import {BsGoogle} from 'react-icons/bs';
 import Contact from '../../components/Contact';
-import {useUserPerms} from '../../hooks/useUserPerms';
+// import {useUserPerms} from '../../hooks/useUserPerms';
 
 const HomePage = () => {
   const {data: profile, refetch: fetchProfile} = useProfile();
   const {data: googleAuth, refetch: fetchGoogleAuth} = useGoogleAuthLink();
   const {mutate, isSuccess} = useGoogleAuthToken();
 
-  const {data: perms, isLoading, isError, error} = useUserPerms();
-  // const isSuperUser = data?.isSuperuser;
-  useEffect(() => {
-    console.log(perms, 'USER PERMS');
-  });
+  // const {data: perms, isLoading, isError, error} = useUserPerms();
+  // useEffect(() => {
+  //   console.log(perms, 'USER PERMS');
+  // });
   useEffect(() => {
     if (googleAuth) {
       window.location.replace(googleAuth.authorizationUrl);

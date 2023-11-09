@@ -96,7 +96,7 @@ class DaviesTest(UserTimeStamp):
         return f"{self.first_trial} - {self.second_trial} - {self.third_trial}"
 
 
-class SharkSkillsSide(UserTimeStamp):
+class SharkSkillsSide(models.Model):
     time = models.DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
     deduction_tally = models.DecimalField(
         decimal_places=2, max_digits=5, null=True, blank=True

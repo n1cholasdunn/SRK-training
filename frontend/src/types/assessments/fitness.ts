@@ -236,13 +236,13 @@ export type FitnessAssessmentFormValues = {
 };
 
 export const FitnessAssessmentFormSchema = z.object({
-  health_markers: HealthMarkersSchema,
-  measurements: MeasurementsSchema,
-  overhead_squat: OverheadSquatSchema,
-  ymca_step: YMCAStepSchema,
-  sit_reach: SitReachSchema,
-  pushup: PushUpSchema,
-  davies: DaviesSchema,
-  shark_skills: SharkSkillsSchema,
-  core: CoreSchema,
+  health_markers: HealthMarkersSchema.optional(),
+  measurements: MeasurementsSchema.optional(),
+  overhead_squat: OverheadSquatSchema.optional(),
+  ymca_step: YMCAStepSchema.optional(),
+  sit_reach: SitReachSchema.optional(),
+  pushup: PushUpSchema.optional(),
+  davies: DaviesSchema.optional(),
+  shark_skills: SharkSkillsSchema.optional(),
+  core: CoreSchema.optional(),
 });

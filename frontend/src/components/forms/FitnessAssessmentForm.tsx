@@ -27,11 +27,13 @@ const FitnessAssessmentForm = () => {
 
   const {mutate: submitFitness} =
     useSubmitAssessment<FitnessAssessmentFormValues>(
-      'assessments/fitness/testing/create/',
+      'assessments/fitness/shark-skills/create/',
       FitnessAssessmentFormSchema
     );
 
   const onSubmit = (data: FitnessAssessmentFormValues) => {
+    console.log(data);
+
     submitFitness(data);
   };
 
@@ -73,14 +75,14 @@ const FitnessAssessmentForm = () => {
       <PushUpAssessment control={control} register={register} errors={errors} />
       <h2>Davies Assessment</h2>
       <DaviesAssessment control={control} register={register} errors={errors} />
+      <h2>Core Assessment</h2>
+      <CoreAssessment control={control} register={register} errors={errors} />
       <h2>Shark Skills Assessment</h2>
       <SharkSkillsAssessment
         control={control}
         register={register}
         errors={errors}
       />
-      <h2>Core Assessment</h2>
-      <CoreAssessment control={control} register={register} errors={errors} />
 
       <button type="submit">Submit Assessments</button>
     </form>

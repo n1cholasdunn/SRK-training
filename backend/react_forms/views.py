@@ -2,6 +2,69 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from react_forms.utils.fitness.ymca_step import (
+    create_ymca_step_test,
+    delete_ymca_step_test,
+    get_ymca_step_test_by_id,
+    get_ymca_step_tests,
+    update_ymca_step_test,
+)
+from react_forms.utils.fitness.core import (
+    create_core_test,
+    delete_core_test,
+    get_core_test_by_id,
+    get_core_tests,
+    update_core_test,
+)
+from react_forms.utils.fitness.davies import (
+    create_davies_test,
+    delete_davies_test,
+    get_davies_test_by_id,
+    get_davies_tests,
+    update_davies_test,
+)
+from react_forms.utils.fitness.health_markers import (
+    create_health_markers_test,
+    delete_health_markers_test,
+    get_health_markers_test_by_id,
+    get_health_markers_tests,
+    update_health_markers_test,
+)
+from react_forms.utils.fitness.measurements import (
+    create_measurements_test,
+    delete_measurements_test,
+    get_measurements_test_by_id,
+    get_measurements_tests,
+    update_measurements_test,
+)
+from react_forms.utils.fitness.overhead_squat import (
+    create_overhead_squat_test,
+    delete_overhead_squat_test,
+    get_overhead_squat_test_by_id,
+    get_overhead_squat_tests,
+    update_overhead_squat_test,
+)
+from react_forms.utils.fitness.pushup import (
+    create_pushup_test,
+    delete_pushup_test,
+    get_pushup_test_by_id,
+    get_pushup_tests,
+    update_pushup_test,
+)
+from react_forms.utils.fitness.shark_skills import (
+    create_shark_skills_test,
+    delete_shark_skills_test,
+    get_shark_skills_test_by_id,
+    get_shark_skills_tests,
+    update_shark_skills_test,
+)
+from react_forms.utils.fitness.sit_reach import (
+    create_sit_reach_test,
+    delete_sit_reach_test,
+    get_sit_reach_test_by_id,
+    get_sit_reach_tests,
+    update_sit_reach_test,
+)
 from react_forms.utils.climbing.oa_finger_strength import (
     create_oa_finger_strength_test,
     delete_oa_finger_strength_test,
@@ -282,3 +345,185 @@ def handle_oa_pinch_strength_test_by_id(request, pk):
         return update_oa_pinch_strength_test(request, pk)
     if request.method == "DELETE":
         return delete_oa_pinch_strength_test(request, pk)
+
+
+@api_view(["GET", "POST"])
+@permission_classes([IsAuthenticated])
+def handle_core_test(request):
+    if request.method == "GET":
+        return get_core_tests(request)
+    if request.method == "POST":
+        return create_core_test(request)
+
+
+@api_view(["GET", "PUT", "PATCH"])
+@permission_classes([IsAuthenticated])
+def handle_core_test_by_id(request, pk):
+    if request.method == "GET":
+        return get_core_test_by_id(request, pk)
+    if request.method == "PUT" or request.method == "PATCH":
+        return update_core_test(request, pk)
+    if request.method == "DELETE":
+        return delete_core_test(request, pk)
+
+
+@api_view(["GET", "POST"])
+@permission_classes([IsAuthenticated])
+def handle_pushup_test(request):
+    if request.method == "GET":
+        return get_pushup_tests(request)
+    if request.method == "POST":
+        return create_pushup_test(request)
+
+
+@api_view(["GET", "PUT", "PATCH"])
+@permission_classes([IsAuthenticated])
+def handle_pushup_test_by_id(request, pk):
+    if request.method == "GET":
+        return get_pushup_test_by_id(request, pk)
+    if request.method == "PUT" or request.method == "PATCH":
+        return update_pushup_test(request, pk)
+    if request.method == "DELETE":
+        return delete_pushup_test(request, pk)
+
+
+@api_view(["GET", "POST"])
+@permission_classes([IsAuthenticated])
+def handle_davies_test(request):
+    if request.method == "GET":
+        return get_davies_tests(request)
+    if request.method == "POST":
+        return create_davies_test(request)
+
+
+@api_view(["GET", "PUT", "PATCH"])
+@permission_classes([IsAuthenticated])
+def handle_davies_test_by_id(request, pk):
+    if request.method == "GET":
+        return get_davies_test_by_id(request, pk)
+    if request.method == "PUT" or request.method == "PATCH":
+        return update_davies_test(request, pk)
+    if request.method == "DELETE":
+        return delete_davies_test(request, pk)
+
+
+@api_view(["GET", "POST"])
+@permission_classes([IsAuthenticated])
+def handle_health_markers_test(request):
+    if request.method == "GET":
+        return get_health_markers_tests(request)
+    if request.method == "POST":
+        return create_health_markers_test(request)
+
+
+@api_view(["GET", "PUT", "PATCH"])
+@permission_classes([IsAuthenticated])
+def handle_health_markers_test_by_id(request, pk):
+    if request.method == "GET":
+        return get_health_markers_test_by_id(request, pk)
+    if request.method == "PUT" or request.method == "PATCH":
+        return update_health_markers_test(request, pk)
+    if request.method == "DELETE":
+        return delete_health_markers_test(request, pk)
+
+
+@api_view(["GET", "POST"])
+@permission_classes([IsAuthenticated])
+def handle_measurements_test(request):
+    if request.method == "GET":
+        return get_measurements_tests(request)
+    if request.method == "POST":
+        return create_measurements_test(request)
+
+
+@api_view(["GET", "PUT", "PATCH"])
+@permission_classes([IsAuthenticated])
+def handle_measurements_test_by_id(request, pk):
+    if request.method == "GET":
+        return get_measurements_test_by_id(request, pk)
+    if request.method == "PUT" or request.method == "PATCH":
+        return update_measurements_test(request, pk)
+    if request.method == "DELETE":
+        return delete_measurements_test(request, pk)
+
+
+@api_view(["GET", "POST"])
+@permission_classes([IsAuthenticated])
+def handle_overhead_squat_test(request):
+    if request.method == "GET":
+        return get_overhead_squat_tests(request)
+    if request.method == "POST":
+        return create_overhead_squat_test(request)
+
+
+@api_view(["GET", "PUT", "PATCH"])
+@permission_classes([IsAuthenticated])
+def handle_overhead_squat_test_by_id(request, pk):
+    if request.method == "GET":
+        return get_overhead_squat_test_by_id(request, pk)
+    if request.method == "PUT" or request.method == "PATCH":
+        return update_overhead_squat_test(request, pk)
+    if request.method == "DELETE":
+        return delete_overhead_squat_test(request, pk)
+
+
+@api_view(["GET", "POST"])
+@permission_classes([IsAuthenticated])
+def handle_sit_reach_test(request):
+    if request.method == "GET":
+        return get_sit_reach_tests(request)
+    if request.method == "POST":
+        return create_sit_reach_test(request)
+
+
+@api_view(["GET", "PUT", "PATCH"])
+@permission_classes([IsAuthenticated])
+def handle_sit_reach_test_by_id(request, pk):
+    if request.method == "GET":
+        return get_sit_reach_test_by_id(request, pk)
+    if request.method == "PUT" or request.method == "PATCH":
+        return update_sit_reach_test(request, pk)
+    if request.method == "DELETE":
+        return delete_sit_reach_test(request, pk)
+
+
+@api_view(["GET", "POST"])
+@permission_classes([IsAuthenticated])
+def handle_shark_skills_test(request):
+    if request.method == "GET":
+        return get_shark_skills_tests(request)
+    if request.method == "POST":
+        return create_shark_skills_test(request)
+
+
+@api_view(["GET", "PUT", "PATCH"])
+@permission_classes([IsAuthenticated])
+def handle_shark_skills_test_by_id(request, pk):
+    if request.method == "GET":
+        return get_shark_skills_test_by_id(request, pk)
+    if request.method == "PUT" or request.method == "PATCH":
+        return update_shark_skills_test(request, pk)
+
+    if request.method == "DELETE":
+        return delete_shark_skills_test(request, pk)
+
+
+@api_view(["GET", "POST"])
+@permission_classes([IsAuthenticated])
+def handle_ymca_step_test(request):
+    if request.method == "GET":
+        return get_ymca_step_tests(request)
+    if request.method == "POST":
+        return create_ymca_step_test(request)
+
+
+@api_view(["GET", "PUT", "PATCH"])
+@permission_classes([IsAuthenticated])
+def handle_ymca_step_test_by_id(request, pk):
+    if request.method == "GET":
+        return get_ymca_step_test_by_id(request, pk)
+    if request.method == "PUT" or request.method == "PATCH":
+        return update_ymca_step_test(request, pk)
+
+    if request.method == "DELETE":
+        return delete_ymca_step_test(request, pk)

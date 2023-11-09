@@ -3,6 +3,9 @@ from django.urls import path
 from react_forms.utils.climbing.create_multiple_tests import (
     create_multiple_tests,
 )
+from react_forms.utils.fitness.create_multiple_fitness_tests import (
+    create_multiple_fitness_tests,
+)
 from react_forms.views import (
     handle_availability,
     handle_equipment,
@@ -14,6 +17,7 @@ from react_forms.views import (
     handle_program,
     handle_power_endurance_test,
     handle_max_lockoff_test,
+    handle_shark_skills_test,
 )
 
 urlpatterns = [
@@ -72,5 +76,15 @@ urlpatterns = [
         "assessments/climbing/all/",
         create_multiple_tests,
         name="handle-oa-pinch-test",
+    ),
+    path(
+        "assessments/fitness/create/all/",
+        create_multiple_fitness_tests,
+        name="create-multiple-fitness-tests",
+    ),
+    path(
+        "assessments/fitness/shark-skills/create/",
+        handle_shark_skills_test,
+        name="create-shark-skills-tests",
     ),
 ]
