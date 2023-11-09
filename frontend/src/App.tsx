@@ -28,6 +28,8 @@ import RootLayout from './components/layouts/RootLayout';
 import TrainingLayout from './components/layouts/TrainingLayout';
 import ActiveSectionContextProvider from './context/ActiveSectionContext';
 import TestAssessmentForm from './components/forms/TestForm';
+import GenericFitnessForm from './components/forms/GenericFitnessForm';
+import GenericClimbingForm from './components/forms/GenericClimbingForm';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -55,13 +57,17 @@ const router = createBrowserRouter(
       </Route>
       <Route path="assessments">
         <Route path="climbing">
-          <Route path="create" element={<ClimbingAssessmentForm />} />
+          <Route path="create" element={<GenericClimbingForm />}>
+            <Route path="all" element={<ClimbingAssessmentForm />} />
+          </Route>
           <Route path="testing">
             <Route path="create" element={<TestAssessmentForm />}></Route>
           </Route>
         </Route>
         <Route path="fitness">
-          <Route path="create" element={<FitnessAssessmentForm />} />
+          <Route path="create" element={<GenericFitnessForm />}>
+            <Route path="all" element={<FitnessAssessmentForm />} />
+          </Route>
         </Route>
       </Route>
     </Route>
