@@ -4,7 +4,10 @@ import {useQuery} from '@tanstack/react-query';
 
 const getUserPerms = async () => {
   const response = await client.get<User>('/user/info/');
-  return response.data;
+
+  return response.data.isSuperuser !== null
+    ? response.data.isSuperuser
+    : response.data;
 };
 
 export const useUserPerms = () =>

@@ -2,6 +2,27 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from react_forms.utils.climbing.oa_finger_strength import (
+    create_oa_finger_strength_test,
+    delete_oa_finger_strength_test,
+    get_oa_finger_strength_test_by_id,
+    get_oa_finger_strength_tests,
+    update_oa_finger_strength_test,
+)
+from react_forms.utils.climbing.oa_pinch_strength import (
+    create_oa_pinch_strength_test,
+    delete_oa_pinch_strength_test,
+    get_oa_pinch_strength_test_by_id,
+    get_oa_pinch_strength_tests,
+    update_oa_pinch_strength_test,
+)
+from react_forms.utils.climbing.finger_strength import (
+    create_finger_strength_test,
+    delete_finger_strength_test,
+    get_finger_strength_test_by_id,
+    get_finger_strength_tests,
+    update_finger_strength_test,
+)
 from react_forms.utils.climbing.max_lockoff import (
     create_max_lockoff_test,
     delete_max_lockoff_test,
@@ -201,3 +222,63 @@ def handle_max_lockoff_test_by_id(request, pk):
         return update_max_lockoff_test(request, pk)
     if request.method == "DELETE":
         return delete_max_lockoff_test(request, pk)
+
+
+@api_view(["GET", "POST"])
+@permission_classes([IsAuthenticated])
+def handle_finger_strength_test(request):
+    if request.method == "GET":
+        return get_finger_strength_tests(request)
+    if request.method == "POST":
+        return create_finger_strength_test(request)
+
+
+@api_view(["GET", "PUT", "PATCH"])
+@permission_classes([IsAuthenticated])
+def handle_finger_strength_test_by_id(request, pk):
+    if request.method == "GET":
+        return get_finger_strength_test_by_id(request, pk)
+    if request.method == "PUT" or request.method == "PATCH":
+        return update_finger_strength_test(request, pk)
+    if request.method == "DELETE":
+        return delete_finger_strength_test(request, pk)
+
+
+@api_view(["GET", "POST"])
+@permission_classes([IsAuthenticated])
+def handle_oa_finger_strength_test(request):
+    if request.method == "GET":
+        return get_oa_finger_strength_tests(request)
+    if request.method == "POST":
+        return create_oa_finger_strength_test(request)
+
+
+@api_view(["GET", "PUT", "PATCH"])
+@permission_classes([IsAuthenticated])
+def handle_oa_finger_strength_test_by_id(request, pk):
+    if request.method == "GET":
+        return get_oa_finger_strength_test_by_id(request, pk)
+    if request.method == "PUT" or request.method == "PATCH":
+        return update_oa_finger_strength_test(request, pk)
+    if request.method == "DELETE":
+        return delete_oa_finger_strength_test(request, pk)
+
+
+@api_view(["GET", "POST"])
+@permission_classes([IsAuthenticated])
+def handle_oa_pinch_strength_test(request):
+    if request.method == "GET":
+        return get_oa_pinch_strength_tests(request)
+    if request.method == "POST":
+        return create_oa_pinch_strength_test(request)
+
+
+@api_view(["GET", "PUT", "PATCH"])
+@permission_classes([IsAuthenticated])
+def handle_oa_pinch_strength_test_by_id(request, pk):
+    if request.method == "GET":
+        return get_oa_pinch_strength_test_by_id(request, pk)
+    if request.method == "PUT" or request.method == "PATCH":
+        return update_oa_pinch_strength_test(request, pk)
+    if request.method == "DELETE":
+        return delete_oa_pinch_strength_test(request, pk)

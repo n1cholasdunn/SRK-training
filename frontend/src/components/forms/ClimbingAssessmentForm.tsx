@@ -3,7 +3,7 @@ import {
   ClimbingAssessmentFormSchema,
   ClimbingAssessmentFormValues,
 } from '../../types/assessments/climbing';
-import {SubmitHandler, useForm} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 import PowerEnduranceAssessment from '../assessments/PowerEnduranceAssessment';
 import MaxPullupsAssessment from '../assessments/MaxPullupsAssessment';
 import MaxLockoffAssessment from '../assessments/MaxLockoffAssessment';
@@ -35,9 +35,8 @@ const ClimbingAssessmentForm = () => {
     <form
       onSubmit={handleSubmit(onSubmit)}
       className=" flex flex-col space-y-2">
-      {/*
       <h2>Power Endurance Assessment</h2>
-       <PowerEnduranceAssessment
+      <PowerEnduranceAssessment
         control={control}
         register={register}
         errors={errors}
@@ -48,7 +47,6 @@ const ClimbingAssessmentForm = () => {
         register={register}
         errors={errors}
       />
-      */}
 
       <h2>Max Lockoff Assessment</h2>
       <MaxLockoffAssessment
@@ -56,25 +54,27 @@ const ClimbingAssessmentForm = () => {
         register={register}
         errors={errors}
       />
-      {/*
+
       <h2>Finger Strength Assessment</h2>
       <FingerStrengthAssessment
         control={control}
         register={register}
         errors={errors}
       />
+
       <h2>One Arm Finger Strength Assessment</h2>
       <OAFingerStrengthAssessment
         control={control}
         register={register}
         errors={errors}
       />
+
       <h2>One Arm Pinch Strength Assessment</h2>
       <OAPinchAssessment
         control={control}
         register={register}
         errors={errors}
-      /> */}
+      />
 
       <button type="submit">Submit Assessments</button>
     </form>

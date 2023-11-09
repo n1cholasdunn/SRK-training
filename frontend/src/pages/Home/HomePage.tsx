@@ -15,9 +15,10 @@ const HomePage = () => {
   const {data: googleAuth, refetch: fetchGoogleAuth} = useGoogleAuthLink();
   const {mutate, isSuccess} = useGoogleAuthToken();
 
-  const {data: userPerms, isLoading, isError, error} = useUserPerms();
+  const {data: perms, isLoading, isError, error} = useUserPerms();
+  // const isSuperUser = data?.isSuperuser;
   useEffect(() => {
-    console.log(userPerms, 'USER PERMS');
+    console.log(perms, 'USER PERMS');
   });
   useEffect(() => {
     if (googleAuth) {

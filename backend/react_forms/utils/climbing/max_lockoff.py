@@ -36,8 +36,13 @@ def create_max_lockoff_test(request: Request) -> Response:
         if serializer.is_valid():
             test_instance = serializer.save()
             created_tests.append(serializer.data)
+            print(created_tests)
+
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    return Response(
+        {"max_lockoff": {"tests": created_tests}}, status=status.HTTP_201_CREATED
+    )
 
 
 def update_max_lockoff_test(request: Request, pk: int) -> Response:
