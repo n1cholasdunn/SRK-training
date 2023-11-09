@@ -1,5 +1,5 @@
 from django.db import models
-from .common import UserTimeStamp
+from common.models.common import UserTimeStamp
 
 
 # TODO format data to be integers and floats to be stored in DB properly and have forms be reusable for react forms

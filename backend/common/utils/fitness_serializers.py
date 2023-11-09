@@ -1,29 +1,20 @@
-from rest_framework.serializers import ModelSerializer
+from common.utils.base_serializer import BaseOwnerFieldSerializer
 from common.models.fitness_models import (
-    HealthMarkersAssessments,
     HealthMarkersTest,
-    MeasurementsAssessments,
     MeasurementsTest,
-    OverheadSquatAssessments,
     OverheadSquatTest,
-    YMCAStepAssessments,
     YMCAStepTest,
-    SitReachAssessments,
     SitReachTest,
-    PushUpAssessments,
     PushUpTest,
-    DaviesAssessments,
     DaviesTest,
-    SharkSkillsAssessments,
     SharkSkillsTest,
     SharkSkillsSide,
-    CoreAssessments,
     CoreTest,
 )
 
 
-class HealthMarkersTestSerializer(ModelSerializer):
-    class Meta:
+class HealthMarkersTestSerializer(BaseOwnerFieldSerializer):
+    class Meta(BaseOwnerFieldSerializer.Meta):
         model = HealthMarkersTest
         fields = [
             "weight",
@@ -33,18 +24,11 @@ class HealthMarkersTestSerializer(ModelSerializer):
             "blood_pressure",
             "vo2_max",
         ]
+        extra_kwargs = {"trainee": {"read_only": True}}
 
 
-class HealthMarkersAssessmentsSerializer(ModelSerializer):
-    tests = HealthMarkersTestSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = HealthMarkersAssessments
-        fields = ["id", "tests"]
-
-
-class MeasurementsTestSerializer(ModelSerializer):
-    class Meta:
+class MeasurementsTestSerializer(BaseOwnerFieldSerializer):
+    class Meta(BaseOwnerFieldSerializer.Meta):
         model = MeasurementsTest
         fields = [
             "chest",
@@ -56,93 +40,51 @@ class MeasurementsTestSerializer(ModelSerializer):
             "mid_thigh",
             "calves",
         ]
+        extra_kwargs = {"trainee": {"read_only": True}}
 
 
-class MeasurementsAssessmentsSerializer(ModelSerializer):
-    tests = MeasurementsTestSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = MeasurementsAssessments
-        fields = ["id", "assessments"]
-
-
-class OverheadSquatTestSerializer(ModelSerializer):
-    class Meta:
+class OverheadSquatTestSerializer(BaseOwnerFieldSerializer):
+    class Meta(BaseOwnerFieldSerializer.Meta):
         model = OverheadSquatTest
         fields = ["foot_ankle", "knee", "lphc", "shoulder", "solutions"]
+        extra_kwargs = {"trainee": {"read_only": True}}
 
 
-class OverheadSquatAssessmentsSerializer(ModelSerializer):
-    tests = OverheadSquatTestSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = OverheadSquatAssessments
-        fields = ["id", "assessments"]
-
-
-class YMCAStepTestSerializer(ModelSerializer):
-    class Meta:
+class YMCAStepTestSerializer(BaseOwnerFieldSerializer):
+    class Meta(BaseOwnerFieldSerializer.Meta):
         model = YMCAStepTest
         fields = ["recovery_hr", "rating"]
+        extra_kwargs = {"trainee": {"read_only": True}}
 
 
-class YMCAStepAssessmentsSerializer(ModelSerializer):
-    tests = YMCAStepTestSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = YMCAStepAssessments
-        fields = ["id", "assessments"]
-
-
-class SitReachTestSerializer(ModelSerializer):
-    class Meta:
+class SitReachTestSerializer(BaseOwnerFieldSerializer):
+    class Meta(BaseOwnerFieldSerializer.Meta):
         model = SitReachTest
         fields = ["measurement"]
+        extra_kwargs = {"trainee": {"read_only": True}}
 
 
-class SitReachAssessmentsSerializer(ModelSerializer):
-    tests = SitReachTestSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = SitReachAssessments
-        fields = ["id", "assessments"]
-
-
-class PushUpTestSerializer(ModelSerializer):
-    class Meta:
+class PushUpTestSerializer(BaseOwnerFieldSerializer):
+    class Meta(BaseOwnerFieldSerializer.Meta):
         model = PushUpTest
         fields = ["num_pushups"]
+        extra_kwargs = {"trainee": {"read_only": True}}
 
 
-class PushUpAssessmentsSerializer(ModelSerializer):
-    tests = PushUpTestSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = PushUpAssessments
-        fields = ["id", "assessments"]
-
-
-class DaviesTestSerializer(ModelSerializer):
-    class Meta:
+class DaviesTestSerializer(BaseOwnerFieldSerializer):
+    class Meta(BaseOwnerFieldSerializer.Meta):
         model = DaviesTest
         fields = ["first_trial", "second_trial", "third_trial"]
+        extra_kwargs = {"trainee": {"read_only": True}}
 
 
-class DaviesAssessmentsSerializer(ModelSerializer):
-    tests = DaviesTestSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = DaviesAssessments
-        fields = ["id", "assessments"]
-
-
-class SharkSkillsSideSerializer(ModelSerializer):
-    class Meta:
+class SharkSkillsSideSerializer(BaseOwnerFieldSerializer):
+    class Meta(BaseOwnerFieldSerializer.Meta):
         model = SharkSkillsSide
         fields = ["time", "deduction_tally", "total_deducted", "final_total"]
 
 
-class SharkSkillsTestSerializer(ModelSerializer):
+class SharkSkillsTestSerializer(BaseOwnerFieldSerializer):
     practice_left = SharkSkillsSideSerializer(read_only=True)
     practice_right = SharkSkillsSideSerializer(read_only=True)
     first_left = SharkSkillsSideSerializer(read_only=True)
@@ -150,7 +92,7 @@ class SharkSkillsTestSerializer(ModelSerializer):
     second_left = SharkSkillsSideSerializer(read_only=True)
     second_right = SharkSkillsSideSerializer(read_only=True)
 
-    class Meta:
+    class Meta(BaseOwnerFieldSerializer.Meta):
         model = SharkSkillsTest
         fields = [
             "practice_left",
@@ -160,25 +102,11 @@ class SharkSkillsTestSerializer(ModelSerializer):
             "second_left",
             "second_right",
         ]
+        extra_kwargs = {"trainee": {"read_only": True}}
 
 
-class SharkSkillsAssessmentsSerializer(ModelSerializer):
-    tests = SharkSkillsTestSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = SharkSkillsAssessments
-        fields = ["id", "assessments"]
-
-
-class CoreTestSerializer(ModelSerializer):
-    class Meta:
+class CoreTestSerializer(BaseOwnerFieldSerializer):
+    class Meta(BaseOwnerFieldSerializer.Meta):
         model = CoreTest
         fields = ["first_trial", "second_trial"]
-
-
-class CoreAssessmentsSerializer(ModelSerializer):
-    tests = CoreTestSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = CoreAssessments
-        fields = ["id", "assessments"]
+        extra_kwargs = {"trainee": {"read_only": True}}
